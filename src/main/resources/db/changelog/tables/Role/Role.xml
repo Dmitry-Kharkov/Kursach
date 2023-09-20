@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd">
+
+
+    <changeSet id="ROLE-001" author="harkov_dv">
+        <preConditions>
+            <not>
+                <sequenceExists schemaName="REPOSITORY" sequenceName="ROLE_SEQ" />
+            </not>
+        </preConditions>
+
+        <createSequence schemaName="REPOSITORY" sequenceName="ROLE_SEQ" startValue="0"/>
+    </changeSet>
+
+    <changeSet id="ROLE-002" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <tableExists schemaName="REPOSITORY" tableName="ROLE"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="ROLE">
+            <column name="ROLE_ID" type="INT" defaultValueSequenceNext="ROLE_SEQ">
+                <constraints primaryKey="true" primaryKeyName="ROLE_PK"/>
+            </column>
+
+            <column name="NAME" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DESCRIPTION" type="VARCHAR(4056)"/>
+
+            <column name="CREATED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="MODIFIED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ROLE_TYPE_ID" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

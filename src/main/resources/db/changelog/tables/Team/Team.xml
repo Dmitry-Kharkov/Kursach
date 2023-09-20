@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd">
+
+
+    <changeSet id="TEAM-001" author="harkov_dv">
+        <preConditions>
+            <not>
+                <sequenceExists schemaName="REPOSITORY" sequenceName="TEAM_SEQ" />
+            </not>
+        </preConditions>
+
+        <createSequence schemaName="REPOSITORY" sequenceName="TEAM_SEQ" startValue="0"/>
+    </changeSet>
+
+    <changeSet id="TEAM-002" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <tableExists schemaName="REPOSITORY" tableName="TEAM"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="TEAM">
+            <column name="TEAM_ID" type="INT" defaultValueSequenceNext="TEAM_SEQ">
+                <constraints primaryKey="true" primaryKeyName="TEAM_PK"/>
+            </column>
+
+            <column name="NAME" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="USER_ID" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="DESCRIPTION" type="VARCHAR(4056)"/>
+
+            <column name="TYPE_TEAM_ID" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+
+
+            <column name="IS_COMPLETED" type="BOOL" defaultValue="FALSE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CREATED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="MODIFIED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
