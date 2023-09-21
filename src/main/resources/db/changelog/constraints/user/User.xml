@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="USER_ROLE-001" author="vyushin_aa">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-USER_ROLE-ROLE"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="USER_ROLE" baseColumnNames="ROLE_ID"
+                                 constraintName="FK-USER_ROLE-ROLE" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="ROLE" referencedColumnNames="ROLE_ID"/>
+    </changeSet>
+
+    <changeSet id="USER_ROLE-002" author="vyushin_aa">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-USER_ROLE-USER"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="USER_ROLE" baseColumnNames="ROLE_ID"
+                                 constraintName="FK-USER_ROLE-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+    </changeSet>
+
+
+</databaseChangeLog>
