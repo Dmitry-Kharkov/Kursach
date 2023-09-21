@@ -26,7 +26,7 @@
 
         <createTable tableName="TEAM_MEMBER_TYPE">
             <column name="TEAM_MEMBER_ID" type="INT" defaultValueSequenceNext="TEAM_MEMBER_SEQ">
-                <constraints primaryKey="true" primaryKeyName="TEAM_MEMBER_PK"/>
+                <constraints primaryKey="true" primaryKeyName="TEAM_MEMBER__TYPE_PK"/>
             </column>
 
             <column name="NAME" type="VARCHAR(256)">
