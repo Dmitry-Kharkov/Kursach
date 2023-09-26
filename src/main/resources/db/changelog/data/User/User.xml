@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="USER-001" author="harkov-dv">
+
+        <preConditions>
+            <tableIsEmpty schemaName="REPOSITORY" tableName="USER"/>
+        </preConditions>
+
+
+        <insert schemaName="REPOSITORY" tableName="USER">
+            <column name="FULLNAME" value="DMITRY_KHARKOV" />
+            <column name="LOGIN" value="1234" />
+            <column name="PASSWORD" value="1234"/>
+        </insert>
+
+
+    </changeSet>
+</databaseChangeLog>

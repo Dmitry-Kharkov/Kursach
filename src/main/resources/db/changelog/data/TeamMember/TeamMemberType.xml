@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="TYPE_TEAM-001" author="vyushin_aa">
+
+        <preConditions>
+            <tableIsEmpty schemaName="REPOSITORY" tableName="TYPE_TEAM"/>
+        </preConditions>
+
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Вратарь" />
+            <column name="DESCRIPTION" value="Роль в команде футболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Нападающий" />
+            <column name="DESCRIPTION" value="Роль в команде футболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Защитник" />
+            <column name="DESCRIPTION" value="Роль в команде футболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Полузащитник" />
+            <column name="DESCRIPTION" value="Роль в команде футболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Тренер" />
+            <column name="DESCRIPTION" value="Роль в команде футболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Backend - Разработчик" />
+            <column name="DESCRIPTION" value="Роль в команде программистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Frontend - Разработчик" />
+            <column name="DESCRIPTION" value="Роль в команде программистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Android - Разработчик" />
+            <column name="DESCRIPTION" value="Роль в команде программистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="DevOps - Инженер" />
+            <column name="DESCRIPTION" value="Роль в команде программистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Team Lead" />
+            <column name="DESCRIPTION" value="Роль в команде программистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Тренер" />
+            <column name="DESCRIPTION" value="Роль в команде волейболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Игрок" />
+            <column name="DESCRIPTION" value="Роль в команде волейболистов" />
+        </insert>
+
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Нападающий" />
+            <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Защитник" />
+            <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Полузащитник" />
+            <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Тренер" />
+            <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
+        </insert>
+
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Защитник" />
+            <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Риффлер" />
+            <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Снайпер" />
+            <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Защитник" />
+            <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Опорник" />
+            <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Тренер" />
+            <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
