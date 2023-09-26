@@ -14,19 +14,19 @@
         <insert schemaName="REPOSITORY" tableName="ROLE">
             <column name="NAME" value="ADMIN" />
             <column name="DESCRIPTION" value="Администратор имеет доступ ко всем командам разработчика." />
-            <column name="ROLE_TYPE_ID" value="1"/>
+            <column name="ROLE_TYPE_ID" value="0"/>
         </insert>
 
-        <insert schemaName="REPOSITORY" tableName="ROLE_TYPE">
+        <insert schemaName="REPOSITORY" tableName="ROLE">
             <column name="NAME" value="MODERATOR" />
             <column name="DESCRIPTION" value="Модератор имеет доступ к добавлению новых типов команд, ролей." />
-            <column name="ROLE_TYPE_ID" value="1"/>
+            <column name="ROLE_TYPE_ID" value="0"/>
         </insert>
 
-        <insert schemaName="REPOSITORY" tableName="ROLE_TYPE">
+        <insert schemaName="REPOSITORY" tableName="ROLE">
             <column name="NAME" value="USER" />
             <column name="DESCRIPTION" value="Обычный пользователь, может редактировать только свои объявления." />
-            <column name="ROLE_TYPE_ID" value="1"/>
+            <column name="ROLE_TYPE_ID" value="0"/>
         </insert>
 
 

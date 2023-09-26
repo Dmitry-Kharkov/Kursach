@@ -4,7 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="TYPE_TEAM-001" author="vyushin_aa">
+    <changeSet id="TYPE_TEAM-001" author="harkov-dv">
 
         <preConditions>
             <tableIsEmpty schemaName="REPOSITORY" tableName="TYPE_TEAM"/>

@@ -25,7 +25,7 @@
             </not>
         </preConditions>
 
-        <addForeignKeyConstraint baseTableName="USER_ROLE" baseColumnNames="ROLE_ID"
+        <addForeignKeyConstraint baseTableName="USER_ROLE" baseColumnNames="USER_ID"
                                  constraintName="FK-USER_ROLE-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
                                  referencedTableName="USER" referencedColumnNames="USER_ID"/>
     </changeSet>

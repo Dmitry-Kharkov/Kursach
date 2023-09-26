@@ -11,9 +11,9 @@
         </preConditions>
 
 
-        <insert schemaName="REPOSITORY" tableName="USER">
-            <column name="USER_ID" value="1" />
-            <column name="ROLE_ID" value="1"/>
+        <insert schemaName="REPOSITORY" tableName="USER_ROLE">
+            <column name="USER_ID" value="0" />
+            <column name="ROLE_ID" value="1"/> <!--почему здесь 1-->
         </insert>
 
 
