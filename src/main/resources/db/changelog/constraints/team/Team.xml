@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="TEAM-001" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-TEAM-USER"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="TEAM" baseColumnNames="USER_ID"
+                                 constraintName="FK-TEAM-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+    </changeSet>
+
+    <changeSet id="TEAM-002" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-TEAM-TYPE_TEAM"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="TEAM" baseColumnNames="TYPE_TEAM_ID"
+                                 constraintName="FK-TEAM-TYPE_TEAM" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="TYPE_TEAM" referencedColumnNames="TYPE_TEAM_ID"/>
+    </changeSet>
+
+
+</databaseChangeLog>
