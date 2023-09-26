@@ -33,13 +33,13 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="USER_ID" type="INT" defaultValue="0">
+            <column name="USER_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 
             <column name="DESCRIPTION" type="VARCHAR(4056)"/>
 
-            <column name="TYPE_TEAM_ID" type="INT" defaultValue="0">
+            <column name="TYPE_TEAM_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 

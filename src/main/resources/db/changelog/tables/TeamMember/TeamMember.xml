@@ -33,11 +33,11 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="TEAMMATE_TYPE_ID" type="INT" defaultValue="0">
+            <column name="TEAMMATE_TYPE_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="FORM_ID" type="INT" defaultValue="0">
+            <column name="FORM_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 

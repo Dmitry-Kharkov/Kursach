@@ -29,11 +29,11 @@
                 <constraints primaryKey="true" primaryKeyName="MESSAGE_PK"/>
             </column>
 
-            <column name="FROM_USER_ID" type="INT" defaultValue="0">
+            <column name="FROM_USER_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="TO_USER_ID" type="INT" defaultValue="0">
+            <column name="TO_USER_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 
