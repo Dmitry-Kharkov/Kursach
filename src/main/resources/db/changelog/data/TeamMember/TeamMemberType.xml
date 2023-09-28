@@ -33,7 +33,7 @@
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
             <column name="NAME" value="Тренер" />
-            <column name="DESCRIPTION" value="Роль в команде футболистов" />
+            <column name="DESCRIPTION" value="Тренер команды" />
         </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
@@ -62,39 +62,58 @@
         </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Тренер" />
+            <column name="NAME" value="Связующий" />
             <column name="DESCRIPTION" value="Роль в команде волейболистов" />
         </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Игрок" />
+            <column name="NAME" value="Сильнейший доигровщик" />
             <column name="DESCRIPTION" value="Роль в команде волейболистов" />
         </insert>
 
+        <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
+            <column name="NAME" value="Доигровщик" />
+            <column name="DESCRIPTION" value="Роль в команде волейболистов" />
+        </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Нападающий" />
+            <column name="NAME" value="Сильнейший центральный блокирующий" />
+            <column name="DESCRIPTION" value="Роль в команде волейболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
+            <column name="NAME" value="Центральный блокирующий" />
+            <column name="DESCRIPTION" value="Роль в команде волейболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
+            <column name="NAME" value="Диагональный" />
+            <column name="DESCRIPTION" value="Роль в команде волейболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
+            <column name="NAME" value="Легкий форвард" />
             <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
         </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Защитник" />
+            <column name="NAME" value="Разыгрывающий защитник" />
             <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
         </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Полузащитник" />
+            <column name="NAME" value="Атакующий защитник" />
             <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
         </insert>
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Тренер" />
+            <column name="NAME" value="Тяжелый форвард" />
             <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
         </insert>
 
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Защитник" />
+            <column name="NAME" value="Центровой" />
             <column name="DESCRIPTION" value="Роль в команде баскетболистов" />
         </insert>
 
@@ -115,11 +134,6 @@
 
         <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
             <column name="NAME" value="Опорник" />
-            <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
-        </insert>
-
-        <insert schemaName="REPOSITORY" tableName="TEAM_MEMBER_TYPE">
-            <column name="NAME" value="Тренер" />
             <column name="DESCRIPTION" value="Роль в команде по CS:Go" />
         </insert>
 

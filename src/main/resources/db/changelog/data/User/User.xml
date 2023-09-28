@@ -14,7 +14,6 @@
         <insert schemaName="REPOSITORY" tableName="USER">
             <column name="FULLNAME" value="DMITRY_KHARKOV" />
             <column name="LOGIN" value="1234" />
-            <column name="PASSWORD" value="1234"/>
         </insert>
 
 

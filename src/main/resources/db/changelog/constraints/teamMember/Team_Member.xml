@@ -17,4 +17,19 @@
                                  referencedTableName="TEAM_MEMBER_TYPE" referencedColumnNames="TEAM_MEMBER_TYPE_ID" />
 
     </changeSet>
+
+    <changeSet id="TEAM_MEMBER-002" author="harkov-dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-TEAM_MEMBER-TEAM" />
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="TEAM_MEMBER" baseColumnNames="TEAM_ID"
+                                 constraintName="FK-TEAM_MEMBER-TEAM" onDelete="RESTRICT" onUpdate="RESTRICT"
+                                 referencedTableName="TEAM" referencedColumnNames="TEAM_ID" />
+
+    </changeSet>
+
 </databaseChangeLog>

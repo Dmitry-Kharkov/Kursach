@@ -37,6 +37,10 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="TEAM_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="DESCRIPTION" type="VARCHAR(4056)"/>
 
             <column name="CREATED" type="TIMESTAMP" defaultValue="CURRENT_TIMESTAMP">
