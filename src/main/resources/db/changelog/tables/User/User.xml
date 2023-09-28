@@ -49,10 +49,6 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="USER_ROLE_ID" type="INT" defaultValue="0">
-                <constraints nullable="false"/>
-            </column>
-
         </createTable>
 
     </changeSet>

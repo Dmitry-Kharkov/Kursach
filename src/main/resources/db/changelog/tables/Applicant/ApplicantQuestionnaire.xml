@@ -35,15 +35,11 @@
 
             <column name="DESCRIPTION" type="VARCHAR(4056)"/>
 
-            <column name="USER_ID" type="INT" defaultValue="0">
+            <column name="USER_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="TYPE_TEAM_ID" type="INT" defaultValue="0">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="TYPE_ROLE_IN_TEAM_ID" type="INT" defaultValue="0">
+            <column name="TYPE_TEAM_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 

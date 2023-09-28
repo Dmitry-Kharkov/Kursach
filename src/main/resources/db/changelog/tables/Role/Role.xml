@@ -43,7 +43,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="ROLE_TYPE_ID" type="INT" defaultValue="0">
+            <column name="ROLE_TYPE_ID" type="INT">
                 <constraints nullable="false"/>
             </column>
 
