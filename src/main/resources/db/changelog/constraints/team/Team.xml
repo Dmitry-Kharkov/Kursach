@@ -8,13 +8,13 @@
 
         <preConditions>
             <not>
-                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-TEAM-USER"/>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-TEAM-USERS"/>
             </not>
         </preConditions>
 
         <addForeignKeyConstraint baseTableName="TEAM" baseColumnNames="USER_ID"
-                                 constraintName="FK-TEAM-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
-                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+                                 constraintName="FK-TEAM-USERS" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="USERS" referencedColumnNames="USER_ID"/>
     </changeSet>
 
     <changeSet id="TEAM-002" author="harkov_dv">

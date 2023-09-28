@@ -20,11 +20,11 @@
 
         <preConditions>
             <not>
-                <tableExists schemaName="REPOSITORY" tableName="USER"/>
+                <tableExists schemaName="REPOSITORY" tableName="USERS"/>
             </not>
         </preConditions>
 
-        <createTable tableName="USER">
+        <createTable tableName="USERS">
             <column name="USER_ID" type="INT" defaultValueSequenceNext="USER_SEQ">
                 <constraints primaryKey="true" primaryKeyName="USER_PK"/>
             </column>
