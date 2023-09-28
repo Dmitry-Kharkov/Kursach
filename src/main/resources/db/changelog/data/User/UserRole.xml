@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="USER_ROLE-001" author="harkov-dv">
+
+        <preConditions>
+            <tableIsEmpty schemaName="REPOSITORY" tableName="USER_ROLE"/>
+        </preConditions>
+
+
+        <insert schemaName="REPOSITORY" tableName="USER_ROLE">
+            <column name="USER_ID" value="0" />
+            <column name="ROLE_ID" value="1"/> <!--почему здесь 1-->
+        </insert>
+
+
+    </changeSet>
+</databaseChangeLog>

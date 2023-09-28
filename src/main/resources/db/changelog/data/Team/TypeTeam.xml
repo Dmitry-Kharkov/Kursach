@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="TYPE_TEAM-001" author="harkov-dv">
+
+        <preConditions>
+            <tableIsEmpty schemaName="REPOSITORY" tableName="TYPE_TEAM"/>
+        </preConditions>
+
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Футбол" />
+            <column name="DESCRIPTION" value="Команда футболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Программирование" />
+            <column name="DESCRIPTION" value="Команда программистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Волейбол" />
+            <column name="DESCRIPTION" value="Команда волейболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="Баскетбол" />
+            <column name="DESCRIPTION" value="Команда баскетболистов" />
+        </insert>
+
+        <insert schemaName="REPOSITORY" tableName="TYPE_TEAM">
+            <column name="NAME" value="CS:GO" />
+            <column name="DESCRIPTION" value="Команда игроков в CS:Go" />
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
