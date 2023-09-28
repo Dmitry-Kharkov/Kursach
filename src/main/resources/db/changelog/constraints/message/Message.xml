@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="MESSAGE-001" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-MESSAGE2-USER"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="MESSAGE" baseColumnNames="FROM_USER_ID"
+                                 constraintName="FK-MESSAGE2-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+    </changeSet>
+
+    <changeSet id="MESSAGE-002" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-MESSAGE3-USER"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="MESSAGE" baseColumnNames="FROM_USER_ID"
+                                 constraintName="FK-MESSAGE3-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+    </changeSet>
+
+
+</databaseChangeLog>

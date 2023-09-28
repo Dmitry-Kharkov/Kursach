@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="APPLICANT-001" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-APPLICANT-USER"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="APPLICANT" baseColumnNames="USER_ID"
+                                 constraintName="FK-APPLICANT-USER" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+    </changeSet>
+
+    <changeSet id="APPLICANT-002" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-APPLICANT-TYPE_TEAM"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="APPLICANT" baseColumnNames="TYPE_TEAM_ID"
+                                 constraintName="FK-APPLICANT-TYPE_TEAM" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="TYPE_TEAM" referencedColumnNames="TYPE_TEAM_ID"/>
+    </changeSet>
+
+    <changeSet id="APPLICANT-003" author="harkov_dv">
+
+        <preConditions>
+            <not>
+                <foreignKeyConstraintExists schemaName="REPOSITORY" foreignKeyName="FK-APPLICANT-TEAM_MEMBER_TYPE"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="APPLICANT" baseColumnNames="TEAM_MEMBER_TYPE_ID"
+                                 constraintName="FK-APPLICANT-TEAM_MEMBER_TYPE" onUpdate="RESTRICT" onDelete="RESTRICT"
+                                 referencedTableName="TEAM_MEMBER_TYPE" referencedColumnNames="TEAM_MEMBER_TYPE_ID"/>
+    </changeSet>
+
+
+</databaseChangeLog>

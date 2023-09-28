@@ -43,6 +43,10 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="TEAM_MEMBER_TYPE_ID" type="INT">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="IS_COMPLETED" type="BOOL" defaultValue="FALSE">
                 <constraints nullable="false"/>
             </column>
