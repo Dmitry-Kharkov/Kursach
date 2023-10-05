@@ -1,9 +1,13 @@
 package com.example.searchteam.domain.user;
 
 import com.example.searchteam.domain.BaseEntity;
+import com.example.searchteam.domain.role.Role;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +36,14 @@ public class UserRole extends BaseEntity {
         this.id = userRoleId;
     }
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ROLE_ID")
+    private Role role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     @Override
     public UserRole setId(Long id) {
