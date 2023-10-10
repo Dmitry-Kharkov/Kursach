@@ -1,9 +1,8 @@
 package com.example.searchteam.domain.message;
 
 import com.example.searchteam.domain.BaseEntity;
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.example.searchteam.domain.user.User;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +33,13 @@ public class Message extends BaseEntity {
         this.id = messageId;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FROM_USER_ID")
+    private User fromUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TO_USER_ID")
+    private User toUser;
 
     @Override
     public Message setId(Long id) {

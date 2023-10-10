@@ -1,9 +1,9 @@
 package com.example.searchteam.domain.team;
 
 import com.example.searchteam.domain.EntityWithName;
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.example.searchteam.domain.teamMember.TeamMember;
+import com.example.searchteam.domain.user.User;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +13,8 @@ import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Entity(name = "TEAM")
 @Getter
@@ -33,6 +35,17 @@ public class Team extends EntityWithName {
     public Team(Long teamId) {
         this.id = teamId;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TYPE_TEAM_ID")
+    private TeamType teamType;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    private List<TeamMember> teamMembers = Collections.emptyList();
 
 
     @Override

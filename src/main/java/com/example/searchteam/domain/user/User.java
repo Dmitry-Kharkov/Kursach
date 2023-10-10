@@ -1,6 +1,9 @@
 package com.example.searchteam.domain.user;
 
 import com.example.searchteam.domain.EntityWithName;
+import com.example.searchteam.domain.applicant.Applicant;
+import com.example.searchteam.domain.message.Message;
+import com.example.searchteam.domain.team.Team;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,6 +41,18 @@ public class User extends EntityWithName {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserRole> userRoles = Collections.emptyList();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Team> teams = Collections.emptyList();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fromUser")
+    private List<Message> fromMessages = Collections.emptyList();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "toUser")
+    private List<Message> toMessages = Collections.emptyList();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Applicant> applicants = Collections.emptyList();
 
     public User(Long userId) {
         this.id = userId;
