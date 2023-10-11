@@ -13,13 +13,6 @@ import java.util.List;
 public class TeamMemberDomainService {
 
     private final TeamMemberRepository repository;
-
-
-    @Transactional
-    public List<TeamMember> getTeamMemberById(Long id) {
-        return repository.getTeamMemberById(id);
-    }
-
     @Transactional
     public List<TeamMember> getTeamMemberByName(String name) {
         return repository.getTeamMemberByName(name);
@@ -33,11 +26,6 @@ public class TeamMemberDomainService {
     @Transactional
     public List<TeamMember> getTeamMemberByTeamId(Long teamId) {
         return repository.getTeamMemberByTeamId(teamId);
-    }
-
-    @Transactional
-    public void deleteTeamMemberById(Long id) {
-        repository.deleteTeamMemberById(id);
     }
 
     @Transactional

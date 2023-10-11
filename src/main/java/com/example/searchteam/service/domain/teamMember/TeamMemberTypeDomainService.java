@@ -13,19 +13,9 @@ public class TeamMemberTypeDomainService {
 
     private final TeamMemberTypeRepository repository;
 
-
-    @Transactional
-    public List<TeamMemberType> getTeamMemberTypeById(Long id) {
-        return repository.getTeamMemberTypeById(id);
-    }
-
     @Transactional
     public List<TeamMemberType> getTeamMemberTypeByName(String name) {
         return repository.getTeamMemberTypeByName(name);
-    }
-    @Transactional
-    public void deleteTeamMemberTypeById(Long id) {
-        repository.deleteTeamMemberTypeById(id);
     }
 
     @Transactional

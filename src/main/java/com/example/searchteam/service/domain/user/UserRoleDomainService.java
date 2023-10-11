@@ -18,12 +18,6 @@ public class UserRoleDomainService {
 
     private final UserRoleRepository repository;
 
-
-    @Transactional
-    public List<UserRole> getUserRoleById(Long id) {
-        return repository.getUserRoleById(id);
-    }
-
     @Transactional
     public List<UserRole> getUserRoleByUserId(Long userId) {
         return repository.getUserRoleByUserId(userId);
@@ -33,11 +27,5 @@ public class UserRoleDomainService {
     public List<UserRole> getUserRoleByRoleId(Long roleId) {
         return repository.getUserRoleByRoleId(roleId);
     }
-
-    @Transactional
-    public void deleteUserRoleById(Long id) {
-        repository.deleteUserRoleById(id);
-    }
-
 
 }

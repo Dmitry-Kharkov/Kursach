@@ -16,18 +16,8 @@ public class RoleTypeDomainService {
 
 
     @Transactional
-    public List<RoleType> getRoleTypeById(Long id) {
-        return repository.getRoleTypeById(id);
-    }
-
-    @Transactional
     public List<RoleType> getRoleTypeByName(String name) {
         return repository.getRoleTypeByName(name);
-    }
-
-    @Transactional
-    public void deleteRoleTypeById(Long id) {
-        repository.deleteRoleTypeById(id);
     }
 
     @Transactional

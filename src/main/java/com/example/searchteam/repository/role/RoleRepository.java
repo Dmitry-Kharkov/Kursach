@@ -6,11 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role, Long > {
-    List<Role> getRoleById(Long id);
     List<Role> getRoleByName(String name);
     List<Role> getRoleByRoleTypeId(Long roleTypeId);
-
-    void deleteRoleById(Long id);
     void deleteRoleByName(String name);
 
 

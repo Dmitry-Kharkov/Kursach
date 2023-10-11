@@ -14,12 +14,6 @@ public class TeamDomainService {
 
     private final TeamRepository repository;
 
-
-    @Transactional
-    public List<Team> getTeamById(Long id) {
-        return repository.getTeamById(id);
-    }
-
     @Transactional
     public List<Team> getTeamByName(String name) {
         return repository.getTeamByName(name);
@@ -33,11 +27,6 @@ public class TeamDomainService {
     @Transactional
     public List<Team> getTeamByTeamTypeId(Long teamTypeId) {
         return repository.getTeamByUserId(teamTypeId);
-    }
-
-    @Transactional
-    public void deleteTeamById(Long id) {
-        repository.deleteTeamById(id);
     }
 
     @Transactional

@@ -15,20 +15,9 @@ public class TeamTypeDomainService {
 
     private final TeamTypeRepository repository;
 
-
-    @Transactional
-    public List<TeamType> getTeamTypeById(Long id) {
-        return repository.getTeamTypeById(id);
-    }
-
     @Transactional
     public List<TeamType> getTeamTypeByName(String name) {
         return repository.getTeamTypeByName(name);
-    }
-
-    @Transactional
-    public void deleteTeamTypeById(Long id) {
-        repository.deleteTeamTypeById(id);
     }
 
     @Transactional

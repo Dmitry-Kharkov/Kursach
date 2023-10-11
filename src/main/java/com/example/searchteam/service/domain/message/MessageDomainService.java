@@ -16,11 +16,6 @@ public class MessageDomainService {
 
 
     @Transactional
-    public List<Message> getMessageById(Long id) {
-        return repository.getMessageById(id);
-    }
-
-    @Transactional
     public List<Message> getMessageByFromUserId(Long fromUserId) {
         return repository.getMessageByFromUserId(fromUserId);
     }
@@ -30,9 +25,5 @@ public class MessageDomainService {
         return repository.getMessageByToUserId(toUserId);
     }
 
-    @Transactional
-    public void deleteMessageById(Long id) {
-        repository.deleteMessageById(id);
-    }
 
 }

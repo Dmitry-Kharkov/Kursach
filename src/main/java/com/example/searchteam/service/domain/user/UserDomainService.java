@@ -16,12 +16,6 @@ public class UserDomainService {
 
     private final UserRepository repository;
 
-
-    @Transactional
-    public List<User> getUserById(Long id) {
-        return repository.getUserById(id);
-    }
-
     @Transactional
     public List<User> getUserByFullName(String fullName) {
         return repository.getUserByFullName(fullName);
@@ -30,11 +24,6 @@ public class UserDomainService {
     @Transactional
     public List<User> getUserByLogin(String login) {
         return repository.getUserByLogin(login);
-    }
-
-    @Transactional
-    public void deleteUserById(Long id) {
-        repository.deleteUserById(id);
     }
 
     @Transactional

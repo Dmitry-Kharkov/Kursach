@@ -15,12 +15,6 @@ public class RoleDomainService {
 
     private final RoleRepository repository;
 
-
-    @Transactional
-    public List<Role> getRoleById(Long id) {
-        return repository.getRoleById(id);
-    }
-
     @Transactional
     public List<Role> getRoleByName(String name) {
         return repository.getRoleByName(name);
@@ -29,11 +23,6 @@ public class RoleDomainService {
     @Transactional
     public List<Role> getRoleByRoleTypeId(Long roleTypeId) {
         return repository.getRoleByRoleTypeId(roleTypeId);
-    }
-
-    @Transactional
-    public void deleteRoleById(Long id) {
-        repository.deleteRoleById(id);
     }
 
     @Transactional

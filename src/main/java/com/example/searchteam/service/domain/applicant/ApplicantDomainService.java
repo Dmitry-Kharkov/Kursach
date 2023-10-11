@@ -16,11 +16,6 @@ public class ApplicantDomainService {
 
 
     @Transactional
-    public List<Applicant> getApplicantById(Long id) {
-        return repository.getApplicantById(id);
-    }
-
-    @Transactional
     public List<Applicant> getApplicantByName(String name) {
         return repository.getApplicantByName(name);
     }
@@ -38,12 +33,6 @@ public class ApplicantDomainService {
     @Transactional
     public List<Applicant> getApplicantByUserId(Long userId) {
         return repository.getApplicantByUserId(userId);
-    }
-
-
-    @Transactional
-    public void deleteApplicantById(Long id) {
-        repository.deleteApplicantById(id);
     }
 
     @Transactional
