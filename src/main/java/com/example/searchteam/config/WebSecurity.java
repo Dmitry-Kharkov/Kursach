@@ -21,7 +21,8 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @RequiredArgsConstructor
 public class WebSecurity {
 
-    private static final String API_URL_PATTERN = "/v1/**";
+    private static final String API_URL_PATTERN = "api/v1/**";
+
     @Bean
     public SecurityFilterChain getSecurityFilterChain(HttpSecurity http,
                                                       HandlerMappingIntrospector introspector) throws Exception {
@@ -37,7 +38,7 @@ public class WebSecurity {
         http.authorizeHttpRequests(auth ->
                 auth
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
         );
 
         http.formLogin(Customizer.withDefaults());
