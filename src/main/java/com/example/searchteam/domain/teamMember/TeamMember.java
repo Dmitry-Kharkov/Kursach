@@ -1,9 +1,8 @@
 package com.example.searchteam.domain.teamMember;
 
 import com.example.searchteam.domain.EntityWithName;
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.example.searchteam.domain.team.Team;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +30,13 @@ public class TeamMember extends EntityWithName {
         this.id = teamMemberId;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_MEMBER_TYPE_ID")
+    private TeamMemberType teamMemberType;
 
     @Override
     public TeamMember setId(Long id) {

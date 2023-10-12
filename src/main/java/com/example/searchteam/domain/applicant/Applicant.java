@@ -1,9 +1,10 @@
 package com.example.searchteam.domain.applicant;
 
 import com.example.searchteam.domain.EntityWithName;
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import com.example.searchteam.domain.team.TeamType;
+import com.example.searchteam.domain.teamMember.TeamMemberType;
+import com.example.searchteam.domain.user.User;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,18 @@ public class Applicant extends EntityWithName {
         this.id = applicantId;
     }
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TYPE_TEAM_ID")
+    private TeamType teamType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_MEMBER_TYPE_ID")
+    private TeamMemberType teamMemberType;
 
     @Override
     public Applicant setId(Long id) {
