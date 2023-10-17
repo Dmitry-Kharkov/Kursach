@@ -1,6 +1,6 @@
-package com.example.searchteam.service.domain;
+package com.example.searchteam.service.role;
 
-import com.example.searchteam.dto.request.RoleRequest;
+import com.example.searchteam.dto.request.role.RoleRequest;
 import com.example.searchteam.dto.response.role.RoleResponse;
 import com.example.searchteam.service.domain.role.RoleDomainService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,5 @@ public class RoleService {
     public RoleResponse getRoleById(RoleRequest request ){
         return service.getRoleById(request.getRoleId());
     }
-
 
 }

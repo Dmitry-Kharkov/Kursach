@@ -2,6 +2,10 @@ package com.example.searchteam.service.domain.user;
 
 import com.example.searchteam.domain.teamMember.TeamMember;
 import com.example.searchteam.domain.user.User;
+import com.example.searchteam.dto.response.team.TeamResponse;
+import com.example.searchteam.dto.response.user.UserResponse;
+import com.example.searchteam.mapper.team.TeamResponseMapper;
+import com.example.searchteam.mapper.user.UserResponseMapper;
 import com.example.searchteam.repository.teamMember.TeamMemberRepository;
 import com.example.searchteam.repository.user.UserRepository;
 import jakarta.transaction.Transactional;
@@ -15,7 +19,12 @@ import java.util.List;
 public class UserDomainService {
 
     private final UserRepository repository;
+    private final UserResponseMapper responseUserMapper;
 
+    @Transactional
+    public UserResponse getUserById(Long id) {
+        return responseUserMapper.from(repository.findById(id).orElseThrow());
+    }
     @Transactional
     public List<User> getUserByFullName(String fullName) {
         return repository.getUserByFullName(fullName);
