@@ -1,8 +1,8 @@
-package com.example.searchteam.controller;
+package com.example.searchteam.controller.role;
 
-import com.example.searchteam.dto.request.RoleRequest;
+import com.example.searchteam.dto.request.role.RoleRequest;
 import com.example.searchteam.dto.response.role.RoleResponse;
-import com.example.searchteam.service.domain.RoleService;
+import com.example.searchteam.service.role.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
