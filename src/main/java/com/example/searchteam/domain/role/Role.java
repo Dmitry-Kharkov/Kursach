@@ -43,7 +43,7 @@ public class Role extends EntityWithName {
     @JoinColumn(name = "ROLE_TYPE_ID")
     private RoleType roleType;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+   @OneToMany(cascade = CascadeType.DETACH, mappedBy = "role")
     private List<UserRole> userRoles = Collections.emptyList();
 
     @Override

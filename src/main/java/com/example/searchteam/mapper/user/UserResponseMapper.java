@@ -13,7 +13,7 @@ public class UserResponseMapper implements Mapper<UserResponse, User> {
     public UserResponse from(User source) {
         return new UserResponse()
                 .setUserId(source.getId())
-                .setFullName(source.getName())
+                .setFullName(source.getFullName())
                 .setLogin(source.getLogin())
                 //.setPassword(source.getPassword())
                 .setCreated(source.getCreatedDateTime())

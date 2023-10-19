@@ -1,5 +1,6 @@
 package com.example.searchteam.dto.response.applicant;
 
+import com.example.searchteam.dto.response.user.UserResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -16,7 +17,7 @@ public class ApplicantResponse {
     private Long applicantId;
     private String name;
     private String description;
-    private Long userId;
+    private UserResponse user;
     private Long typeTeamId;
     private Long teamMemberTypeId;
     private LocalDateTime created;
