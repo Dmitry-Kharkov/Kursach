@@ -1,6 +1,6 @@
 package com.example.searchteam.domain.user;
 
-import com.example.searchteam.domain.EntityWithName;
+import com.example.searchteam.domain.BaseEntity;
 import com.example.searchteam.domain.applicant.Applicant;
 import com.example.searchteam.domain.message.Message;
 import com.example.searchteam.domain.team.Team;
@@ -29,7 +29,7 @@ import java.util.List;
 @ToString(onlyExplicitlyIncluded = true, callSuper = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @AttributeOverride(name = "id", column = @Column(name = "USER_ID"))
-public class User extends EntityWithName {
+public class User extends BaseEntity {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -65,17 +65,6 @@ public class User extends EntityWithName {
         return this;
     }
 
-    @Override
-    public User setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    @Override
-    public User setDescription(String description) {
-        this.description = description;
-        return this;
-    }
 
     @Override
     public User setCreatedDateTime(LocalDateTime createdDateTime) {

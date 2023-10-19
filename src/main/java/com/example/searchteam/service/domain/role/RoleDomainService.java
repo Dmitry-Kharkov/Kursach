@@ -35,6 +35,12 @@ public class RoleDomainService {
     }
 
     @Transactional
+    public void deleteRoleById(Long id) {
+        repository.deleteById(id);
+    }
+
+
+    @Transactional
     public void deleteRoleByName(String name) {
         repository.deleteRoleByName(name);
     }

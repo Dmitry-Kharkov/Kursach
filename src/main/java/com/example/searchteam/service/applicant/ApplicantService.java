@@ -1,5 +1,6 @@
 package com.example.searchteam.service.applicant;
 
+import com.example.searchteam.dto.request.applicant.ApplicantAddRequest;
 import com.example.searchteam.dto.request.applicant.ApplicantRequest;
 import com.example.searchteam.dto.response.applicant.ApplicantResponse;
 import com.example.searchteam.service.domain.applicant.ApplicantDomainService;
@@ -16,5 +17,14 @@ public class ApplicantService {
         return service.getApplicantById(request.getApplicantId());
     }
 
+    public ApplicantResponse addApplicant(ApplicantAddRequest request) {
+        Long applicantId = service.addApplicant(request);
+        return service.getApplicantById(applicantId);
+    }
 
+
+    public ApplicantResponse editApplicant(ApplicantAddRequest request) {
+        Long applicantId = service.editApplicant(request);
+        return service.getApplicantById(applicantId);
+    }
 }
