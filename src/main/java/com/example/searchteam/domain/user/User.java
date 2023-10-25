@@ -38,6 +38,8 @@ public class User extends BaseEntity {
     String fullName;
     @Column(name="LOGIN")
     String login;
+    @Column(name="PASSWORD")
+    String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserRole> userRoles = Collections.emptyList();

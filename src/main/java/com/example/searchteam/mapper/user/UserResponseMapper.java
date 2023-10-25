@@ -15,7 +15,7 @@ public class UserResponseMapper implements Mapper<UserResponse, User> {
                 .setUserId(source.getId())
                 .setFullName(source.getFullName())
                 .setLogin(source.getLogin())
-                //.setPassword(source.getPassword())
+                .setPassword(source.getPassword())
                 .setCreated(source.getCreatedDateTime())
                 .setModified(source.getModifiedDateTime());
     }
