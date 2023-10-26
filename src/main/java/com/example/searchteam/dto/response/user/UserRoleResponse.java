@@ -18,7 +18,7 @@ public class UserRoleResponse {
 
     private Long userRoleId;
     private Long userId;
-    private Long roleId;
+    private RoleResponse role;
     private LocalDateTime created;
     private LocalDateTime modified;
 

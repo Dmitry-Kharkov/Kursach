@@ -2,7 +2,9 @@ package com.example.searchteam.mapper.team;
 
 import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.dto.response.team.TeamResponse;
+import com.example.searchteam.dto.response.team.TypeTeamResponse;
 import com.example.searchteam.mapper.Mapper;
+import com.example.searchteam.mapper.user.UserResponseMapper;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +17,16 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class TeamResponseMapper implements Mapper<TeamResponse, Team> {
+    private final UserResponseMapper userResponseMapper;
+    private final TeamTypeResponseMapper teamTypeResponseMapper;
     @Override
     public TeamResponse from(Team source) {
         return new TeamResponse()
                 .setTeamId(source.getId())
                 .setName(source.getName())
-                .setUserId(source.getUser().getId())
+                .setUser(userResponseMapper.from(source.getUser()))
                 .setDescription(source.getDescription())
-                .setTypeTeamId(source.getTeamType().getId())
+                .setTypeTeam(teamTypeResponseMapper.from(source.getTeamType()))
                 .setCreated(source.getCreatedDateTime())
                 .setModified(source.getModifiedDateTime());
     }

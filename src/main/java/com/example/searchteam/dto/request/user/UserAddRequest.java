@@ -1,5 +1,6 @@
 package com.example.searchteam.dto.request.user;
 
+import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.UserRole;
 import com.example.searchteam.repository.user.UserRoleRepository;
 import com.example.searchteam.service.domain.user.UserRoleDomainService;
@@ -23,11 +24,12 @@ public class UserAddRequest {
     private Long id;
     private String name;
     private String login;
-    private List<UserRole> userRoles;
+    private String password;
+    private List<Role> roles;
 
-    public List<UserRole> getUserRoles() {
-        userRoles.addAll(UserRoleRepository.getUserRoleByUserId(id));
-        return userRoles;
+    public List<Role> getUserRoles() {
+        roles.addAll(UserRoleRepository.getUserRoleByUserId(id));
+        return roles;
     }
 
 }
