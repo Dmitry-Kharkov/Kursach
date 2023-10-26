@@ -1,6 +1,5 @@
 package com.example.searchteam.dto.response.user;
 
-import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.dto.response.role.RoleResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class UserResponse {
     private String fullName;
     private String login;
     private String password;
-    private List<Long> roles;
+    private List<RoleResponse> roles;
     private LocalDateTime created;
     private LocalDateTime modified;
 
