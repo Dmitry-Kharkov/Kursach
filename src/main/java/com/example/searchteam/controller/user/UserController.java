@@ -42,7 +42,7 @@ public class UserController {
             value = USER_EDIT,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public UserResponse editApplicant(@RequestBody UserAddRequest request) {
+    public UserResponse editUser(@RequestBody UserAddRequest request) {
         return service.editUser(request);
     }
 

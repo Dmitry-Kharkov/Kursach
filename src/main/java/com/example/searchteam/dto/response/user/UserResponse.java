@@ -20,7 +20,7 @@ public class UserResponse {
     private String fullName;
     private String login;
     private String password;
-    private List<RoleResponse> roles;
+    private List<Long> roles;
     private LocalDateTime created;
     private LocalDateTime modified;
 

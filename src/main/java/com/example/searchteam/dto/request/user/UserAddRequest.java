@@ -11,25 +11,19 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-public class UserAddRequest {
 
+public class UserAddRequest {
 
     private Long id;
     private String name;
     private String login;
     private String password;
     private List<Role> roles;
-
-    public List<Role> getUserRoles() {
-        roles.addAll(UserRoleRepository.getUserRoleByUserId(id));
-        return roles;
-    }
 
 }
