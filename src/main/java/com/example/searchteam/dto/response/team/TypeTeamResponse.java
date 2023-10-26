@@ -1,6 +1,8 @@
-package com.example.searchteam.dto.response.message;
+package com.example.searchteam.dto.response.team;
 
+import com.example.searchteam.dto.response.teamMember.TeamMemberTypeResponse;
 import com.example.searchteam.dto.response.user.UserResponse;
+import liquibase.changelog.ChangeSet;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,13 +14,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class MessageResponse {
+public class TypeTeamResponse {
 
-    private Long messageId;
-    private UserResponse fromUser;
-    private UserResponse toUser;
-    private String text;
+    private Long typeTeamId;
+    private String name;
+    private String description;
     private LocalDateTime created;
     private LocalDateTime modified;
-
 }

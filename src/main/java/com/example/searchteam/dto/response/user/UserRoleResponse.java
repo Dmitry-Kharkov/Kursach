@@ -1,5 +1,6 @@
 package com.example.searchteam.dto.response.user;
 
+import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.dto.response.role.RoleResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class UserResponse {
+public class UserRoleResponse {
 
+    private Long userRoleId;
     private Long userId;
-    private String fullName;
-    private String login;
-    private String password;
-    private List<RoleResponse> roles;
+    private RoleResponse role;
     private LocalDateTime created;
     private LocalDateTime modified;
 

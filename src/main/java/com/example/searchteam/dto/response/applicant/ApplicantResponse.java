@@ -1,5 +1,8 @@
 package com.example.searchteam.dto.response.applicant;
 
+import com.example.searchteam.domain.teamMember.TeamMemberType;
+import com.example.searchteam.dto.response.team.TypeTeamResponse;
+import com.example.searchteam.dto.response.teamMember.TeamMemberTypeResponse;
 import com.example.searchteam.dto.response.user.UserResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +21,8 @@ public class ApplicantResponse {
     private String name;
     private String description;
     private UserResponse user;
-    private Long typeTeamId;
-    private Long teamMemberTypeId;
+    private TypeTeamResponse typeTeam;
+    private TeamMemberTypeResponse teamMemberType;
     private LocalDateTime created;
     private LocalDateTime modified;
 

@@ -1,6 +1,6 @@
-package com.example.searchteam.dto.response.message;
+package com.example.searchteam.dto.response.teamMember;
 
-import com.example.searchteam.dto.response.user.UserResponse;
+import com.example.searchteam.dto.response.team.TeamResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,12 +12,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class MessageResponse {
+public class TeamMemberTypeResponse {
 
-    private Long messageId;
-    private UserResponse fromUser;
-    private UserResponse toUser;
-    private String text;
+    private Long teamMemberTypeId;
+    private String name;
+    private String description;
     private LocalDateTime created;
     private LocalDateTime modified;
 
