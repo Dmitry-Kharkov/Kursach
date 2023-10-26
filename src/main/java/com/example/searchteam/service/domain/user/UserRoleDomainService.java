@@ -3,6 +3,7 @@ package com.example.searchteam.service.domain.user;
 import com.example.searchteam.domain.teamMember.TeamMember;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
+import com.example.searchteam.dto.response.user.UserRoleResponse;
 import com.example.searchteam.repository.teamMember.TeamMemberRepository;
 import com.example.searchteam.repository.user.UserRepository;
 import com.example.searchteam.repository.user.UserRoleRepository;
@@ -20,7 +21,7 @@ public class UserRoleDomainService {
 
     @Transactional
     public List<UserRole> getUserRoleByUserId(Long userId) {
-        return repository.getUserRoleByUserId(userId);
+        return UserRoleRepository.getUserRoleByUserId(userId);
     }
 
     @Transactional

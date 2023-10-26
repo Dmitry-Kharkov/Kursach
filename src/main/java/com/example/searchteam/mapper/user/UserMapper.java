@@ -1,9 +1,6 @@
 package com.example.searchteam.mapper.user;
 
-import com.example.searchteam.domain.team.TeamType;
-import com.example.searchteam.domain.teamMember.TeamMemberType;
 import com.example.searchteam.domain.user.User;
-import com.example.searchteam.dto.request.applicant.ApplicantAddRequest;
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +14,6 @@ public class UserMapper implements Mapper<User, UserAddRequest> {
         return new User()
                 .setFullName(source.getName())
                 .setLogin(source.getLogin())
-                .setPassword(source.getPassword());
+                .setUserRoles(source.getUserRoles());
     }
 }

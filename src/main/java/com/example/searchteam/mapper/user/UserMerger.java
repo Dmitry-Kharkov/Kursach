@@ -19,7 +19,6 @@ public class UserMerger implements Merger<User, UserAddRequest> {
     public User merge(User target, UserAddRequest source) {
         return target
                 .setFullName(source.getName())
-                .setLogin(source.getLogin())
-                .setPassword(source.getPassword());
+                .setLogin(source.getLogin());
     }
 }

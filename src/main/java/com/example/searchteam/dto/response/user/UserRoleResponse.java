@@ -14,13 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @Accessors(chain = true)
 @ToString
-public class UserResponse {
+public class UserRoleResponse {
 
+    private Long userRoleId;
     private Long userId;
-    private String fullName;
-    private String login;
-    private String password;
-    private List<RoleResponse> roles;
+    private Long roleId;
     private LocalDateTime created;
     private LocalDateTime modified;
 
