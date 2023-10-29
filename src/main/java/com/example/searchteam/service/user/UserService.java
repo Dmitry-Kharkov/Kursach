@@ -7,6 +7,8 @@ import com.example.searchteam.service.domain.user.UserDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -15,6 +17,10 @@ public class UserService {
 
     public UserResponse getUserById(UserRequest request ){
         return service.getUserById(request.getUserId());
+    }
+
+    public List<UserResponse> getAllUsers(){
+        return service.getAllUsers();
     }
 
     public UserResponse addUser(UserAddRequest request) {

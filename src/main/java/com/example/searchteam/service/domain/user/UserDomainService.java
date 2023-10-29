@@ -33,6 +33,11 @@ public class UserDomainService {
     }
 
     @Transactional
+    public List<UserResponse> getAllUsers() {
+        return responseUserMapper.from(repository.findAll());
+    }
+
+    @Transactional
     public List<User> getUserByFullName(String fullName) {
         return repository.getUserByFullName(fullName);
     }
