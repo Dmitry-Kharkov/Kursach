@@ -61,7 +61,6 @@ public class UserDomainService {
     public Long addUser(UserAddRequest request) {
 
         var user = userMapper.from(request);
-
         user.setUserRoles(Collections.emptyList());
 
         return repository.save(user).getId();
@@ -72,6 +71,7 @@ public class UserDomainService {
         var user = repository.getReferenceById(request.getId());
         return repository.save(userMerger.merge(user, request)).getId();
     }
+
 
     @Transactional
     public void setUserRole(Long userId, List<Long> roles){

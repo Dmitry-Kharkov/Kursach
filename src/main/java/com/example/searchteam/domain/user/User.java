@@ -20,6 +20,8 @@ import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity(name = "USERS")
 @Getter
