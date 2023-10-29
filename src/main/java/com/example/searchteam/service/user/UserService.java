@@ -25,6 +25,7 @@ public class UserService {
 
     public UserResponse addUser(UserAddRequest request) {
         Long userId = service.addUser(request);
+        service.setUserRole(userId, List.of(2L));
         return service.getUserById(userId);
     }
 
