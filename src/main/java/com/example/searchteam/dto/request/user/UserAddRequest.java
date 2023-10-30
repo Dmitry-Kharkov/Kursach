@@ -1,6 +1,5 @@
 package com.example.searchteam.dto.request.user;
 
-import com.example.searchteam.domain.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
