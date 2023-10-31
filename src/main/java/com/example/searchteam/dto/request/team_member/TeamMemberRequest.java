@@ -1,4 +1,4 @@
-package com.example.searchteam.dto.request.teamMember;
+package com.example.searchteam.dto.request.team_member;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

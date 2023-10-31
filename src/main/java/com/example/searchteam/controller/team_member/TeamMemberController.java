@@ -1,8 +1,8 @@
-package com.example.searchteam.controller.teamMember;
+package com.example.searchteam.controller.team_member;
 
-import com.example.searchteam.dto.request.teamMember.TeamMemberRequest;
-import com.example.searchteam.dto.response.teamMember.TeamMemberResponse;
-import com.example.searchteam.service.teamMember.TeamMemberService;
+import com.example.searchteam.dto.request.team_member.TeamMemberRequest;
+import com.example.searchteam.dto.response.team_member.TeamMemberResponse;
+import com.example.searchteam.service.team_member.TeamMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

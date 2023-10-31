@@ -2,7 +2,7 @@ package com.example.searchteam.mapper.applicant;
 
 import com.example.searchteam.domain.applicant.Applicant;
 import com.example.searchteam.domain.team.TeamType;
-import com.example.searchteam.domain.teamMember.TeamMemberType;
+import com.example.searchteam.domain.team_member.TeamMemberType;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.dto.request.applicant.ApplicantAddRequest;
 import com.example.searchteam.mapper.Mapper;
