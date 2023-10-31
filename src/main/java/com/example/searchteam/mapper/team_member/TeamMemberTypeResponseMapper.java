@@ -1,7 +1,7 @@
-package com.example.searchteam.mapper.teamMember;
+package com.example.searchteam.mapper.team_member;
 
-import com.example.searchteam.domain.teamMember.TeamMemberType;
-import com.example.searchteam.dto.response.teamMember.TeamMemberTypeResponse;
+import com.example.searchteam.domain.team_member.TeamMemberType;
+import com.example.searchteam.dto.response.team_member.TeamMemberTypeResponse;
 import com.example.searchteam.mapper.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

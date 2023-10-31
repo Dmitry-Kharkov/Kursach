@@ -2,9 +2,11 @@ package com.example.searchteam.domain.team;
 
 import com.example.searchteam.domain.EntityWithName;
 import com.example.searchteam.domain.applicant.Applicant;
-import com.example.searchteam.domain.user.User;
-import com.example.searchteam.domain.user.UserRole;
-import jakarta.persistence.*;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,14 +19,14 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-@Entity(name = "TEAM_TYPE")
+@Entity(name = "TYPE_TEAM")
 @Getter
 @Setter
 @Accessors(chain = true)
 @NoArgsConstructor
 @ToString(onlyExplicitlyIncluded = true, callSuper = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-@AttributeOverride(name = "id", column = @Column(name = "TEAM_TYPE_ID"))
+@AttributeOverride(name = "id", column = @Column(name = "TYPE_TEAM_ID"))
 public class TeamType extends EntityWithName {
 
     @Serial

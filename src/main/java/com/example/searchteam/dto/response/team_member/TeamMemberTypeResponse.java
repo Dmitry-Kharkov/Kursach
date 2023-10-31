@@ -1,6 +1,5 @@
-package com.example.searchteam.dto.response.teamMember;
+package com.example.searchteam.dto.response.team_member;
 
-import com.example.searchteam.dto.response.team.TeamResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

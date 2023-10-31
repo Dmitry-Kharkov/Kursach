@@ -1,8 +1,7 @@
 package com.example.searchteam.dto.response.applicant;
 
-import com.example.searchteam.domain.teamMember.TeamMemberType;
 import com.example.searchteam.dto.response.team.TypeTeamResponse;
-import com.example.searchteam.dto.response.teamMember.TeamMemberTypeResponse;
+import com.example.searchteam.dto.response.team_member.TeamMemberTypeResponse;
 import com.example.searchteam.dto.response.user.UserResponse;
 import lombok.Data;
 import lombok.NoArgsConstructor;

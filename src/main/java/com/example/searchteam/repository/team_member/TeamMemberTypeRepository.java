@@ -1,6 +1,6 @@
-package com.example.searchteam.repository.teamMember;
+package com.example.searchteam.repository.team_member;
 
-import com.example.searchteam.domain.teamMember.TeamMemberType;
+import com.example.searchteam.domain.team_member.TeamMemberType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

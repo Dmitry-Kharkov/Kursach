@@ -1,4 +1,4 @@
-package com.example.searchteam.domain.teamMember;
+package com.example.searchteam.domain.team_member;
 
 import com.example.searchteam.domain.EntityWithName;
 import com.example.searchteam.domain.team.Team;

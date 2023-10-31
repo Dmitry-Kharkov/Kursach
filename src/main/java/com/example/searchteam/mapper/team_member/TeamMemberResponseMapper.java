@@ -1,18 +1,15 @@
-package com.example.searchteam.mapper.teamMember;
+package com.example.searchteam.mapper.team_member;
 
-import com.example.searchteam.domain.teamMember.TeamMember;
-import com.example.searchteam.dto.response.teamMember.TeamMemberResponse;
-import com.example.searchteam.dto.response.teamMember.TeamMemberTypeResponse;
+import com.example.searchteam.domain.team_member.TeamMember;
+import com.example.searchteam.dto.response.team_member.TeamMemberResponse;
 import com.example.searchteam.mapper.Mapper;
-import com.example.searchteam.mapper.team.TeamResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class TeamMemberResponseMapper implements Mapper<TeamMemberResponse, TeamMember> {
-    private TeamMemberTypeResponseMapper teamMemberTypeResponseMapper;
-    private TeamResponseMapper teamResponseMapper;
+    private final TeamMemberTypeResponseMapper teamMemberTypeResponseMapper;
 
     @Override
     public TeamMemberResponse from(TeamMember source) {
@@ -20,7 +17,6 @@ public class TeamMemberResponseMapper implements Mapper<TeamMemberResponse, Team
                 .setTeamMemberId(source.getId())
                 .setName(source.getName())
                 .setTeamMemberType(teamMemberTypeResponseMapper.from(source.getTeamMemberType()))
-                .setTeam(teamResponseMapper.from(source.getTeam()))
                 .setDescription(source.getDescription())
                 .setCreated(source.getCreatedDateTime())
                 .setModified(source.getModifiedDateTime());

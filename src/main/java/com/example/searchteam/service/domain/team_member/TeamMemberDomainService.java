@@ -1,11 +1,9 @@
-package com.example.searchteam.service.domain.teamMember;
+package com.example.searchteam.service.domain.team_member;
 
-import com.example.searchteam.domain.teamMember.TeamMember;
-import com.example.searchteam.dto.response.team.TeamResponse;
-import com.example.searchteam.dto.response.teamMember.TeamMemberResponse;
-import com.example.searchteam.mapper.team.TeamResponseMapper;
-import com.example.searchteam.mapper.teamMember.TeamMemberResponseMapper;
-import com.example.searchteam.repository.teamMember.TeamMemberRepository;
+import com.example.searchteam.domain.team_member.TeamMember;
+import com.example.searchteam.dto.response.team_member.TeamMemberResponse;
+import com.example.searchteam.mapper.team_member.TeamMemberResponseMapper;
+import com.example.searchteam.repository.team_member.TeamMemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

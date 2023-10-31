@@ -1,7 +1,7 @@
 package com.example.searchteam.domain.team;
 
 import com.example.searchteam.domain.EntityWithName;
-import com.example.searchteam.domain.teamMember.TeamMember;
+import com.example.searchteam.domain.team_member.TeamMember;
 import com.example.searchteam.domain.user.User;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
