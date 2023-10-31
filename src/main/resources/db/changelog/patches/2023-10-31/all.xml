@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="ADD-COLUMN-TEAM-MEMBER-001" author="vyushin_aa">
+
+        <addColumn schemaName="REPOSITORY" tableName="TEAM_MEMBER">
+            <column name="APPLICANT_ID" type="INT" afterColumn="TEAM_ID"/>
+        </addColumn>
+
+        <addForeignKeyConstraint
+                baseTableName="TEAM_MEMBER" baseColumnNames="APPLICANT_ID"
+                constraintName="FK-TEAM_MEMBER-APPLICANT"  onDelete="RESTRICT" onUpdate="RESTRICT"
+                referencedTableName="APPLICANT" referencedColumnNames="APPLICANT_ID"/>
+
+
+    </changeSet>
+</databaseChangeLog>

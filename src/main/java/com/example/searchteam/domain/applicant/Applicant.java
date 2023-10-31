@@ -2,6 +2,7 @@ package com.example.searchteam.domain.applicant;
 
 import com.example.searchteam.domain.EntityWithName;
 import com.example.searchteam.domain.team.TeamType;
+import com.example.searchteam.domain.team_member.TeamMember;
 import com.example.searchteam.domain.team_member.TeamMemberType;
 import com.example.searchteam.domain.user.User;
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "APPLICANT")
 @Getter
@@ -47,6 +49,10 @@ public class Applicant extends EntityWithName {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_MEMBER_TYPE_ID")
     private TeamMemberType teamMemberType;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
+    private List<TeamMember> teamMembers;
+
 
     @Override
     public Applicant setId(Long id) {

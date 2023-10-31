@@ -1,6 +1,7 @@
 package com.example.searchteam.domain.team_member;
 
 import com.example.searchteam.domain.EntityWithName;
+import com.example.searchteam.domain.applicant.Applicant;
 import com.example.searchteam.domain.team.Team;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -37,6 +38,10 @@ public class TeamMember extends EntityWithName {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_MEMBER_TYPE_ID")
     private TeamMemberType teamMemberType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "APPLICANT_ID")
+    private Applicant applicant;
 
     @Override
     public TeamMember setId(Long id) {
