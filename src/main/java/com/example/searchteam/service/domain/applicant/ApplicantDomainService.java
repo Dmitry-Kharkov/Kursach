@@ -28,6 +28,11 @@ public class ApplicantDomainService {
     }
 
     @Transactional
+    public List<ApplicantResponse> getAllApplicants() {
+        return responseApplicantMapper.from(repository.findAll());
+    }
+
+    @Transactional
     public List<Applicant> getApplicantByName(String name) {
         return repository.getApplicantByName(name);
     }

@@ -1,11 +1,12 @@
 package com.example.searchteam.service.team;
 
-import com.example.searchteam.dto.request.team.TeamAddRequest;
 import com.example.searchteam.dto.request.team.TeamRequest;
 import com.example.searchteam.dto.response.team.TeamResponse;
 import com.example.searchteam.service.domain.team.TeamDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +18,8 @@ public class TeamService {
         return service.getTeamById(request.getTeamId());
     }
 
-    public TeamResponse addTeam(TeamAddRequest request) {
-       Long teamId =  service.addTeam(request);
-       return service.getTeamById(teamId);
+    public List<TeamResponse> getAllTeams(){
+        return service.getAllTeams();
     }
+
 }

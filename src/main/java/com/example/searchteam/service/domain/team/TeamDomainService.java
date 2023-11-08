@@ -25,6 +25,12 @@ public class TeamDomainService {
     public TeamResponse getTeamById(Long id) {
         return responseTeamMapper.from(repository.findById(id).orElseThrow());
     }
+
+    @Transactional
+    public List<TeamResponse> getAllTeams() {
+        return responseTeamMapper.from(repository.findAll());
+    }
+
     @Transactional
     public List<Team> getTeamByName(String name) {
         return repository.getTeamByName(name);

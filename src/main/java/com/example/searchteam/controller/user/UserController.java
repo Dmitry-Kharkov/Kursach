@@ -1,15 +1,14 @@
 package com.example.searchteam.controller.user;
 
 import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
 import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -23,6 +22,7 @@ public class UserController {
     public static final String USER_GET_ALL = "/api/v1/user/get-all";
     public static final String USER_EDIT = "/api/v1/user/edit";
     public static final String USER_ADD = "/api/v1/user/add";
+    public static final String USER_EDIT_PASSWORD = "/api/v1/user/edit-pwd";
 
     private final UserService service;
 
@@ -54,5 +54,13 @@ public class UserController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> getAllUsers(){ return service.getAllUsers(); }
+
+    @PostMapping(
+            value = USER_EDIT_PASSWORD,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public UserResponse editPasswordUser(@RequestBody UserEditPasswordRequest request) {
+        return service.editPasswordUser(request);
+    }
 
 }

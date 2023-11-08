@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -15,6 +17,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class RoleController {
 
     public static final String ROLE_GET_BY_ID = "/api/v1/role/get-by-id";
+    public static final String ROLE_GET_ALL = "/api/v1/role/get-all";
 
     private final RoleService service;
 
@@ -24,6 +27,14 @@ public class RoleController {
             produces = APPLICATION_JSON_VALUE)
     public RoleResponse getRoleById(@RequestBody RoleRequest request){
         return service.getRoleById(request);
+    }
+
+    @PostMapping(
+            value = ROLE_GET_ALL,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public List<RoleResponse> getAllRoles(){
+        return service.getAllRoles();
     }
 
 

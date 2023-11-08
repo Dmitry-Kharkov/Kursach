@@ -1,6 +1,7 @@
 package com.example.searchteam.service.user;
 
 import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
 import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.domain.user.UserDomainService;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +29,7 @@ public class UserService {
     }
 
     public UserResponse addUser(UserAddRequest request) {
-        if(!request.verificationPassword()) {
+        if(!verificationPassword(request.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
         }
         Long userId = service.addUser(request);
@@ -38,5 +41,19 @@ public class UserService {
     public UserResponse editUser(UserAddRequest request) {
         Long userId = service.editUser(request);
         return service.getUserById(userId);
+    }
+
+    public UserResponse editPasswordUser(UserEditPasswordRequest request) {
+        if(!verificationPassword(request.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+        }
+        Long userId = service.editPasswordUser(request);
+        return service.getUserById(userId);
+    }
+
+    public boolean verificationPassword(String password) {
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
+        Matcher m = Pattern.compile(regex).matcher(password);
+        return (m.matches());
     }
 }

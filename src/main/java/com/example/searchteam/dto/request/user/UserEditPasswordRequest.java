@@ -10,11 +10,9 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 
-public class UserAddRequest {
+public class UserEditPasswordRequest {
 
     private Long id;
-    private String name;
-    private String login;
     private String password;
 
 }
