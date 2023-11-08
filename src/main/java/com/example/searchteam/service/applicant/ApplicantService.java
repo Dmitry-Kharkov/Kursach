@@ -2,6 +2,7 @@ package com.example.searchteam.service.applicant;
 
 import com.example.searchteam.dto.request.applicant.ApplicantAddRequest;
 import com.example.searchteam.dto.request.applicant.ApplicantRequest;
+import com.example.searchteam.dto.request.role.RoleRequest;
 import com.example.searchteam.dto.response.applicant.ApplicantResponse;
 import com.example.searchteam.service.domain.applicant.ApplicantDomainService;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,8 @@ public class ApplicantService {
     public ApplicantResponse editApplicant(ApplicantAddRequest request) {
         Long applicantId = service.editApplicant(request);
         return service.getApplicantById(applicantId);
+    }
+    public void deleteApplicant(ApplicantRequest request) {
+        service.deleteApplicantById(request.getApplicantId());
     }
 }
