@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class TeamAddRequest {
 
-    private Long teamId;
+    private Long id;
     private String name;
     private String description;
     private Long userId;
