@@ -23,7 +23,6 @@ public class UserController {
     public static final String USER_EDIT = "/api/v1/user/edit";
     public static final String USER_EDIT_PASSWORD = "/api/v1/user/edit-pwd";
     public static final String USER_ADD = "/api/v1/user/add";
-    public static final String USER_EDIT_PASSWORD = "/api/v1/user/edit-pwd";
 
     private final UserService service;
 
@@ -63,13 +62,5 @@ public class UserController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> getAllUsers(){ return service.getAllUsers(); }
-
-    @PostMapping(
-            value = USER_EDIT_PASSWORD,
-            consumes = APPLICATION_JSON_VALUE,
-            produces = APPLICATION_JSON_VALUE)
-    public UserResponse editPasswordUser(@RequestBody UserEditPasswordRequest request) {
-        return service.editPasswordUser(request);
-    }
 
 }

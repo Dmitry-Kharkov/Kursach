@@ -76,7 +76,7 @@ public class UserDomainService {
     @Transactional
     public Long editPasswordUser(UserEditPasswordRequest request) {
         var user = repository.getReferenceById(request.getId());
-        return repository.save(userMerger.mergePassword(user, request)).getId();
+        return repository.save(user.setPassword(request.getPassword())).getId();
     }
 
 
