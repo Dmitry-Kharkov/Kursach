@@ -22,6 +22,7 @@ public class TeamResponse {
     private UserResponse user;
     private String description;
     private TypeTeamResponse typeTeam;
+    private boolean isCompleted;
     private List<TeamMemberResponse> members = Collections.emptyList();
     private LocalDateTime created;
     private LocalDateTime modified;

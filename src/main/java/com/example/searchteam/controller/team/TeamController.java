@@ -1,7 +1,9 @@
 package com.example.searchteam.controller.team;
 
 import com.example.searchteam.dto.request.team.TeamAddRequest;
+import com.example.searchteam.dto.request.team.TeamFiltrationRequest;
 import com.example.searchteam.dto.request.team.TeamRequest;
+import com.example.searchteam.dto.response.team.ShortTeamResponse;
 import com.example.searchteam.dto.response.team.TeamResponse;
 import com.example.searchteam.service.team.TeamService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class TeamController {
     public static final String TEAM_ADD = "/api/v1/team/add";
     public static final String TEAM_EDIT = "/api/v1/team/edit";
     public static final String TEAM_DELETE = "/api/v1/team/delete";
+    public static final String TEAM_FILTER="/api/v1/team/filter";
 
 
     private final TeamService service;
@@ -66,6 +69,13 @@ public class TeamController {
         service.deleteTeam(request);
     }
 
+    @PostMapping(
+            value = TEAM_FILTER,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public List<ShortTeamResponse> getFilterTeams(@RequestBody TeamFiltrationRequest request){
+        return service.getFilterTeams(request);
+    }
 
 
 }
