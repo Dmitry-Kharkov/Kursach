@@ -1,5 +1,6 @@
 package com.example.searchteam.service.role;
 
+import com.example.searchteam.dto.request.role.RoleAddRequest;
 import com.example.searchteam.dto.request.role.RoleRequest;
 import com.example.searchteam.dto.response.role.RoleResponse;
 import com.example.searchteam.service.domain.role.RoleDomainService;
@@ -20,4 +21,19 @@ public class RoleService {
 
     public List<RoleResponse> getAllRoles(){ return service.getAllRoles(); }
 
+    public RoleResponse addRole(RoleAddRequest request){
+        Long roleId = service.addRole(request);
+        return service.getRoleById(roleId);
+    }
+
+
+
+    public RoleResponse editRole(RoleAddRequest request) {
+        Long roleId = service.editRole(request);
+        return service.getRoleById(roleId);
+    }
+
+    public void deleteRole(RoleRequest request) {
+        service.deleteRoleById(request.getRoleId());
+    }
 }
