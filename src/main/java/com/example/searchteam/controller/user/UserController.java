@@ -2,6 +2,7 @@ package com.example.searchteam.controller.user;
 
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
 import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.user.UserService;
@@ -23,6 +24,7 @@ public class UserController {
     public static final String USER_EDIT = "/api/v1/user/edit";
     public static final String USER_EDIT_PASSWORD = "/api/v1/user/edit-pwd";
     public static final String USER_ADD = "/api/v1/user/add";
+    public static final String USER_EDIT_ROLES="/api/v1/user/edit-roles";
 
     private final UserService service;
 
@@ -55,6 +57,14 @@ public class UserController {
             produces = APPLICATION_JSON_VALUE)
     public UserResponse editPasswordUser(@RequestBody UserEditPasswordRequest request) {
         return service.editPasswordUser(request);
+    }
+
+    @PostMapping(
+            value = USER_EDIT_ROLES,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public UserResponse editRolesUser(@RequestBody UserEditRolesRequest request) {
+        return service.editRolesUser(request);
     }
 
     @PostMapping(
