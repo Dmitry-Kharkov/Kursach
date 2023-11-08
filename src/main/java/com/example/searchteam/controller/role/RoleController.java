@@ -1,5 +1,6 @@
 package com.example.searchteam.controller.role;
 
+import com.example.searchteam.dto.request.role.RoleAddRequest;
 import com.example.searchteam.dto.request.role.RoleRequest;
 import com.example.searchteam.dto.response.role.RoleResponse;
 import com.example.searchteam.service.role.RoleService;
@@ -18,6 +19,9 @@ public class RoleController {
 
     public static final String ROLE_GET_BY_ID = "/api/v1/role/get-by-id";
     public static final String ROLE_GET_ALL = "/api/v1/role/get-all";
+    public static final String ROLE_EDIT = "/api/v1/role/edit";
+    public static final String ROLE_DELETE = "/api/v1/role/delete";
+    public static final String ROLE_ADD = "/api/v1/role/add";
 
     private final RoleService service;
 
@@ -35,6 +39,30 @@ public class RoleController {
             produces = APPLICATION_JSON_VALUE)
     public List<RoleResponse> getAllRoles(){
         return service.getAllRoles();
+    }
+
+
+    @PostMapping(
+            value = ROLE_ADD,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public RoleResponse addRole(@RequestBody RoleAddRequest request) {
+        return service.addRole(request);
+    }
+    @PostMapping(
+            value = ROLE_EDIT,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public RoleResponse editRole(@RequestBody RoleAddRequest request) {
+        return service.editRole(request);
+    }
+
+    @PostMapping(
+            value = ROLE_DELETE,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public void deleteRole(@RequestBody RoleRequest request) {
+        service.deleteRole(request);
     }
 
 

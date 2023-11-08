@@ -37,7 +37,6 @@ public class RoleType extends EntityWithName {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleType")
     private List<Role> roles = Collections.emptyList();
-
     @Override
     public RoleType setId(Long id) {
         this.id = id;

@@ -67,4 +67,9 @@ public class ApplicantDomainService {
         var applicant = repository.getReferenceById(request.getId());
         return repository.save(applicantMerger.merge(applicant, request)).getId();
     }
+
+    @Transactional
+    public void deleteApplicantById(Long id) {
+        repository.deleteById(id);
+    }
 }

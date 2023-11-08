@@ -8,5 +8,7 @@ import java.util.List;
 public interface RoleTypeRepository extends JpaRepository<RoleType, Long > {
     List<RoleType> getRoleTypeByName(String name);
 
+    RoleType getRoleTypeById(Long id);
+
     void deleteRoleTypeByName(String name);
 }
