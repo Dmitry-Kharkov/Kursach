@@ -7,6 +7,8 @@ import com.example.searchteam.service.domain.applicant.ApplicantDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ApplicantService {
@@ -15,6 +17,10 @@ public class ApplicantService {
 
     public ApplicantResponse getApplicantById(ApplicantRequest request ){
         return service.getApplicantById(request.getApplicantId());
+    }
+
+    public List<ApplicantResponse> getAllApplicants(){
+        return service.getAllApplicants();
     }
 
     public ApplicantResponse addApplicant(ApplicantAddRequest request) {

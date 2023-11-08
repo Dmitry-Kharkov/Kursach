@@ -16,17 +16,17 @@ public class InitConfig {
 
     private final UserDomainService userDomainService;
 
-    @Value("${search_team.admin.login}")
-    private String login;
+    //@Value("${search_team.admin.login}")
+    private String login="admin";
 
-    @Value("${search_team.admin.pwd}")
-    private String password;
+    //@Value("${search_team.admin.pwd}")
+    private String password="admin";
 
 
     @PostConstruct
     public void initAdmin(){
         if (userDomainService.getUserByLogin(login).getUserId() == null){
-           var user =  userDomainService.addUser(new UserAddRequest().setLogin(login).setPassword(password));
+           var user =  userDomainService.addUser(new UserAddRequest().setName("admin").setLogin(login).setPassword(password));
            userDomainService.setUserRole(user, List.of(0L));
         }
     }

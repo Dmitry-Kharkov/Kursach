@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -18,6 +20,7 @@ public class ApplicantController {
     public static final String APPLICANT_GET_BY_ID = "/api/v1/applicant/get-by-id";
     public static final String APPLICANT_ADD = "/api/v1/applicant/add";
     public static final String APPLICANT_EDIT = "/api/v1/applicant/edit";
+    public static final String APPLICANT_GET_ALL = "/api/v1/applicant/get-all";
 
     private final ApplicantService service;
 
@@ -46,5 +49,10 @@ public class ApplicantController {
         return service.editApplicant(request);
     }
 
+    @PostMapping(
+            value = APPLICANT_GET_ALL,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public List<ApplicantResponse> getAllApplicants(){ return service.getAllApplicants(); }
 
 }

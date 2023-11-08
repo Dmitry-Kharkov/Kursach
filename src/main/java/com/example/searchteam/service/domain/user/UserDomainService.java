@@ -4,6 +4,7 @@ import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
 import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.mapper.user.UserMapper;
 import com.example.searchteam.mapper.user.UserMerger;
@@ -33,6 +34,11 @@ public class UserDomainService {
     }
 
     @Transactional
+    public List<UserResponse> getAllUsers() {
+        return responseUserMapper.from(repository.findAll());
+    }
+
+    @Transactional
     public List<User> getUserByFullName(String fullName) {
         return repository.getUserByFullName(fullName);
     }
@@ -56,7 +62,6 @@ public class UserDomainService {
     public Long addUser(UserAddRequest request) {
 
         var user = userMapper.from(request);
-
         user.setUserRoles(Collections.emptyList());
 
         return repository.save(user).getId();
@@ -67,6 +72,13 @@ public class UserDomainService {
         var user = repository.getReferenceById(request.getId());
         return repository.save(userMerger.merge(user, request)).getId();
     }
+
+    @Transactional
+    public Long editPasswordUser(UserEditPasswordRequest request) {
+        var user = repository.getReferenceById(request.getId());
+        return repository.save(user.setPassword(request.getPassword())).getId();
+    }
+
 
     @Transactional
     public void setUserRole(Long userId, List<Long> roles){

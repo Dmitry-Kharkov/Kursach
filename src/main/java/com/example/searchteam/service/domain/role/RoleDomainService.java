@@ -25,6 +25,11 @@ public class RoleDomainService {
     }
 
     @Transactional
+    public List<RoleResponse> getAllRoles() {
+        return responseRoleMapper.from(repository.findAll());
+    }
+
+    @Transactional
     public List<RoleResponse> getRoleByName(String name) {
         return responseRoleMapper.from(repository.getRoleByName(name));
     }

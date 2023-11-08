@@ -1,10 +1,7 @@
 package com.example.searchteam.controller.message;
 
-import com.example.searchteam.dto.request.applicant.ApplicantRequest;
 import com.example.searchteam.dto.request.message.MessageRequest;
-import com.example.searchteam.dto.response.applicant.ApplicantResponse;
 import com.example.searchteam.dto.response.message.MessageResponse;
-import com.example.searchteam.service.applicant.ApplicantService;
 import com.example.searchteam.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +25,7 @@ public class MessageController {
     public MessageResponse getMessageById(@RequestBody MessageRequest request){
         return service.getMessageById(request);
     }
+
 
 
 }
