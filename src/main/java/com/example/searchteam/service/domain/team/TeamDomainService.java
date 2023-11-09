@@ -2,7 +2,6 @@ package com.example.searchteam.service.domain.team;
 
 import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.dto.request.team.TeamAddRequest;
-import com.example.searchteam.dto.response.team.ShortTeamResponse;
 import com.example.searchteam.dto.response.team.TeamResponse;
 import com.example.searchteam.mapper.team.TeamMapper;
 import com.example.searchteam.mapper.team.TeamMerger;
@@ -70,9 +69,5 @@ public class TeamDomainService {
         repository.deleteById(id);
     }
 
-    @Transactional
-    public List<ShortTeamResponse> shortenedTeams(List<TeamResponse> teams){
-        List<ShortTeamResponse> shortTeams=teams.stream().map(e->new ShortTeamResponse(e.getTeamId(),e.getName(),e.getUser())).toList();
-        return shortTeams;
-    }
+
 }
