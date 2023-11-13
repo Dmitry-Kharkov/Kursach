@@ -5,6 +5,7 @@ import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.mapper.user.UserMapper;
 import com.example.searchteam.mapper.user.UserMerger;
@@ -77,6 +78,15 @@ public class UserDomainService {
     public Long editPasswordUser(UserEditPasswordRequest request) {
         var user = repository.getReferenceById(request.getId());
         return repository.save(user.setPassword(request.getPassword())).getId();
+    }
+
+    @Transactional
+    public Long editRolesUser(UserEditRolesRequest request) {
+        var userRoles = request.getRoles().stream()
+                .map( r -> new UserRole().setUser(new User(request.getId())).setRole(new Role(r)))
+                .toList();
+        userRoleRepository.saveAll(userRoles);
+        return repository.getReferenceById(request.getId()).getId();
     }
 
 

@@ -2,6 +2,7 @@ package com.example.searchteam.service.user;
 
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
 import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.domain.user.UserDomainService;
@@ -48,6 +49,11 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
         }
         Long userId = service.editPasswordUser(request);
+        return service.getUserById(userId);
+    }
+
+    public UserResponse editRolesUser(UserEditRolesRequest request) {
+        Long userId = service.editRolesUser(request);
         return service.getUserById(userId);
     }
 

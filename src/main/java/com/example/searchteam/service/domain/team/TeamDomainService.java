@@ -4,6 +4,7 @@ import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.dto.request.team.TeamAddRequest;
 import com.example.searchteam.dto.response.team.TeamResponse;
 import com.example.searchteam.mapper.team.TeamMapper;
+import com.example.searchteam.mapper.team.TeamMerger;
 import com.example.searchteam.mapper.team.TeamResponseMapper;
 import com.example.searchteam.repository.team.TeamRepository;
 import jakarta.transaction.Transactional;
@@ -20,6 +21,7 @@ public class TeamDomainService {
     private final TeamRepository repository;
     private final TeamResponseMapper responseTeamMapper;
     private final TeamMapper teamMapper;
+    private final TeamMerger teamMerger;
 
     @Transactional
     public TeamResponse getTeamById(Long id) {
@@ -55,4 +57,17 @@ public class TeamDomainService {
     public Long addTeam(TeamAddRequest request) {
         return repository.save(teamMapper.from(request)).getId();
     }
+
+    @Transactional
+    public Long editTeam(TeamAddRequest request) {
+        var team = repository.getReferenceById(request.getId());
+        return repository.save(teamMerger.merge(team, request)).getId();
+    }
+
+    @Transactional
+    public void deleteTeamById(Long id) {
+        repository.deleteById(id);
+    }
+
+
 }
