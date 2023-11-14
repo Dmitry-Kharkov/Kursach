@@ -41,7 +41,7 @@ public class TeamService {
         service.deleteTeamById(request.getTeamId());
     }
 
-    public List<ShortTeamResponse> getFilterTeams(TeamFiltrationRequest request) {
+    public List<ShortTeamResponse> getSearchTeams(TeamFiltrationRequest request) {
         return service.getAllTeams().stream()
                 .filter(t -> applyFilter(t,request))
                 .map(t ->new ShortTeamResponse(t.getTeamId(),t.getName(),t.getUser()))

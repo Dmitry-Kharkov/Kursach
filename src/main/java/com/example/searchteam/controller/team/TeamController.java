@@ -24,7 +24,7 @@ public class TeamController {
     public static final String TEAM_ADD = "/api/v1/team/add";
     public static final String TEAM_EDIT = "/api/v1/team/edit";
     public static final String TEAM_DELETE = "/api/v1/team/delete";
-    public static final String TEAM_FILTER="/api/v1/team/filter";
+    public static final String TEAM_SEARCH="/api/v1/team/search";
 
 
     private final TeamService service;
@@ -70,11 +70,11 @@ public class TeamController {
     }
 
     @PostMapping(
-            value = TEAM_FILTER,
+            value = TEAM_SEARCH,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public List<ShortTeamResponse> getFilterTeams(@RequestBody TeamFiltrationRequest request){
-        return service.getFilterTeams(request);
+    public List<ShortTeamResponse> getSearchTeams(@RequestBody TeamFiltrationRequest request){
+        return service.getSearchTeams(request);
     }
 
 

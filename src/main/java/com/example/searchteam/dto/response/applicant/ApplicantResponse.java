@@ -20,9 +20,11 @@ public class ApplicantResponse {
     private String name;
     private String description;
     private UserResponse user;
+    private boolean isCompleted;
     private TypeTeamResponse typeTeam;
     private TeamMemberTypeResponse teamMemberType;
     private LocalDateTime created;
     private LocalDateTime modified;
+
 
 }
