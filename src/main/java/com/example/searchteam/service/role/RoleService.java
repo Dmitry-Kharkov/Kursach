@@ -26,8 +26,6 @@ public class RoleService {
         return service.getRoleById(roleId);
     }
 
-
-
     public RoleResponse editRole(RoleAddRequest request) {
         Long roleId = service.editRole(request);
         return service.getRoleById(roleId);
