@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -56,6 +57,18 @@ class RoleServiceTest {
 
     @Test
     void getAllRolesTest() {
+        when(domainService.getAllRoles()).thenReturn(List.of(getRoleResponse(),getRoleResponse(),getRoleResponse()));
+        var result = service.getAllRoles();
+        for(RoleResponse e:result) {
+                assertEquals(ID, e.getRoleId());
+                assertEquals(NAME, e.getName());
+                assertEquals(ROLE_TYPE, e.getRoleType());
+                assertEquals(DESCRIPTION, e.getDescription());
+                assertEquals(CREATED, e.getCreated());
+                assertEquals(MODIFIED, e.getModified());
+        }
+        verify(domainService).getAllRoles();
+        verifyNoMoreInteractions(domainService);
     }
 
     @Test
@@ -82,10 +95,29 @@ class RoleServiceTest {
 
     @Test
     void editRoleTest() {
+        when(domainService.editRole(any())).thenReturn(getRoleResponse().getRoleId());
+        when(domainService.getRoleById(any())).thenReturn(getRoleResponse());
+
+        var result = service.editRole(getRoleAddRequest());
+
+        assertEquals(ID, result.getRoleId());
+        assertEquals(NAME, result.getName());
+        assertEquals(ROLE_TYPE, result.getRoleType());
+        assertEquals(DESCRIPTION, result.getDescription());
+        assertEquals(CREATED, result.getCreated());
+        assertEquals(MODIFIED, result.getModified());
+
+        verify(domainService).editRole(any());
+        verify(domainService).getRoleById(any());
+        verifyNoMoreInteractions(domainService);
     }
 
     @Test
     void deleteRoleTest() {
+        service.deleteRole(getRoleRequest());
+        verify(domainService).deleteRoleById(any());
+        verify(domainService).getRoleById(any());
+        verifyNoMoreInteractions(domainService);
     }
 
 
