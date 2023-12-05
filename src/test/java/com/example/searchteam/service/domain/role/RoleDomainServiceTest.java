@@ -57,7 +57,7 @@ class RoleDomainServiceTest {
     @Test
     void getRoleByIdTest() {
         when(repository.findById(any())).thenReturn(Optional.ofNullable(getRole()));
-        when(responseMapper.from(anyList())).thenReturn(List.of(getRoleResponse(),getRoleResponse(),getRoleResponse()));
+        when(responseMapper.from((Role)any())).thenReturn(getRoleResponse());
 
         var result = domainService.getRoleById(any());
 
@@ -110,7 +110,7 @@ class RoleDomainServiceTest {
 
     @Test
     void editRoleTest() {
-        when(repository.save(any())).thenReturn(getRoleResponse());
+        when(repository.save(any())).thenReturn(getRole());
         when(repository.getReferenceById(any())).thenReturn(getRole());
 
         var result = domainService.editRole(getRoleAddRequest());
@@ -125,7 +125,7 @@ class RoleDomainServiceTest {
     @Test
     void deleteRoleTest() {
         domainService.deleteRoleById(ID);
-        verify(repository).getRoleByRoleTypeId(any());
+        verify(repository).deleteById(any());
         verifyNoMoreInteractions(repository);
     }
 
