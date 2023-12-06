@@ -158,6 +158,14 @@ class UserDomainServiceTest {
     }
 
     @Test
+    void setUserRoleTest() {
+        when(userRoleRepository.saveAll(any())).thenReturn(List.of(getUserRole()));
+        domainService.setUserRole(ID,ROLES_LONG);
+        verify(userRoleRepository).saveAll(any());
+        verifyNoMoreInteractions(userRoleRepository);
+    }
+
+    @Test
     void deleteUserByFullNameTest() {
         domainService.deleteUserByFullName(NAME);
         verify(repository).deleteUserByFullName(any());
