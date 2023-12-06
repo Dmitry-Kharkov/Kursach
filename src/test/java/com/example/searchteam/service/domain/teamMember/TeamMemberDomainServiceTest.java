@@ -70,7 +70,7 @@ class TeamMemberMemberDomainServiceTest {
         assertEquals(MODIFIED, result.getModified());
 
         verify(repository).findById(any());
-        verify(responseMapper).from(anyList());
+        verify(responseMapper).from((TeamMember)any());
         verifyNoMoreInteractions(repository);
         verifyNoMoreInteractions(responseMapper);
     }
