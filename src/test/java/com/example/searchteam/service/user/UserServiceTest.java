@@ -40,6 +40,7 @@ import static org.mockito.Mockito.when;
 
     private static final String PASSWORD = "PASSWORD";
     private static final List<Long> ROLES=null;
+    private static final List<RoleResponse> ROLES_R=null;
 
     private static final LocalDateTime CREATED = LocalDateTime.now();
     private static final LocalDateTime MODIFIED = LocalDateTime.now().plusMinutes(2);
@@ -110,7 +111,7 @@ import static org.mockito.Mockito.when;
             assertEquals(ID, e.getUserId());
             assertEquals(LOGIN, e.getLogin());
             assertEquals(NAME, e.getFullName());
-            assertEquals(ROLES, e.getRoles());
+            assertTrue(e.getRoles().isEmpty());
             assertEquals(CREATED, e.getCreated());
             assertEquals(MODIFIED, e.getModified());
         }
@@ -151,7 +152,7 @@ import static org.mockito.Mockito.when;
         assertEquals(CREATED,result.getCreated());
         assertEquals(MODIFIED, result.getModified());
 
-        verify(domainService).editUser(any());
+        verify(domainService).editRolesUser(any());
         verify(domainService).getUserById(any());
         verifyNoMoreInteractions(domainService);
     }
@@ -171,7 +172,7 @@ import static org.mockito.Mockito.when;
         assertEquals(CREATED,result.getCreated());
         assertEquals(MODIFIED, result.getModified());
 
-        verify(domainService).editUser(any());
+        verify(domainService).editPasswordUser(any());
         verify(domainService).getUserById(any());
         verifyNoMoreInteractions(domainService);
 
