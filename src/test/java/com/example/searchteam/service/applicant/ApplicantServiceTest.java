@@ -139,7 +139,6 @@ class ApplicantServiceTest {
     void deleteApplicantTest() {
         service.deleteApplicant(getApplicantRequest());
         verify(domainService).deleteApplicantById(any());
-        verify(domainService).getApplicantById(any());
         verifyNoMoreInteractions(domainService);
     }
 
