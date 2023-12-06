@@ -31,8 +31,11 @@ class TeamServiceTest {
     private static final String NAME = "NAME";
     private static final String DESCRIPTION = "DESCRIPTION";
     private static final Long USER_ID=0l;
-    private static final UserResponse USER=null;
-    private static final TypeTeamResponse TYPE_TEAM=null;
+    private static final UserResponse USER=new UserResponse().setFullName("TEST");
+    private static final TypeTeamResponse TYPE_TEAM=new TypeTeamResponse().setName("TEST");
+    private static final List<String> TYPE_TEAM_STRING=List.of("TEST","TEST");
+    private static final List<String> USERS_STRING=List.of("TEST","TEST");
+    private static final List<String> MEMBERS_STRING=List.of("TEST","TEST");
     private static final Long TYPE_TEAM_ID=0L;
     private static final List<TeamMemberAddRequest> MEMBERS=null;
     private static final LocalDateTime CREATED = LocalDateTime.now();
@@ -128,7 +131,6 @@ class TeamServiceTest {
     void deleteTeamTest() {
         service.deleteTeam(getTeamRequest());
         verify(domainService).deleteTeamById(any());
-        verify(domainService).getTeamById(any());
         verifyNoMoreInteractions(domainService);
     }
 
@@ -154,9 +156,11 @@ class TeamServiceTest {
 
     private TeamFiltrationRequest getTeamFiltrationRequest() {
         return new TeamFiltrationRequest()
-                //.setUsers(List.of( USER))
                 .setStart(CREATED)
                 .setFinish(MODIFIED)
+                .setTeamTypes(TYPE_TEAM_STRING)
+                .setUsers(USERS_STRING)
+                .setMembers(MEMBERS_STRING)
                 .setIsCompleted(false)
                 .setName(NAME);
     }
