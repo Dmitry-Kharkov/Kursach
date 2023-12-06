@@ -34,8 +34,6 @@ class TeamMemberMemberDomainServiceTest {
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
     private static final String DESCRIPTION = "DESCRIPTION";
-    private static final User USER = null;
-    private static final UserResponse USER_RESPONSE = null;
     private static final TeamMemberTypeResponse TEAM_MEMBER_TYPE = null;
     private static final ApplicantResponse APPLICANT=null;
     private static final TeamMemberType TEAM_TYPE=null;
