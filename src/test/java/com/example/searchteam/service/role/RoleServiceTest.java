@@ -116,7 +116,6 @@ class RoleServiceTest {
     void deleteRoleTest() {
         service.deleteRole(getRoleRequest());
         verify(domainService).deleteRoleById(any());
-        verify(domainService).getRoleById(any());
         verifyNoMoreInteractions(domainService);
     }
 
