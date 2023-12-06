@@ -67,7 +67,7 @@ import static org.mockito.Mockito.*;
             assertEquals(MODIFIED, result.getModified());
 
             verify(repository).findById(any());
-            verify(responseMapper).from(anyList());
+            verify(responseMapper).from((Applicant)any());
             verifyNoMoreInteractions(repository);
             verifyNoMoreInteractions(responseMapper);
         }
