@@ -69,7 +69,7 @@ class RoleDomainServiceTest {
         assertEquals(MODIFIED, result.getModified());
 
         verify(repository).findById(any());
-        verify(responseMapper).from(anyList());
+        verify(responseMapper).from((Role)any());
         verifyNoMoreInteractions(repository);
         verifyNoMoreInteractions(responseMapper);
     }
