@@ -2,10 +2,8 @@ package com.example.searchteam.service.domain.team;
 
 import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.domain.team.TeamType;
-import com.example.searchteam.domain.team_member.TeamMember;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.dto.request.team.TeamAddRequest;
-import com.example.searchteam.dto.request.team.TeamRequest;
 import com.example.searchteam.dto.request.team_member.TeamMemberAddRequest;
 import com.example.searchteam.dto.response.team.TeamResponse;
 import com.example.searchteam.dto.response.team.TypeTeamResponse;
@@ -15,7 +13,6 @@ import com.example.searchteam.mapper.team.TeamMapper;
 import com.example.searchteam.mapper.team.TeamMerger;
 import com.example.searchteam.mapper.team.TeamResponseMapper;
 import com.example.searchteam.repository.team.TeamRepository;
-import com.example.searchteam.service.domain.team.TeamDomainService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -80,7 +77,7 @@ class TeamDomainServiceTest {
         assertEquals(MODIFIED, result.getModified());
 
         verify(repository).findById(any());
-        verify(responseMapper).from(anyList());
+        verify(responseMapper).from((Team)any());
         verifyNoMoreInteractions(repository);
         verifyNoMoreInteractions(responseMapper);
     }
