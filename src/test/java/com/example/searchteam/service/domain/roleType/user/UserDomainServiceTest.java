@@ -79,6 +79,23 @@ class UserDomainServiceTest {
         verifyNoMoreInteractions(responseMapper);
     }
 
+    @Test
+    void getUserByFullNameTest() {
+        when(repository.getUserByFullName(any())).thenReturn(List.of(getUser(),getUser(),getUser()));
+        var result = domainService.getUserByFullName(any());
+
+        for(User e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getFullName());
+            assertEquals(ROLES.get(0).getRoleId(), e.getUserRoles().get(0).getId());
+            assertEquals(LOGIN, e.getLogin());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getUserByFullName(any());
+        verifyNoMoreInteractions(repository);
+    }
+
 
     @Test
     void getAllUsersTest() {
@@ -169,6 +186,13 @@ class UserDomainServiceTest {
     void deleteUserByFullNameTest() {
         domainService.deleteUserByFullName(NAME);
         verify(repository).deleteUserByFullName(any());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void deleteUserByLoginTest() {
+        domainService.deleteUserByLogin(LOGIN);
+        verify(repository).deleteUserByLogin(any());
         verifyNoMoreInteractions(repository);
     }
 
