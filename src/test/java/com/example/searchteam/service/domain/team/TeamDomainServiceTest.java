@@ -2,6 +2,7 @@ package com.example.searchteam.service.domain.team;
 
 import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.domain.team.TeamType;
+import com.example.searchteam.domain.team_member.TeamMember;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.dto.request.team.TeamAddRequest;
 import com.example.searchteam.dto.request.team_member.TeamMemberAddRequest;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.verify;
@@ -40,8 +42,9 @@ class TeamDomainServiceTest {
     private static final TeamType TEAM_TYPE = null;
     private static final User USER = null;
     private static final UserResponse USER_RESPONSE = null;
-    private static final List<TeamMemberAddRequest> MEMBERS = null;
+    private static final List<TeamMemberAddRequest> MEMBERS = List.of(new TeamMemberAddRequest().setTeamMemberId(ID).setName(NAME));
     private static final List<TeamMemberResponse> MEMBERS_RESPONSE = null;
+    private static final List<TeamMember> TEAM_MEMBERS = null;
     private static final Long TEAM_TYPE_ID = 0L;
     private static final LocalDateTime CREATED = LocalDateTime.now();
     private static final LocalDateTime MODIFIED = LocalDateTime.now().plusMinutes(2);
@@ -70,7 +73,7 @@ class TeamDomainServiceTest {
         assertEquals(ID, result.getTeamId());
         assertEquals(NAME, result.getName());
         assertEquals(TEAM_TYPE, result.getTypeTeam());
-        assertEquals(MEMBERS, result.getMembers());
+        assertNull(result.getMembers());
         assertEquals(USER, result.getUser());
         assertEquals(DESCRIPTION, result.getDescription());
         assertEquals(CREATED, result.getCreated());
@@ -80,6 +83,66 @@ class TeamDomainServiceTest {
         verify(responseMapper).from((Team)any());
         verifyNoMoreInteractions(repository);
         verifyNoMoreInteractions(responseMapper);
+    }
+
+    @Test
+    void getTeamByNameTest() {
+        when(repository.getTeamByName(any())).thenReturn(List.of(getTeam(),getTeam(),getTeam()));
+
+        var result = domainService.getTeamByName(any());
+
+        for(Team e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getName());
+            assertEquals(TEAM_TYPE, e.getTeamType());
+            assertNull(e.getTeamMembers());
+            assertEquals(USER, e.getUser());
+            assertEquals(DESCRIPTION, e.getDescription());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getTeamByName(any());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void getTeamByUserIdTest() {
+        when(repository.getTeamByUserId(any())).thenReturn(List.of(getTeam(),getTeam(),getTeam()));
+
+        var result = domainService.getTeamByUserId(any());
+
+        for(Team e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getName());
+            assertEquals(TEAM_TYPE, e.getTeamType());
+            assertNull(e.getTeamMembers());
+            assertEquals(USER, e.getUser());
+            assertEquals(DESCRIPTION, e.getDescription());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getTeamByUserId(any());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void getTeamByTeamTypeIdTest() {
+        when(repository.getTeamByUserId(any())).thenReturn(List.of(getTeam(),getTeam(),getTeam()));
+
+        var result = domainService.getTeamByTeamTypeId(any());
+
+        for(Team e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getName());
+            assertEquals(TEAM_TYPE, e.getTeamType());
+            assertNull(e.getTeamMembers());
+            assertEquals(USER, e.getUser());
+            assertEquals(DESCRIPTION, e.getDescription());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getTeamByUserId(any());
+        verifyNoMoreInteractions(repository);
     }
 
 
@@ -135,9 +198,15 @@ class TeamDomainServiceTest {
     }
 
     @Test
-    void deleteTeamTest() {
+    void deleteTeamByIdTest() {
         domainService.deleteTeamById(ID);
         verify(repository).deleteById(any());
+        verifyNoMoreInteractions(repository);
+    }
+    @Test
+    void deleteTeamByNameTest() {
+        domainService.deleteTeamByName(NAME);
+        verify(repository).deleteTeamByName(any());
         verifyNoMoreInteractions(repository);
     }
 
@@ -148,6 +217,7 @@ class TeamDomainServiceTest {
                 .setName(NAME)
                 .setTeamType(TEAM_TYPE)
                 .setUser(USER)
+                .setTeamMembers(TEAM_MEMBERS)
                 .setDescription(DESCRIPTION)
                 .setCreatedDateTime(CREATED)
                 .setModifiedDateTime(MODIFIED);
