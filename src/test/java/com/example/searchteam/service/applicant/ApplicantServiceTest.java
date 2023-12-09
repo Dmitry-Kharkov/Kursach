@@ -27,9 +27,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ApplicantServiceTest {
@@ -37,9 +35,9 @@ class ApplicantServiceTest {
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
     private static final String DESCRIPTION = "DESCRIPTION";
-    private static final UserResponse USER=null;
-    private static final TypeTeamResponse TYPE_TEAM=null;
-    private static final TeamMemberTypeResponse TEAM_MEMBER_TYPE=null;
+    private static final UserResponse USER=new UserResponse().setUserId(ID).setFullName(NAME);
+    private static final TypeTeamResponse TYPE_TEAM=new TypeTeamResponse().setTypeTeamId(ID).setName(NAME);
+    private static final TeamMemberTypeResponse TEAM_MEMBER_TYPE=new TeamMemberTypeResponse();
     private static final Long TYPE_TEAM_ID=0L;
     private static final Long TEAM_MEMBER_TYPE_ID=0L;
     private static final LocalDateTime CREATED = LocalDateTime.now();
@@ -155,6 +153,25 @@ class ApplicantServiceTest {
         verifyNoMoreInteractions(domainService);
     }
 
+    @Test
+    void applyFilterTest(){
+        when(domainService.getAllApplicants()).thenReturn(List.of(getApplicantResponse(),getApplicantResponse(),getApplicantResponse()));
+        var result=service.getSearchApplicants(getApplicantFiltrationRequestNotInfo());
+        service.getSearchApplicants(getApplicantFiltrationRequestNotInfo().setFinish(CREATED.plusMinutes(-1)));
+        service.getSearchApplicants(getApplicantFiltrationRequestNotInfo().setStart(MODIFIED));
+        service.getSearchApplicants(getApplicantFiltrationRequestNotInfo().setIsCompleted(true));
+        service.getSearchApplicants(getApplicantFiltrationRequestNotInfo().setName(NAME+"1"));
+        service.getSearchApplicants(getApplicantFiltrationRequestNotInfo().setTeamTypes(List.of(DESCRIPTION)));
+        service.getSearchApplicants(getApplicantFiltrationRequestNotInfo().setUsers(List.of(DESCRIPTION)));
+
+        for(ShortApplicantResponse e:result) {
+            assertEquals(ID, e.getApplicantId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService,times(7)).getAllApplicants();
+        verifyNoMoreInteractions(domainService);
+    }
 
 
     private ApplicantRequest getApplicantRequest() {
@@ -195,5 +212,8 @@ class ApplicantServiceTest {
     }
 
 
+    private ApplicantFiltrationRequest getApplicantFiltrationRequestNotInfo() {
+        return new ApplicantFiltrationRequest();
+    }
 
 }
