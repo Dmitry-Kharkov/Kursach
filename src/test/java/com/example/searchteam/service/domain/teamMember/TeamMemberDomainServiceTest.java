@@ -1,14 +1,10 @@
 package com.example.searchteam.service.domain.teamMember;
 
-import com.example.searchteam.domain.applicant.Applicant;
 import com.example.searchteam.domain.team_member.TeamMember;
 import com.example.searchteam.domain.team_member.TeamMemberType;
-import com.example.searchteam.domain.user.User;
-import com.example.searchteam.dto.request.team_member.TeamMemberAddRequest;
 import com.example.searchteam.dto.response.applicant.ApplicantResponse;
 import com.example.searchteam.dto.response.team_member.TeamMemberResponse;
 import com.example.searchteam.dto.response.team_member.TeamMemberTypeResponse;
-import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.mapper.team_member.TeamMemberMapper;
 import com.example.searchteam.mapper.team_member.TeamMemberResponseMapper;
 import com.example.searchteam.repository.team_member.TeamMemberRepository;
@@ -24,12 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TeamMemberMemberDomainServiceTest {
+class TeamMemberDomainServiceTest {
 
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
@@ -71,6 +67,75 @@ class TeamMemberMemberDomainServiceTest {
         verify(responseMapper).from((TeamMember)any());
         verifyNoMoreInteractions(repository);
         verifyNoMoreInteractions(responseMapper);
+    }
+
+
+    @Test
+    void getTeamMemberByNameTest() {
+        when(repository.getTeamMemberByName(any())).thenReturn(List.of(getTeamMember(),getTeamMember(),getTeamMember()));
+
+        var result = domainService.getTeamMemberByName(any());
+
+        for(TeamMember e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getName());
+            assertEquals(TEAM_TYPE, e.getTeamMemberType());
+            assertNull(e.getTeam());
+            assertEquals(APPLICANT, e.getApplicant());
+            assertEquals(DESCRIPTION, e.getDescription());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getTeamMemberByName(any());
+        verifyNoMoreInteractions(repository);
+    }
+
+
+    @Test
+    void getTeamMemberByTeamMemberIdTest() {
+        when(repository.getTeamMemberByTeamMemberTypeId(any())).thenReturn(List.of(getTeamMember(),getTeamMember(),getTeamMember()));
+
+        var result = domainService.getTeamMemberByTeamMemberTypeId(any());
+
+        for(TeamMember e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getName());
+            assertEquals(TEAM_TYPE, e.getTeamMemberType());
+            assertNull(e.getTeam());
+            assertEquals(APPLICANT, e.getApplicant());
+            assertEquals(DESCRIPTION, e.getDescription());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getTeamMemberByTeamMemberTypeId(any());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void getTeamMemberByTeamIdTest() {
+        when(repository.getTeamMemberByTeamId(any())).thenReturn(List.of(getTeamMember(),getTeamMember(),getTeamMember()));
+
+        var result = domainService.getTeamMemberByTeamId(any());
+
+        for(TeamMember e:result) {
+            assertEquals(ID, e.getId());
+            assertEquals(NAME, e.getName());
+            assertEquals(TEAM_TYPE, e.getTeamMemberType());
+            assertNull(e.getTeam());
+            assertEquals(APPLICANT, e.getApplicant());
+            assertEquals(DESCRIPTION, e.getDescription());
+            assertEquals(CREATED, e.getCreatedDateTime());
+            assertEquals(MODIFIED, e.getModifiedDateTime());
+        }
+        verify(repository).getTeamMemberByTeamId(any());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void deleteTeamMemberByNameTest(){
+        domainService.deleteTeamMemberByName(NAME);
+        verify(repository).deleteTeamMemberByName(any());
+        verifyNoMoreInteractions(repository);
     }
 
     private TeamMember getTeamMember() {
