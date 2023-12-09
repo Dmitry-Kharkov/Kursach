@@ -5,6 +5,7 @@ import com.example.searchteam.dto.request.team.TeamAddRequest;
 import com.example.searchteam.dto.request.team.TeamFiltrationRequest;
 import com.example.searchteam.dto.request.team.TeamRequest;
 import com.example.searchteam.dto.request.team_member.TeamMemberAddRequest;
+import com.example.searchteam.dto.response.applicant.ShortApplicantResponse;
 import com.example.searchteam.dto.response.team.ShortTeamResponse;
 import com.example.searchteam.dto.response.team.TeamResponse;
 import com.example.searchteam.dto.response.team.TypeTeamResponse;
@@ -19,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,6 +40,7 @@ class TeamServiceTest {
     private static final List<String> MEMBERS_STRING=List.of("TEST","TEST");
     private static final Long TYPE_TEAM_ID=0L;
     private static final List<TeamMemberAddRequest> MEMBERS=null;
+    private static final List<TeamMemberResponse> MEMBERS_RES=List.of(new TeamMemberResponse().setTeamMemberId(ID).setName(NAME));
     private static final LocalDateTime CREATED = LocalDateTime.now();
     private static final LocalDateTime MODIFIED = LocalDateTime.now().plusMinutes(2);
 
@@ -134,19 +137,38 @@ class TeamServiceTest {
         verifyNoMoreInteractions(domainService);
     }
 
+//    @Test
+//    void getSearchTeamsTest(){
+//        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+//        var result=service.getSearchTeams(getTeamFiltrationRequest());
+//        for(ShortTeamResponse e:result) {
+//            assertEquals(ID, e.getTeamId());
+//            assertEquals(NAME, e.getName());
+//            assertEquals(USER, e.getUser());
+//        }
+//        verify(domainService).getAllTeams();
+//        verifyNoMoreInteractions(domainService);
+//    }
+
     @Test
-    void getSearchTeamsTest(){
+    void applyFilterTest(){
         when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
-        var result=service.getSearchTeams(getTeamFiltrationRequest());
+        var result=service.getSearchTeams(getTeamFiltrationRequestNotInfo());
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setFinish(CREATED.plusMinutes(-1)));
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setStart(MODIFIED));
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setIsCompleted(true));
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setName(NAME+"1"));
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setTeamTypes(List.of(DESCRIPTION)));
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setUsers(List.of(DESCRIPTION)));
+        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setMembers(List.of(NAME)));
         for(ShortTeamResponse e:result) {
             assertEquals(ID, e.getTeamId());
             assertEquals(NAME, e.getName());
             assertEquals(USER, e.getUser());
         }
-        verify(domainService).getAllTeams();
+        verify(domainService,times(8)).getAllTeams();
         verifyNoMoreInteractions(domainService);
     }
-
 
 
     private TeamRequest getTeamRequest() {
@@ -171,6 +193,7 @@ class TeamServiceTest {
                 .setName(NAME)
                 .setDescription(DESCRIPTION)
                 .setUser(USER)
+                .setMembers(MEMBERS_RES)
                 .setTypeTeam(TYPE_TEAM)
                 .setCreated(CREATED)
                 .setModified(MODIFIED);
@@ -186,6 +209,10 @@ class TeamServiceTest {
                 .setUserId(USER_ID)
                 .setMembers(MEMBERS)
                 .setId(ID);
+    }
+
+    private TeamFiltrationRequest getTeamFiltrationRequestNotInfo(){
+        return new TeamFiltrationRequest();
     }
 
 
