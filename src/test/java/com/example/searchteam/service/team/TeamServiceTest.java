@@ -137,39 +137,113 @@ class TeamServiceTest {
         verifyNoMoreInteractions(domainService);
     }
 
-//    @Test
-//    void getSearchTeamsTest(){
-//        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
-//        var result=service.getSearchTeams(getTeamFiltrationRequest());
-//        for(ShortTeamResponse e:result) {
-//            assertEquals(ID, e.getTeamId());
-//            assertEquals(NAME, e.getName());
-//            assertEquals(USER, e.getUser());
-//        }
-//        verify(domainService).getAllTeams();
-//        verifyNoMoreInteractions(domainService);
-//    }
 
     @Test
-    void applyFilterTest(){
+    void applyFilterTestNotInfo(){
         when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
         var result=service.getSearchTeams(getTeamFiltrationRequestNotInfo());
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setFinish(CREATED.plusMinutes(-1)));
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setStart(MODIFIED));
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setIsCompleted(true));
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setName(NAME+"1"));
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setTeamTypes(List.of(DESCRIPTION)));
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setUsers(List.of(DESCRIPTION)));
-        service.getSearchTeams(getTeamFiltrationRequestNotInfo().setMembers(List.of(NAME)));
         for(ShortTeamResponse e:result) {
             assertEquals(ID, e.getTeamId());
             assertEquals(NAME, e.getName());
             assertEquals(USER, e.getUser());
         }
-        verify(domainService,times(8)).getAllTeams();
+        verify(domainService).getAllTeams();
         verifyNoMoreInteractions(domainService);
     }
 
+    @Test
+    void applyFilterTestDataFinish(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result=service.getSearchTeams(getTeamFiltrationRequestNotInfo().setFinish(CREATED.plusMinutes(-1)));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
+
+    @Test
+    void applyFilterTestDataStart(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result=service.getSearchTeams(getTeamFiltrationRequestNotInfo().setStart(MODIFIED));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
+
+    @Test
+    void applyFilterTestComleted(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result= service.getSearchTeams(getTeamFiltrationRequestNotInfo().setIsCompleted(true));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
+
+
+    @Test
+    void applyFilterTestName(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result= service.getSearchTeams(getTeamFiltrationRequestNotInfo().setName(NAME+"1"));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
+
+    @Test
+    void applyFilterTestTeamType(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result=service.getSearchTeams(getTeamFiltrationRequestNotInfo().setTeamTypes(List.of(DESCRIPTION)));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
+
+
+    @Test
+    void applyFilterTestUsers(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result= service.getSearchTeams(getTeamFiltrationRequestNotInfo().setUsers(List.of(DESCRIPTION)));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
+
+
+    @Test
+    void applyFilterTestMembers(){
+        when(domainService.getAllTeams()).thenReturn(List.of(getTeamResponse(),getTeamResponse(),getTeamResponse()));
+        var result=service.getSearchTeams(getTeamFiltrationRequestNotInfo().setMembers(List.of(NAME)));
+        for(ShortTeamResponse e:result) {
+            assertEquals(ID, e.getTeamId());
+            assertEquals(NAME, e.getName());
+            assertEquals(USER, e.getUser());
+        }
+        verify(domainService).getAllTeams();
+        verifyNoMoreInteractions(domainService);
+    }
 
     private TeamRequest getTeamRequest() {
         return new TeamRequest()
