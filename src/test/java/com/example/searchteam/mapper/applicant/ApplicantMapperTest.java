@@ -1,4 +1,4 @@
-package com.example.searchteam.mapper.role.applicant;
+package com.example.searchteam.mapper.applicant;
 
 import com.example.searchteam.dto.request.applicant.ApplicantAddRequest;
 import com.example.searchteam.mapper.applicant.ApplicantMapper;
