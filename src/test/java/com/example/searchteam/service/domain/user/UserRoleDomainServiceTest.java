@@ -1,4 +1,4 @@
-package com.example.searchteam.service.domain.roleType.user;
+package com.example.searchteam.service.domain.user;
 
 import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
