@@ -1,9 +1,6 @@
 package com.example.searchteam.mapper.user;
 
-import com.example.searchteam.domain.role.RoleTypeEnum;
-import com.example.searchteam.dto.request.role.RoleAddRequest;
 import com.example.searchteam.dto.request.user.UserAddRequest;
-import com.example.searchteam.mapper.role.RoleMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,10 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserMapperTest {
