@@ -73,6 +73,8 @@ class RoleMapperTest {
 
     }
 
+
+
     private RoleAddRequest getRoleAddRequest() {
         return new RoleAddRequest()
                 .setRoleTypeId((long) ROLE_TYPE.ordinal())
