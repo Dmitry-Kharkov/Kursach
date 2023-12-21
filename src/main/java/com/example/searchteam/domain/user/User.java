@@ -20,8 +20,6 @@ import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Entity(name = "USERS")
 @Getter
@@ -36,12 +34,12 @@ public class User extends BaseEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name="FULLNAME")
-    String fullName;
-    @Column(name="LOGIN")
-    String login;
-    @Column(name="PASSWORD")
-    String password;
+    @Column(name = "FULLNAME")
+    private String fullName;
+    @Column(name = "LOGIN")
+    private String login;
+    @Column(name = "PASSWORD")
+    private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserRole> userRoles = Collections.emptyList();
