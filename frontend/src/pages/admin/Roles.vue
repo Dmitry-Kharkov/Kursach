@@ -16,7 +16,8 @@ export default {
 
     roleController.getAll()
         .then(response => this.roles = response.data)
-        .then(() => alert("Произошла ошибка при загрузке ролей"))
+        .catch(() => alert("Произошла ошибка при загрузке ролей"))
+
 
   }
 

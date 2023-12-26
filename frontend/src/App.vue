@@ -15,7 +15,45 @@
               @click=routeMyTeams()
               prepend-icon="mdi-account-group"></v-list-item>
 
-          <v-list-group value="5">
+          <v-list-item
+              value="2"
+              title="Мои заявки"
+              @click=routeMyApplication()
+              prepend-icon="mdi mdi-human-edit"></v-list-item>
+
+          <v-list-item
+              value="3"
+              title="Поиск команды"
+              @click=routeSearchTeam()
+              prepend-icon="mdi mdi-human-capacity-decrease"></v-list-item>
+
+          <v-list-item
+              value="4"
+              title="Поиск участников команды"
+              @click=routeSearchTeamMember()
+              prepend-icon="mdi mdi-human-capacity-increase"></v-list-item>
+
+          <v-list-item
+              value="5"
+              title="Все заявки"
+              @click=routeAllApplication()
+              prepend-icon="mdi mdi-account-search"></v-list-item>
+
+          <v-list-item
+              value="6"
+              title="Все команды"
+              @click=routeAllTeam()
+              prepend-icon="mdi mdi-human-queue"></v-list-item>
+
+          <v-list-item
+              value="7"
+              title="Сообщения"
+              @click=routeMyDialog()
+              prepend-icon="mdi mdi-chat"></v-list-item>
+
+
+
+          <v-list-group value="10">
             <template v-slot:activator="{props}">
               <v-list-item
                   v-bind="props"
@@ -24,10 +62,37 @@
             </template>
 
             <v-list-item
-                value="5.1"
+                value="10.1"
                 title="Роли"
                 @click=routeRoles()
-                prepend-icon="mdi-account-group"></v-list-item>
+                ></v-list-item>
+
+            <v-list-item
+                value="10.2"
+                title="Список пользователей"
+                @click=routeUsers()
+                ></v-list-item>
+
+            <v-list-item
+                value="10.3"
+                title="Список типов ролей"
+                @click=routeRoleType()
+                ></v-list-item>
+
+            <v-list-item
+                value="10.4"
+                title="Список типов участников"
+                @click=routeTeamMemberType()
+                ></v-list-item>
+
+            <v-list-item
+                value="10.5"
+                title="Список типов команд"
+                @click=routeTypeTeam()
+                ></v-list-item>
+
+
+
 
           </v-list-group>
 
@@ -66,7 +131,58 @@ export default {
     routeRoles() {
 
       this.$router.push('/roles')
-    }
+    },
+
+    routeMyApplication() {
+
+      this.$router.push('/my-application')
+    },
+
+    routeSearchTeam() {
+
+      this.$router.push('/search-team')
+    },
+
+    routeSearchTeamMember() {
+
+      this.$router.push('/search-team-member')
+    },
+
+    routeAllApplication() {
+
+      this.$router.push('/all-application')
+    },
+
+    routeAllTeam() {
+
+      this.$router.push('/all-team')
+    },
+
+    routeRoleType() {
+
+      this.$router.push('/role-type')
+    },
+
+    routeTeamMemberType() {
+
+      this.$router.push('/team-member-type')
+    },
+
+    routeTypeTeam() {
+
+      this.$router.push('/type-team')
+    },
+
+    routeUsers() {
+
+      this.$router.push('/users')
+    },
+
+    routeMyDialog() {
+
+      this.$router.push('/dialog')
+    },
+
 
 
   }
