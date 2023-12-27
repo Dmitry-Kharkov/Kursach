@@ -14,6 +14,19 @@ export default {
             }
             )
 
+    },
+
+    deleteRoleById(id) {
+
+        return axios.post('http://localhost:8070/api/v1/role/delete',
+            {"roleid" : id},
+            {
+                headers : {
+                    'Content-Type' : "application/json;charset=utf-8"
+                }
+            }
+        )
+
     }
 
 

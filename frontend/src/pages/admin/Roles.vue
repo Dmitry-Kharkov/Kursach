@@ -1,6 +1,7 @@
 <script>
 
 import roleController from "@/controllers/RoleController";
+import {role} from "vuetify/locale";
 
 export default {
 
@@ -17,6 +18,9 @@ export default {
     roleController.getAll()
         .then(response => this.roles = response.data)
         .catch(() => alert("Произошла ошибка при загрузке ролей"))
+
+    roleController.deleteRoleById("roleId")
+        .catch(() => alert("Произошла ошибка при удалении роли"))
 
 
   }
@@ -40,7 +44,7 @@ export default {
     </v-card-text>
     <v-card-actions>
       <v-btn :variant="'outlined'">Редактировать</v-btn>
-      <v-btn :variant="'outlined'">Удалить</v-btn>
+      <v-btn onclick="deleteRoleById(role.roleId)" :variant="'outlined'">Удалить</v-btn>
     </v-card-actions>
   </v-card>
 
