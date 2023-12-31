@@ -1,8 +1,11 @@
-package com.example.searchteam.domain.role;
-
+package com.example.searchteam.domain.team;
 
 import com.example.searchteam.domain.BaseEntityTest;
+import com.example.searchteam.domain.applicant.Applicant;
 import com.example.searchteam.domain.role.Role;
+import com.example.searchteam.domain.role.RoleType;
+import com.example.searchteam.domain.team_member.TeamMember;
+import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,14 +15,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RoleTest extends BaseEntityTest {
+class TeamTypeTest extends BaseEntityTest {
 
 
     private final static Long ID = 1L;
     private final static String NAME = "NAME";
     private final static String DESCRIPTION = "description";
-    private final static RoleType ROLE_TYPE=null;
-    private final static List<Role> ROLES=null;
+    private final static List<Applicant> APPLICANTS = null;
+
 
     private final static LocalDateTime CREATED = LocalDateTime.now();
     private final static LocalDateTime MODIFIED = LocalDateTime.now().plusMinutes(2);
@@ -33,26 +36,27 @@ class RoleTest extends BaseEntityTest {
     @Test
     void testNoArgsConstructor() {
 
-        var roleType = getRoleType();
-        var roleType2 = new RoleType(-ID);
+        var teamType = getTeamType();
+        var teamType2 = new TeamType(-ID);
 
-        assertEquals(ID, roleType.getId());
-        assertEquals(NAME, roleType.getName());
-        assertNull(roleType.getRoles());
-        assertEquals(DESCRIPTION, roleType.getDescription());
-        assertEquals(CREATED, roleType.getCreatedDateTime());
-        assertEquals(MODIFIED, roleType.getModifiedDateTime());
+        assertEquals(ID, teamType.getId());
+        assertEquals(NAME, teamType.getName());
+        assertNull(teamType.getApplicants());
+        assertNotNull(teamType.getTeams());
+        assertEquals(DESCRIPTION, teamType.getDescription());
+        assertEquals(CREATED, teamType.getCreatedDateTime());
+        assertEquals(MODIFIED, teamType.getModifiedDateTime());
 
-        assertEquals(-ID, roleType2.getId());
+        assertEquals(-ID, teamType2.getId());
 
     }
 
 
-    private RoleType getRoleType() {
-        return new RoleType()
+    private TeamType getTeamType() {
+        return new TeamType()
                 .setId(ID)
                 .setName(NAME)
-                .setRoles(ROLES)
+                .setApplicants(APPLICANTS)
                 .setDescription(DESCRIPTION)
                 .setCreatedDateTime(CREATED)
                 .setModifiedDateTime(MODIFIED);
