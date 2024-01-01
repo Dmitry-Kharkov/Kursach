@@ -1,12 +1,14 @@
-
 package com.example.searchteam.mapper.team;
 
+import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.domain.team.TeamType;
 import com.example.searchteam.domain.team_member.TeamMember;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.dto.request.team.TeamAddRequest;
 import com.example.searchteam.dto.request.team_member.TeamMemberAddRequest;
 import com.example.searchteam.mapper.team_member.TeamMemberMapper;
+import com.example.searchteam.mapper.team_member.TeamMemberResponseMapper;
+import com.example.searchteam.mapper.user.UserResponseMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,9 +20,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
-class TeamMapperTest {
+class TeamResponseMapperTest {
 
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
@@ -33,69 +36,45 @@ class TeamMapperTest {
     private static final List<TeamMember> TEAM_MEMBERS = List.of();
 
     @Mock
-    private TeamMemberMapper teamMemberMapper;
+    private UserResponseMapper userResponseMapper;
+    @Mock
+    private TeamTypeResponseMapper teamTypeResponseMapper;
+    @Mock
+    private TeamMemberResponseMapper teamMemberResponseMapper;
     @InjectMocks
-    private TeamMapper mapper;
+    private TeamResponseMapper mapper;
     @Test
     void fromTest(){
 
-        var source = spy(getTeamAddRequest());
+        var source = spy(getTeam());
 
         var result = mapper.from(source);
 
-        assertNull(result.getId());
-        assertNull(result.getCreatedDateTime());
-        assertNull(result.getModifiedDateTime());
+        assertEquals(ID,result.getTeamId());
+        assertNull(result.getCreated());
+        assertNull(result.getModified());
         assertEquals(NAME, result.getName());
-        assertEquals(TEAM_MEMBERS, result.getTeamMembers());
-        assertEquals(USER, result.getUser());
-        assertEquals(TEAM_TYPE, result.getTeamType());
+        assertEquals(TEAM_MEMBERS, result.getMembers());
+        assertNull(result.getUser());
+        assertNull(result.getTypeTeam());
         assertEquals(DESCRIPTION, result.getDescription());
 
 
-        verify(teamMemberMapper).from(source.getMembers());
+        verify(source).getId();
         verify(source).getName();
         verify(source).getDescription();
-        verify(source).getTypeTeamId();
-        verify(source,times(2)).getMembers();
-        verify(source).getUserId();
+        verify(source).getUser();
+        verify(source).getTeamMembers();
+        verify(source).getUser();
+        verify(source).getTeamType();
+        verify(source).getCreatedDateTime();
+        verify(source).getModifiedDateTime();
         verifyNoMoreInteractions(source);
-        verifyNoMoreInteractions(teamMemberMapper);
 
     }
 
 
-    @Test
-    void fromListTest(){
 
-        var source = spy(getTeamAddRequest());
-
-        var resultList = mapper.from(List.of(source,source,source));
-
-        assertEquals(3, resultList.size());
-
-        var result = resultList.get(0);
-
-        assertNull(result.getId());
-        assertNull(result.getCreatedDateTime());
-        assertNull(result.getModifiedDateTime());
-        assertEquals(NAME, result.getName());
-        assertEquals(TEAM_MEMBERS, result.getTeamMembers());
-        assertEquals(USER, result.getUser());
-        assertEquals(TEAM_TYPE, result.getTeamType());
-        assertEquals(DESCRIPTION, result.getDescription());
-
-
-        verify(teamMemberMapper,times(3)).from(source.getMembers());
-        verify(source,times(3)).getName();
-        verify(source,times(3)).getDescription();
-        verify(source,times(3)).getTypeTeamId();
-        verify(source,times(4)).getMembers();
-        verify(source,times(3)).getUserId();
-        verifyNoMoreInteractions(source);
-        verifyNoMoreInteractions(teamMemberMapper);
-
-    }
 
     private TeamAddRequest getTeamAddRequest() {
         return new TeamAddRequest()
@@ -107,6 +86,15 @@ class TeamMapperTest {
                 .setId(ID);
     }
 
+    private Team getTeam() {
+        return new Team()
+                .setName(NAME)
+                .setTeamType(TEAM_TYPE)
+                .setUser(USER)
+                .setTeamMembers(TEAM_MEMBERS)
+                .setDescription(DESCRIPTION)
+                .setId(ID);
+    }
+
 
 }
-
