@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Entity(name = "APPLICANT")
@@ -51,7 +52,7 @@ public class Applicant extends EntityWithName {
     private TeamMemberType teamMemberType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
-    private List<TeamMember> teamMembers;
+    private List<TeamMember> teamMembers= Collections.emptyList();
 
 
     @Override
