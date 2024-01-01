@@ -1,3 +1,4 @@
+
 package com.example.searchteam.mapper.team;
 
 import com.example.searchteam.domain.team.TeamType;
@@ -108,3 +109,4 @@ class TeamMapperTest {
 
 
 }
+
