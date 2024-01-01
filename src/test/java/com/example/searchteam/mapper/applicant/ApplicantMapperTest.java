@@ -1,7 +1,7 @@
-package com.example.searchteam.mapper.role;
+package com.example.searchteam.mapper.applicant;
 
-import com.example.searchteam.domain.role.RoleTypeEnum;
-import com.example.searchteam.dto.request.role.RoleAddRequest;
+import com.example.searchteam.dto.request.applicant.ApplicantAddRequest;
+import com.example.searchteam.mapper.applicant.ApplicantMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,19 +17,22 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
-class RoleMapperTest {
+class ApplicantMapperTest {
 
     private static final Long ID = 0L;
+    private static final Long USER_ID = 0L;
+    private static final Long TEAM_TYPE_ID = 0L;
+    private static final Long TEAM_MEMBER_TYPE_ID = 0L;
     private static final String NAME = "NAME";
     private static final String DESCRIPTION = "DESCRIPTION";
-    private static final RoleTypeEnum ROLE_TYPE = RoleTypeEnum.TEAM;
+
 
     @InjectMocks
-    private RoleMapper mapper;
+    private ApplicantMapper mapper;
     @Test
     void fromTest(){
 
-        var source = spy(getRoleAddRequest());
+        var source = spy(getApplicantAddRequest());
 
         var result = mapper.from(source);
 
@@ -38,11 +41,15 @@ class RoleMapperTest {
         assertNull(result.getModifiedDateTime());
         assertEquals(NAME, result.getName());
         assertEquals(DESCRIPTION, result.getDescription());
-        assertEquals(ROLE_TYPE.ordinal(), result.getRoleType().getId());
+        assertEquals(USER_ID, result.getUser().getId());
+        assertEquals(TEAM_TYPE_ID, result.getTeamType().getId());
+        assertEquals(TEAM_MEMBER_TYPE_ID, result.getTeamMemberType().getId());
 
         verify(source).getName();
         verify(source).getDescription();
-        verify(source).getRoleTypeId();
+        verify(source).getUserId();
+        verify(source).getTeamTypeId();
+        verify(source).getTeamMemberTypeId();
         verifyNoMoreInteractions(source);
 
     }
@@ -51,7 +58,7 @@ class RoleMapperTest {
     @Test
     void fromListTest(){
 
-        var source = spy(getRoleAddRequest());
+        var source = spy(getApplicantAddRequest());
 
         var resultList = mapper.from(List.of(source,source,source));
 
@@ -64,20 +71,24 @@ class RoleMapperTest {
         assertNull(result.getModifiedDateTime());
         assertEquals(NAME, result.getName());
         assertEquals(DESCRIPTION, result.getDescription());
-        assertEquals(ROLE_TYPE.ordinal(), result.getRoleType().getId());
+        assertEquals(USER_ID, result.getUser().getId());
+        assertEquals(TEAM_TYPE_ID, result.getTeamType().getId());
+        assertEquals(TEAM_MEMBER_TYPE_ID, result.getTeamMemberType().getId());
 
-        verify(source, times(3)).getName();
+        verify(source,times(3)).getName();
         verify(source,times(3)).getDescription();
-        verify(source, times(3)).getRoleTypeId();
+        verify(source,times(3)).getUserId();
+        verify(source,times(3)).getTeamTypeId();
+        verify(source,times(3)).getTeamMemberTypeId();
         verifyNoMoreInteractions(source);
 
     }
 
-
-
-    private RoleAddRequest getRoleAddRequest() {
-        return new RoleAddRequest()
-                .setRoleTypeId((long) ROLE_TYPE.ordinal())
+    private ApplicantAddRequest getApplicantAddRequest() {
+        return new ApplicantAddRequest()
+                .setUserId(USER_ID)
+                .setTeamTypeId(TEAM_TYPE_ID)
+                .setTeamMemberTypeId(TEAM_MEMBER_TYPE_ID)
                 .setName(NAME)
                 .setDescription(DESCRIPTION)
                 .setId(ID);

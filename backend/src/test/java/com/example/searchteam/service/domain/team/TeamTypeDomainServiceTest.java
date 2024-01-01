@@ -1,5 +1,6 @@
 package com.example.searchteam.service.domain.team;
 
+
 import com.example.searchteam.domain.team.Team;
 import com.example.searchteam.domain.team.TeamType;
 import com.example.searchteam.repository.team.TeamTypeRepository;
