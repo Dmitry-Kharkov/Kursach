@@ -1,5 +1,6 @@
 package com.example.searchteam.dto.request.role;
 
+import com.example.searchteam.domain.role.RoleTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -14,8 +15,7 @@ public class RoleAddRequest {
 
     private Long id;
     private String name;
-    //private RoleTypeResponse roleType;
-    private Long roleTypeId;
+    private RoleTypeEnum roleType;
     private String description;
 
 }

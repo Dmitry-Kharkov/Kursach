@@ -3,6 +3,7 @@
 import roleController from "@/controllers/RoleController";
 import Fab from "@/components/Fab.vue";
 import MyField from "@/components/MyField.vue";
+import roleTypeController from "@/controllers/RoleTypeController";
 
 export default {
   components: {MyField, Fab},
@@ -25,7 +26,10 @@ export default {
         name: '',
         description : '',
         roleTypeId : ''
-      }
+      },
+
+      roleTypes : [],
+      selectRoleType : {}
 
     }
   },
@@ -35,6 +39,11 @@ export default {
     roleController.getAll()
         .then(response => this.roles = response.data)
         .catch(() => alert("Произошла ошибка при загрузке ролей"))
+
+    roleTypeController.getAll()
+        .then(response => this.roleTypes = response.data)
+        .catch(() => alert("Произошла ошибка при загрузке типов ролей"))
+
   },
 
   methods: {
@@ -50,6 +59,8 @@ export default {
     },
 
     addNewRole(){
+
+      this.role.roleTypeId = this.selectRoleType.roleTypeId
 
       roleController.addRole(this.role)
           .then(response => this.roles.push(response.data))
@@ -77,13 +88,24 @@ export default {
       this.roleEdit.description = '';
     },
 
-    showEditRoleDialog(id){
-      this.roleEdit.id=id;
+    showEditRoleDialog(role){
+      this.roleEdit.id=role.id;
+      this.roleEdit.name = role.name
+      this.roleEdit.description = role.description
       this.isEditRole = true;
+    },
+
+    itemProps(item){
+      return {
+        title: item.name,
+        subtitle: item.description,
+        id : item.roleTypeId
+      }
+
     }
+  },
 
 
-  }
 
 
 }
@@ -92,7 +114,7 @@ export default {
 
 <template>
 
-  <fab v-on:fab_action = "showAddNewRoleDialog()" ></fab>
+
 
   <v-card :variant="'outlined'" v-for="role in roles" :key="role.roleId">
     <v-card-title>{{ role.name }}</v-card-title>
@@ -104,7 +126,7 @@ export default {
 
     </v-card-text>
     <v-card-actions>
-      <v-btn @click="showEditRoleDialog(role.roleId)" :variant="'outlined'">Редактировать</v-btn>
+      <v-btn @click="showEditRoleDialog(role)" :variant="'outlined'">Редактировать</v-btn>
       <v-btn @click="deleteRoleById(role.roleId)" :variant="'outlined'">Удалить</v-btn>
     </v-card-actions>
   </v-card>
@@ -118,6 +140,14 @@ export default {
 
         <my-field label="Название" :value="role.name" v-on:update:modelValue="this.role.name = $event"/>
         <my-field label="Описание" :value="role.description" v-on:update:modelValue="this.role.description = $event" />
+        <v-select
+            variant="outlined"
+            class = "select"
+            label="Тип роли"
+            v-model="selectRoleType"
+            :items="roleTypes"
+            :item-props="itemProps"
+        ></v-select>
 
         <v-card-actions>
           <v-btn
@@ -137,6 +167,14 @@ export default {
 
       <my-field label="Название" :value="roleEdit.name" v-on:update:modelValue="this.roleEdit.name = $event"/>
       <my-field label="Описание" :value="roleEdit.description" v-on:update:modelValue="this.roleEdit.description = $event" />
+      <v-select
+          variant="outlined"
+          class = "select"
+          label="Тип роли"
+          v-model="selectRoleType"
+          :items="roleTypes"
+          :item-props="itemProps"
+      ></v-select>
 
       <v-card-actions>
         <v-btn
@@ -148,9 +186,11 @@ export default {
   </v-dialog>
 
 
-
+  <fab v-on:fab_action = "showAddNewRoleDialog()" ></fab>
 </template>
 
 <style>
-
+.select{
+  margin: 25px;
+}
 </style>

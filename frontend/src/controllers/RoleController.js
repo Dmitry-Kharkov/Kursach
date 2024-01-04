@@ -35,7 +35,7 @@ export default {
             {
                 "name" : role.name,
                 "description" : role.description,
-                "roleTypeId" : 0
+                "roleTypeId" : role.roleTypeId
             },
             {
                 headers : {
