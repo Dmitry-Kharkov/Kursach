@@ -1,13 +1,13 @@
 <template>
   <v-card>
-    <v-layout>
+    <v-layout >
       <v-navigation-drawer
           :width="350"
           expand-on-hover
           rail
       >
 
-        <v-list density="compact" nav>
+        <v-list density="compact" nav class="menu">
 
           <v-list-item
               value="1"
@@ -92,71 +92,19 @@
                 ></v-list-item>
 
           </v-list-group>
-
-
-          <v-container
-              style="height: 300px"
-          >
-            <v-row justify="start"
-            >
-              <v-menu
-                  min-width="200px"
-                  rounded
-              >
-                <template v-slot:activator="{ props }">
-                  <v-btn
-                      icon
-                      v-bind="props"
-                  >
-                    <v-avatar
-                        color="brown"
-                        size="large"
-                    >
-                      <span class="text-h5">{{ user.initials }}</span>
-                    </v-avatar>
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-text>
-                    <div class="mx-auto text-center">
-                      <v-avatar
-                          color="brown"
-                      >
-                        <span class="text-h5">{{ user.initials }}</span>
-                      </v-avatar>
-                      <h3>{{ user.fullName }}</h3>
-                      <p class="text-caption mt-1">
-                        {{ user.email }}
-                      </p>
-                      <v-divider class="my-3"></v-divider>
-                      <v-btn
-                          rounded
-                          variant="text"
-                      >
-                        Edit Account
-                      </v-btn>
-                      <v-divider class="my-3"></v-divider>
-                      <v-btn
-                          rounded
-                          variant="text"
-                      >
-                        Disconnect
-                      </v-btn>
-                    </div>
-                  </v-card-text>
-                </v-card>
-              </v-menu>
-            </v-row>
-          </v-container>
-
         </v-list>
+
+        <template v-slot:append>
+           <account/>
+        </template>
+
+
       </v-navigation-drawer>
-
-
 
       <v-main>
         <router-view></router-view>
       </v-main>
+
     </v-layout>
 
   </v-card>
@@ -167,19 +115,15 @@
 
 <script>
 
+import Account from "@/components/Account.vue";
+
 export default {
+  components: {Account},
 
   data() {
     return {
 
       open: ['Main'],
-
-      user: {
-        initials: 'DH',
-        fullName: 'Dima Harkov',
-        email: 'harkov.dima2005@gmail.com',
-      },
-
 
     }
   },
@@ -256,4 +200,9 @@ export default {
 
 <style>
 
+
+.menu{
+  display: flex;
+  flex-direction: column;
+}
 </style>
