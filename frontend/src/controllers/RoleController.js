@@ -35,6 +35,24 @@ export default {
             {
                 "name" : role.name,
                 "description" : role.description,
+                "roleType" : role.roleType
+            },
+            {
+                headers : {
+                    'Content-Type' : "application/json;charset=utf-8"
+                }
+            }
+        )
+
+    },
+
+    editRole(role){
+
+        return axios.post('http://localhost:8070/api/v1/role/edit',
+            {
+                "id" :role.id,
+                "name" : role.name,
+                "description" : role.description,
                 "roleTypeId" : 0
             },
             {

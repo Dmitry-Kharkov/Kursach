@@ -16,6 +16,6 @@ public class RoleMapper implements Mapper<Role, RoleAddRequest> {
         return new Role()
                 .setName(source.getName())
                 .setDescription(source.getDescription())
-                .setRoleType(new RoleType(source.getRoleTypeId()));
+                .setRoleType(new RoleType((long) source.getRoleType().ordinal()));
     }
 }
