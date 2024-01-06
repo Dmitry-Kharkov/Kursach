@@ -60,8 +60,8 @@ export default {
 
     addNewRole(){
 
-      this.role.roleTypeId = this.selectRoleType.roleTypeId
-
+      this.role.roleType = this.selectRoleType.name
+      console.log(this.selectRoleType)
       roleController.addRole(this.role)
           .then(response => this.roles.push(response.data))
           .catch(error => alert('Произошла ошибка при добавлении роли' + error))

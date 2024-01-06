@@ -16,6 +16,6 @@ public class RoleMerger implements Merger<Role, RoleAddRequest> {
         return target
                 .setName(source.getName())
                 .setDescription(source.getDescription())
-                .setRoleType(new RoleType(source.getRoleTypeId()));
+                .setRoleType(new RoleType((long) source.getRoleType().ordinal()));
     }
 }
