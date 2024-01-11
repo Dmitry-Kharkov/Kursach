@@ -25,7 +25,7 @@ export default {
         id : '',
         name: '',
         description : '',
-        roleTypeId : ''
+        roleType : ''
       },
 
       roleTypes : [],
@@ -78,6 +78,8 @@ export default {
     },
 
     editRole(){
+      this.roleEdit.roleType = this.selectRoleType.name;
+      console.log(this.roleEdit.roleType)
       this.roles = this.roles.filter( r => r.roleId !== this.roleEdit.id )
       roleController.editRole(this.roleEdit)
           .then(response => this.roles.push(response.data))
@@ -88,10 +90,10 @@ export default {
       this.roleEdit.description = '';
     },
 
-    showEditRoleDialog(role){
-      this.roleEdit.id=role.id;
-      this.roleEdit.name = role.name
-      this.roleEdit.description = role.description
+    showEditRoleDialog(roleId,roleName,roleDescription){
+      this.roleEdit.id=roleId;
+      this.roleEdit.name = roleName
+      this.roleEdit.description = roleDescription
       this.isEditRole = true;
     },
 
@@ -126,7 +128,7 @@ export default {
 
     </v-card-text>
     <v-card-actions>
-      <v-btn @click="showEditRoleDialog(role)" :variant="'outlined'">Редактировать</v-btn>
+      <v-btn @click="showEditRoleDialog(role.roleId,role.name,role.description)" :variant="'outlined'">Редактировать</v-btn>
       <v-btn @click="deleteRoleById(role.roleId)" :variant="'outlined'">Удалить</v-btn>
     </v-card-actions>
   </v-card>
