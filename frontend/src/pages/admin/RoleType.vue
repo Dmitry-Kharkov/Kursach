@@ -1,8 +1,10 @@
 <script>
 
 import roleTypeController from "@/controllers/RoleTypeController";
+import ItemViewer from "@/components/ItemViewer.vue";
 
 export default {
+  components: {ItemViewer},
 
   data() {
     return {
@@ -26,21 +28,11 @@ export default {
 
 <template>
 
-  <v-card :variant="'outlined'" v-for="roleType in roleTypes" :key="roleType.roleTypeId">
-
-    <v-card-title>{{ roleType.name }}</v-card-title>
-    <v-card-text>
-      <div><strong>ID:</strong> {{ roleType.roleTypeId }}</div>
-      <div>{{ roleType.description }}</div>
-      <div><strong>Создан:</strong> {{ roleType.created }}</div>
-      <div><strong>Изменен:</strong> {{ roleType.modified }}</div>
-
-    </v-card-text>
-    <v-card-actions>
-      <v-btn :variant="'outlined'">Редактировать</v-btn>
-      <v-btn :variant="'outlined'">Удалить</v-btn>
-    </v-card-actions>
-  </v-card>
+  <item-viewer
+      :id="roleType.roleTypeId"
+      :item="roleType"
+      v-for="roleType in roleTypes" :key="roleType.roleTypeId"
+  />
 
 </template>
 
