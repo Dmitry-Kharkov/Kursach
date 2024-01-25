@@ -54,8 +54,13 @@ public class UserService {
         return service.getUserById(userId);
     }
 
-    public List<UserResponse> SearchUsers(FiltrationUser request) {
-        return service.getAllUsers().stream().filter(e->e.getLogin().equals(request.getLogin())).toList();
+    public List<UserResponse> searchUsers(FiltrationUser request) {
+        return service.getAllUsers()
+                .stream()
+                .filter(e->e.getLogin().contains(request.getSearchValue().toLowerCase()))
+                .skip(request.getFrom())
+                .limit(request.getCount())
+                .toList();
     }
 
     private boolean verificationPassword(String password) {

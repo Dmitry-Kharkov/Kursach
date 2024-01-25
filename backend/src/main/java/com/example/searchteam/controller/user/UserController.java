@@ -75,6 +75,6 @@ public class UserController {
             value = USER_SEARCH,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public List<UserResponse> SearchUsers(@RequestBody FiltrationUser request){ return service.SearchUsers(request); }
+    public List<UserResponse> searchUsers(@RequestBody FiltrationUser request){ return service.searchUsers(request); }
 
 }

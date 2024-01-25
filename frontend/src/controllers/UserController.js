@@ -1,11 +1,13 @@
 import axios from "axios";
 
+let HOST = 'http://localhost:8070'
+let API = '/api/v1/user/'
 
 export default {
 
     getAll() {
 
-        return axios.post('http://localhost:8070/api/v1/user/get-all',
+        return axios.post(HOST + API + 'get-all',
             {},
             {
                 headers : {
@@ -18,7 +20,7 @@ export default {
 
     searchUsers() {
 
-        return axios.post('http://localhost:8070/api/v1/user/search',
+        return axios.post(HOST + API + 'search',
             {"login":"admin"},
             {
                 headers : {

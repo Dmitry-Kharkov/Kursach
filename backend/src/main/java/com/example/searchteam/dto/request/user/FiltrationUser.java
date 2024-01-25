@@ -10,8 +10,7 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 public class FiltrationUser {
-    private String login;
+    private String searchValue;
     private Long from;
     private Long count;
-    private String mean;
 }
