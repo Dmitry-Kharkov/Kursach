@@ -1,8 +1,10 @@
 <script>
 
 import userController from "@/controllers/UserController";
+import Button from "@/components/Button.vue";
 
 export default {
+  components: {Button},
 
   data() {
     return {
@@ -40,6 +42,7 @@ export default {
     <v-card-actions>
       <v-btn :variant="'outlined'">Редактировать</v-btn>
       <v-btn :variant="'outlined'">Удалить</v-btn>
+      <Button name="Тест" event="getAll()"></Button>
     </v-card-actions>
   </v-card>
 
