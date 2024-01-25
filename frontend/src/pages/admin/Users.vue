@@ -9,9 +9,18 @@ export default {
   data() {
     return {
 
-      users: []
+      users: [],
 
+      search: {
+        searchValue:"t",
+        count:'5',
+        coefficient:'0',
+        from:'0'
+
+      }
     }
+
+
   },
 
   mounted() {
@@ -23,10 +32,12 @@ export default {
   },
 
   methods: {
-    searchUsers() {
-      userController.searchUsers()
+    searchUsers(search) {
+      userController.searchUsers(search)
           .then(response => this.users = response.data)
           .catch(() => alert("Произошла ошибка при поиске пользователей"))
+      this.search.coefficient+=1
+      this.search.from=this.search.count*this.search.coefficient+1
     }
   }
 
@@ -36,7 +47,7 @@ export default {
 </script>
 
 <template>
-  <Button name="Поиск пользователей" @click="searchUsers()" :location="'top center'"></Button>
+  <Button name="Поиск пользователей" @click="searchUsers(search)" :location="'top center'"></Button>
 
   <v-card :variant="'outlined'" v-for="user in users" :key="user.userId">
 

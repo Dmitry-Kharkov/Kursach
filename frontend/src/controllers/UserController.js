@@ -18,10 +18,12 @@ export default {
 
     },
 
-    searchUsers() {
+    searchUsers(searchUsers) {
 
         return axios.post(HOST + API + 'search',
-            {"login":"admin"},
+            {"searchValue":searchUsers.searchValue,
+            "from":searchUsers.from,
+            "count":searchUsers.count},
             {
                 headers : {
                     'Content-Type' : "application/json;charset=utf-8"
