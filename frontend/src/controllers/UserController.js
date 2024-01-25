@@ -16,6 +16,19 @@ export default {
 
     },
 
+    searchUsers() {
+
+        return axios.post('http://localhost:8070/api/v1/user/search',
+            {"login":"admin"},
+            {
+                headers : {
+                    'Content-Type' : "application/json;charset=utf-8"
+                }
+            }
+        )
+
+    }
+
 
 
 }

@@ -1,5 +1,15 @@
 <script>
+import {blue, grey} from "vuetify/util/colors";
+
   export default {
+    computed: {
+      blue() {
+        return blue
+      },
+      grey() {
+        return grey
+      }
+    },
 
     props : {
 

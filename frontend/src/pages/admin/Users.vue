@@ -20,13 +20,23 @@ export default {
         .then(response => this.users = response.data)
         .catch(() => alert("Произошла ошибка при загрузке пользователей"))
 
+  },
+
+  methods: {
+    searchUsers() {
+      userController.searchUsers()
+          .then(response => this.users = response.data)
+          .catch(() => alert("Произошла ошибка при поиске пользователей"))
+    }
   }
+
 
 }
 
 </script>
 
 <template>
+  <Button name="Поиск пользователей" @click="searchUsers()" :location="'top center'"></Button>
 
   <v-card :variant="'outlined'" v-for="user in users" :key="user.userId">
 
@@ -42,7 +52,6 @@ export default {
     <v-card-actions>
       <v-btn :variant="'outlined'">Редактировать</v-btn>
       <v-btn :variant="'outlined'">Удалить</v-btn>
-      <Button name="Тест" event="getAll()"></Button>
     </v-card-actions>
   </v-card>
 
