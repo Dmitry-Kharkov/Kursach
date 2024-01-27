@@ -1,9 +1,6 @@
 package com.example.searchteam.service.user;
 
-import com.example.searchteam.dto.request.user.UserAddRequest;
-import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
-import com.example.searchteam.dto.request.user.UserEditRolesRequest;
-import com.example.searchteam.dto.request.user.UserRequest;
+import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.domain.user.UserDomainService;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +52,10 @@ public class UserService {
     public UserResponse editRolesUser(UserEditRolesRequest request) {
         Long userId = service.editRolesUser(request);
         return service.getUserById(userId);
+    }
+
+    public Boolean isExists(LoginUserRequest request) {
+        return service.isExists(request);
     }
 
     private boolean verificationPassword(String password) {
