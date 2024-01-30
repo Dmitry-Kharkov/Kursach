@@ -105,7 +105,7 @@ public class UserDomainService {
     public Boolean isExists(LoginUserRequest request){
         var loginUser=userLoginMapper.from(request);
         var users=repository.findAll();
-        return users.stream().filter(e->e.getLogin().equals(loginUser.getLogin()) && e.getPassword().equals(loginUser.getPassword())).toList().isEmpty();
+        return !users.stream().filter(e->e.getLogin().equals(loginUser.getLogin()) && e.getPassword().equals(loginUser.getPassword())).toList().isEmpty();
 
     }
 }

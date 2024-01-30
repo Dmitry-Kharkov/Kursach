@@ -1,4 +1,5 @@
 <template>
+  <v-label v-text="text"></v-label>
   <v-sheet class="bg-deep-purple pa-15" location=""  rounded>
     <v-card class="mx-auto px-6 py-8" max-width="450">
       <v-form
@@ -45,10 +46,13 @@
 </template>
 <script>
 import Account from "@/components/Account.vue";
+import UserController from "@/controllers/UserController";
 
 export default {
   data: () => ({
-    min: v => v.length >= 8 || 'Минимум 8 символов',
+    isExists:true,
+    text:"Пользователь не найден",
+    min: v => v.length >= 0 || 'Минимум 8 символов',
     show: false,
     form: false,
     login: null,
@@ -58,12 +62,16 @@ export default {
 
   methods: {
     onSubmit () {
-      if (!this.form) return
+      UserController.userLogin(this.login,this.password)
+          .then(response=>response.data?window.location.href="http://localhost:8080/":this.text="Пользователь не найден")
+          .catch(error => alert('Произошла ошибка при авторизации' + error))
 
-      this.loading = true
-      console.log(this.login,this.password)
-      Account.data().user.fullName=this.login
-      Account.data().user.email=this.password
+      // if (!this.form) return
+      //
+      // this.loading = true
+      // console.log(this.login,this.password)
+      // Account.data().user.fullName=this.login
+      // Account.data().user.email=this.password
       setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {
