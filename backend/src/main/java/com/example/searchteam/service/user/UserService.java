@@ -33,6 +33,9 @@ public class UserService {
         if(!verificationPassword(request.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
         }
+        if(!verificationEmail(request.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный адрес электронной почты");
+        }
         Long userId = service.addUser(request);
         service.setUserRole(userId, List.of(2L));
         return service.getUserById(userId);
@@ -60,6 +63,12 @@ public class UserService {
     private boolean verificationPassword(String password) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
         Matcher m =  Pattern.compile(regex).matcher(password);
+        return (m.matches());
+    }
+
+    private boolean verificationEmail(String email) {
+        String regex = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i";
+        Matcher m =  Pattern.compile(regex).matcher(email);
         return (m.matches());
     }
 }

@@ -32,6 +32,7 @@ export default {
     <v-card-text>
       <div><strong>ID:</strong> {{ user.userId }}</div>
       <div><strong>Login:</strong>{{ user.login }}</div>
+      <div><strong>Email:</strong>{{ user.email }}</div>
       <div><strong>Роли:</strong>{{user.roles.map(role=>role.name).join(', ')}}</div>
       <div><strong>Создан:</strong> {{ user.created }}</div>
       <div><strong>Изменен:</strong> {{ user.modified }}</div>

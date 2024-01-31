@@ -16,6 +16,16 @@ export default {
 
     },
 
+    editPassword(password) {
+        return axios.post('http://localhost:8070/api/v1/user/edit-pwd',
+            {"password":password},
+            {
+                headers : {
+                    'Content-Type' : "application/json;charset=utf-8"
+                }
+            }
+        )
+    }
 
 
 }
