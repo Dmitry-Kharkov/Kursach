@@ -1,5 +1,7 @@
 <template>
-
+<v-label>  <h1>
+  ДОБРО ПОЖАЛОВАТЬ!
+</h1></v-label>
 
 </template>
 
