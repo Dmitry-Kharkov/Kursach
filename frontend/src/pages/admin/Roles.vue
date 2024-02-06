@@ -4,9 +4,10 @@ import roleController from "@/controllers/RoleController";
 import Fab from "@/components/Fab.vue";
 import MyField from "@/components/MyField.vue";
 import roleTypeController from "@/controllers/RoleTypeController";
+import ItemViewer from "@/components/ItemViewer.vue";
 
 export default {
-  components: {MyField, Fab},
+  components: {ItemViewer, MyField, Fab},
 
   data() {
     return {
@@ -61,7 +62,6 @@ export default {
     addNewRole(){
 
       this.role.roleType = this.selectRoleType.name
-      console.log(this.selectRoleType)
       roleController.addRole(this.role)
           .then(response => this.roles.push(response.data))
           .catch(error => alert('Произошла ошибка при добавлении роли' + error))
@@ -116,23 +116,12 @@ export default {
 
 <template>
 
-
-
-  <v-card :variant="'outlined'" v-for="role in roles" :key="role.roleId">
-    <v-card-title>{{ role.name }}</v-card-title>
-    <v-card-text>
-      <div><strong>ID:</strong> {{ role.roleId }}</div>
-      <div>{{ role.description }}</div>
-      <div><strong>Создан:</strong> {{ role.created }}</div>
-      <div><strong>Изменен:</strong> {{ role.modified }}</div>
-
-    </v-card-text>
-    <v-card-actions>
-      <v-btn @click="showEditRoleDialog(role)" :variant="'outlined'">Редактировать</v-btn>
-      <v-btn @click="deleteRoleById(role.roleId)" :variant="'outlined'">Удалить</v-btn>
-    </v-card-actions>
-  </v-card>
-
+  <item-viewer
+      :id="role.roleId"
+      :item="role"
+      v-on:item_edit="showEditRoleDialog($event)"
+      v-on:item_delete="deleteRoleById($event)"
+      v-for="role in roles" :key="role.roleId"/>
 
   <v-dialog
       width="500"
