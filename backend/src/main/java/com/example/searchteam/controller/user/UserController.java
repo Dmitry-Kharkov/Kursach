@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Console;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -23,6 +24,7 @@ public class UserController {
     public static final String USER_ADD = "/api/v1/user/add";
     public static final String USER_EDIT_ROLES="/api/v1/user/edit-roles";
     public static final String USER_SEARCH="/api/v1/user/search";
+    public static final String USER_LOGIN="/api/v1/user/login";
 
     private final UserService service;
 
@@ -72,9 +74,16 @@ public class UserController {
     public List<UserResponse> getAllUsers(){ return service.getAllUsers(); }
 
     @PostMapping(
+            value = USER_LOGIN,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public Boolean isExists(@RequestBody LoginUserRequest request){ return service.isExists(request); }
+  
+    @PostMapping(
             value = USER_SEARCH,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> searchUsers(@RequestBody FiltrationUser request){ return service.searchUsers(request); }
+
 
 }

@@ -54,6 +54,10 @@ public class UserService {
         return service.getUserById(userId);
     }
 
+    public Boolean isExists(LoginUserRequest request) {
+        return service.isExists(request);
+}
+
     public List<UserResponse> searchUsers(FiltrationUser request) {
         return service.getAllUsers()
                 .stream()
