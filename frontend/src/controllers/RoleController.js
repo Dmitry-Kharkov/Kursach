@@ -53,7 +53,7 @@ export default {
                 "id" :role.id,
                 "name" : role.name,
                 "description" : role.description,
-                "roleTypeId" : 0
+                "roleType" : role.roleType
             },
             {
                 headers : {
