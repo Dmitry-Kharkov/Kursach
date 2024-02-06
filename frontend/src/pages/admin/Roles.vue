@@ -4,10 +4,9 @@ import roleController from "@/controllers/RoleController";
 import Fab from "@/components/Fab.vue";
 import MyField from "@/components/MyField.vue";
 import roleTypeController from "@/controllers/RoleTypeController";
-import ItemViewer from "@/components/ItemViewer.vue";
 
 export default {
-  components: {ItemViewer, MyField, Fab},
+  components: {MyField, Fab},
 
   data() {
     return {
@@ -26,7 +25,7 @@ export default {
         id : '',
         name: '',
         description : '',
-        roleTypeId : ''
+        roleType : ''
       },
 
       roleTypes : [],
@@ -62,6 +61,7 @@ export default {
     addNewRole(){
 
       this.role.roleType = this.selectRoleType.name
+      console.log(this.selectRoleType)
       roleController.addRole(this.role)
           .then(response => this.roles.push(response.data))
           .catch(error => alert('Произошла ошибка при добавлении роли' + error))
@@ -74,10 +74,13 @@ export default {
     },
 
     showAddNewRoleDialog(){
+      this.selectRoleType = {};
       this.isAddRole = true;
     },
 
     editRole(){
+      this.roleEdit.roleType = this.selectRoleType.name;
+      console.log(this.roleEdit.roleType)
       this.roles = this.roles.filter( r => r.roleId !== this.roleEdit.id )
       roleController.editRole(this.roleEdit)
           .then(response => this.roles.push(response.data))
@@ -92,6 +95,7 @@ export default {
       this.roleEdit.id=role.id;
       this.roleEdit.name = role.name
       this.roleEdit.description = role.description
+      this.selectRoleType = this.roleTypes.filter( type => type.name === role.roleType)
       this.isEditRole = true;
     },
 
@@ -114,12 +118,23 @@ export default {
 
 <template>
 
-  <item-viewer
-      :id="role.roleId"
-      :item="role"
-      v-on:item_edit="showEditRoleDialog($event)"
-      v-on:item_delete="deleteRoleById($event)"
-      v-for="role in roles" :key="role.roleId"/>
+
+
+  <v-card :variant="'outlined'" v-for="role in roles" :key="role.roleId">
+    <v-card-title>{{ role.name }}</v-card-title>
+    <v-card-text>
+      <div><strong>ID:</strong> {{ role.roleId }}</div>
+      <div>{{ role.description }}</div>
+      <div><strong>Создан:</strong> {{ role.created }}</div>
+      <div><strong>Изменен:</strong> {{ role.modified }}</div>
+
+    </v-card-text>
+    <v-card-actions>
+      <v-btn @click="showEditRoleDialog(role.roleId,role.name,role.description)" :variant="'outlined'">Редактировать</v-btn>
+      <v-btn @click="deleteRoleById(role.roleId)" :variant="'outlined'">Удалить</v-btn>
+    </v-card-actions>
+  </v-card>
+
 
   <v-dialog
       width="500"
@@ -160,6 +175,7 @@ export default {
           variant="outlined"
           class = "select"
           label="Тип роли"
+          :multiple=false
           v-model="selectRoleType"
           :items="roleTypes"
           :item-props="itemProps"

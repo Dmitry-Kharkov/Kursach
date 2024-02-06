@@ -1,14 +1,11 @@
 package com.example.searchteam.mapper.user;
 
 import com.example.searchteam.domain.user.User;
-import com.example.searchteam.domain.user.UserRole;
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.mapper.Mapper;
 import com.example.searchteam.repository.user.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +16,7 @@ public class UserMapper implements Mapper<User, UserAddRequest> {
     public User from(UserAddRequest source) {
         return new User()
                 .setFullName(source.getName())
-                .setLogin(source.getLogin())
+                .setLogin(source.getLogin().toLowerCase())
                 .setPassword(source.getPassword());
     }
 }

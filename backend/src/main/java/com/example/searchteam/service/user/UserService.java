@@ -56,6 +56,15 @@ public class UserService {
 
     public Boolean isExists(LoginUserRequest request) {
         return service.isExists(request);
+}
+
+    public List<UserResponse> searchUsers(FiltrationUser request) {
+        return service.getAllUsers()
+                .stream()
+                .filter(e->e.getLogin().contains(request.getSearchValue().toLowerCase()))
+                .skip(request.getFrom())
+                .limit(request.getCount())
+                .toList();
     }
 
     private boolean verificationPassword(String password) {
