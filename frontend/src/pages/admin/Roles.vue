@@ -74,6 +74,7 @@ export default {
     },
 
     showAddNewRoleDialog(){
+      this.selectRoleType = {};
       this.isAddRole = true;
     },
 
@@ -90,10 +91,11 @@ export default {
       this.roleEdit.description = '';
     },
 
-    showEditRoleDialog(roleId,roleName,roleDescription){
-      this.roleEdit.id=roleId;
-      this.roleEdit.name = roleName
-      this.roleEdit.description = roleDescription
+    showEditRoleDialog(role){
+      this.roleEdit.id=role.id;
+      this.roleEdit.name = role.name
+      this.roleEdit.description = role.description
+      this.selectRoleType = this.roleTypes.filter( type => type.name === role.roleType)
       this.isEditRole = true;
     },
 
@@ -173,6 +175,7 @@ export default {
           variant="outlined"
           class = "select"
           label="Тип роли"
+          :multiple=false
           v-model="selectRoleType"
           :items="roleTypes"
           :item-props="itemProps"
