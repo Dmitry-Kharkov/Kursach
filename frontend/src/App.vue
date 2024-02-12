@@ -10,6 +10,11 @@
         <v-list density="compact" nav class="menu">
 
           <v-list-item
+              value="13"
+              title="Регистрация"
+              @click=routeRegistration()
+              prepend-icon="mdi-account-plus"></v-list-item>
+          <v-list-item
               value="11"
               title="Вход"
               @click=routeLogin()
@@ -136,8 +141,11 @@ export default {
 
   methods: {
 
+    routeRegistration() {
+      this.$router.push('/registration')
+    }
+    
     routeLogin() {
-
       this.$router.push('/login')
     },
 
