@@ -1,6 +1,7 @@
 package com.example.searchteam.mapper.user;
 
 import com.example.searchteam.domain.user.User;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.mapper.Mapper;
 import com.example.searchteam.repository.user.UserRoleRepository;
@@ -9,14 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserMapper implements Mapper<User, UserAddRequest> {
-
-    private final UserRoleRepository repository;
+public class UserLoginMapper implements Mapper<User, LoginUserRequest> {
     @Override
-    public User from(UserAddRequest source) {
+    public User from(LoginUserRequest source) {
         return new User()
-                .setFullName(source.getName())
-                .setLogin(source.getLogin().toLowerCase())
+                .setLogin(source.getLogin())
                 .setPassword(source.getPassword());
     }
+
 }

@@ -13,7 +13,7 @@ public class UserMerger implements Merger<User, UserAddRequest> {
     @Override
     public User merge(User target, UserAddRequest source) {
         return target
-                .setLogin(source.getLogin())
+                .setLogin(source.getLogin().toLowerCase())
                 .setFullName(source.getName());
     }
 }

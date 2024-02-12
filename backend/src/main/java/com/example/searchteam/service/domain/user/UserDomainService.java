@@ -3,10 +3,12 @@ package com.example.searchteam.service.domain.user;
 import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
 import com.example.searchteam.dto.request.user.UserEditRolesRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
+import com.example.searchteam.mapper.user.UserLoginMapper;
 import com.example.searchteam.mapper.user.UserMapper;
 import com.example.searchteam.mapper.user.UserMerger;
 import com.example.searchteam.mapper.user.UserResponseMapper;
@@ -28,6 +30,7 @@ public class UserDomainService {
     private final UserResponseMapper responseUserMapper;
     private final UserMapper userMapper;
     private final UserMerger userMerger;
+    private final UserLoginMapper userLoginMapper;
 
     @Transactional
     public UserResponse getUserById(Long id) {
@@ -98,4 +101,11 @@ public class UserDomainService {
         userRoleRepository.saveAll(userRoles);
     }
 
+    @Transactional
+    public Boolean isExists(LoginUserRequest request){
+        var loginUser=userLoginMapper.from(request);
+        var users=repository.findAll();
+        return !users.stream().filter(e->e.getLogin().equals(loginUser.getLogin()) && e.getPassword().equals(loginUser.getPassword())).toList().isEmpty();
+
+    }
 }

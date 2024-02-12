@@ -1,15 +1,26 @@
 <script>
 
 import userController from "@/controllers/UserController";
+import Button from "@/components/Button.vue";
 
 export default {
+  components: {Button},
 
   data() {
     return {
 
-      users: []
+      users: [],
 
+      search: {
+        searchValue:"t",
+        count:'5',
+        coefficient:'0',
+        from:'0'
+
+      }
     }
+
+
   },
 
   mounted() {
@@ -18,13 +29,25 @@ export default {
         .then(response => this.users = response.data)
         .catch(() => alert("Произошла ошибка при загрузке пользователей"))
 
+  },
+
+  methods: {
+    searchUsers(search) {
+      userController.searchUsers(search)
+          .then(response => this.users = response.data)
+          .catch(() => alert("Произошла ошибка при поиске пользователей"))
+      this.search.coefficient+=1
+      this.search.from=this.search.count*this.search.coefficient+1
+    }
   }
+
 
 }
 
 </script>
 
 <template>
+  <Button name="Поиск пользователей" @click="searchUsers(search)" :location="'top center'"></Button>
 
   <v-card :variant="'outlined'" v-for="user in users" :key="user.userId">
 
