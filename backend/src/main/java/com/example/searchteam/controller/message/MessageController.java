@@ -12,12 +12,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+
+/**
+ * Контроллер для сообщения
+ */
 public class MessageController {
 
     public static final String MESSAGE_GET_BY_ID = "/api/v1/message/get-by-id";
 
     private final MessageService service;
 
+    /**
+     * Запрос получения сообщения по id
+     * @param request - messageId
+     */
     @PostMapping(
             value = MESSAGE_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,

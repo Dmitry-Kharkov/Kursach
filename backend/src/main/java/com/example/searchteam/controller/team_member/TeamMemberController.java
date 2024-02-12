@@ -13,12 +13,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+
+/**
+ * Контроллер для участника команды
+ */
 public class TeamMemberController {
 
     public static final String TEAM_MEMBER_GET_BY_ID = "/api/v1/team-member/get-by-id";
 
     private final TeamMemberService service;
 
+    /**
+     * Запрос получения участника команды по id
+     * @param request - TeamMemberId
+     */
     @PostMapping(
             value = TEAM_MEMBER_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,

@@ -20,6 +20,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+/**
+ * Контроллер для заявителя
+ */
 public class ApplicantController {
 
     public static final String APPLICANT_GET_BY_ID = "/api/v1/applicant/get-by-id";
@@ -31,6 +34,10 @@ public class ApplicantController {
 
     private final ApplicantService service;
 
+    /**
+     * Запрос получения заявителя по id
+     * @param request - applicantId
+     */
     @PostMapping(
             value = APPLICANT_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -39,7 +46,10 @@ public class ApplicantController {
         return service.getApplicantById(request);
     }
 
-
+    /**
+     * Запрос добавления заявителя
+     * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     */
     @PostMapping(
             value = APPLICANT_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -48,6 +58,10 @@ public class ApplicantController {
         return service.addApplicant(request);
     }
 
+    /**
+     * Запрос изменения заявителя
+     * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     */
     @PostMapping(
             value = APPLICANT_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -56,12 +70,19 @@ public class ApplicantController {
         return service.editApplicant(request);
     }
 
+    /**
+     * Запрос получения всех заявителей
+     */
     @PostMapping(
             value = APPLICANT_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<ApplicantResponse> getAllApplicants(){ return service.getAllApplicants(); }
 
+    /**
+     * Запрос удаления заявителя
+     * @param request - ApplicantRequest(applicantId)
+     */
     @PostMapping(
             value = APPLICANT_DELETE,
             consumes = APPLICATION_JSON_VALUE,
@@ -70,6 +91,10 @@ public class ApplicantController {
         service.deleteApplicant(request);
     }
 
+    /**
+     * Запрос поиска заявителя
+     * @param request - ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
+     */
     @PostMapping(
             value = APPLICANT_SEARCH,
             consumes = APPLICATION_JSON_VALUE,
