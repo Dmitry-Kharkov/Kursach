@@ -22,51 +22,89 @@ import java.time.LocalDateTime;
 @ToString(onlyExplicitlyIncluded = true, callSuper = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @AttributeOverride(name = "id", column = @Column(name = "TEAM_MEMBER_ID"))
+
+/**
+ * Сущность участника команды
+ * @deprecated Описание участника команды
+ */
 public class TeamMember extends EntityWithName {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Конструктор участника команды
+     * @param teamMemberId - id участника команды
+     */
     public TeamMember(Long teamMemberId) {
         this.id = teamMemberId;
     }
 
+    /**
+     * Переменная id команды
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+    /**
+     * Переменная id типа участника команды
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_MEMBER_TYPE_ID")
     private TeamMemberType teamMemberType;
 
+    /**
+     * Переменная id заявителя
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "APPLICANT_ID")
     private Applicant applicant;
 
+    /**
+     * Метод изменения id
+     * @param id - идентификатор
+     */
     @Override
     public TeamMember setId(Long id) {
         this.id = id;
         return this;
     }
 
+    /**
+     * Метод изменения имени
+     * @param name - имя
+     */
     @Override
     public TeamMember setName(String name) {
         this.name = name;
         return this;
     }
 
+    /**
+     * Метод изменения описания
+     * @param description - описание
+     */
     @Override
     public TeamMember setDescription(String description) {
         this.description = description;
         return this;
     }
 
+    /**
+     * Метод изменения времени создания
+     * @param createdDateTime - время создания
+     */
     @Override
     public TeamMember setCreatedDateTime(LocalDateTime createdDateTime) {
         this.createdDateTime = createdDateTime;
         return this;
     }
 
+    /**
+     * Метод изменения времени изменения
+     * @param modifiedDateTime - время изменения
+     */
     @Override
     public TeamMember setModifiedDateTime(LocalDateTime modifiedDateTime) {
         this.modifiedDateTime = modifiedDateTime;
