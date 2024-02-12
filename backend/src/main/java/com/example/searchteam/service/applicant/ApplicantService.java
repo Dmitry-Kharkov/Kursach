@@ -13,33 +13,63 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+/**
+ * Сервис заявителя
+ * @deprecated реализует методы обработки информации о заявителе
+ */
 public class ApplicantService {
 
+    /**
+     * Domain Service заявителя
+     * @deprecated реализует методы обработки информации о заявителе
+     */
     private final ApplicantDomainService service;
 
+    /**
+     * получение заявителя по id
+     * @param request - id
+     */
     public ApplicantResponse getApplicantById(ApplicantRequest request) {
         return service.getApplicantById(request.getApplicantId());
     }
 
+    /**
+     * получение всех заявок
+     */
     public List<ApplicantResponse> getAllApplicants() {
         return service.getAllApplicants();
     }
 
+    /**
+     * Создание новой заявки
+     * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     */
     public ApplicantResponse addApplicant(ApplicantAddRequest request) {
         Long applicantId = service.addApplicant(request);
         return service.getApplicantById(applicantId);
     }
 
-
+    /**
+     * Изменение заявки
+     * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     */
     public ApplicantResponse editApplicant(ApplicantAddRequest request) {
         Long applicantId = service.editApplicant(request);
         return service.getApplicantById(applicantId);
     }
 
+    /**
+     * Удаление заявки
+     * @param request - ApplicantRequest(applicantId)
+     */
     public void deleteApplicant(ApplicantRequest request) {
         service.deleteApplicantById(request.getApplicantId());
     }
 
+    /**
+     * Поиск заявки
+     * @param request - ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
+     */
     public List<ShortApplicantResponse> getSearchApplicants(ApplicantFiltrationRequest request) {
         return service.getAllApplicants().stream()
                 .filter(t -> applyFilter(t, request))
@@ -49,6 +79,10 @@ public class ApplicantService {
     }
 
 
+    /**
+     * Фильтр для поиска заявки
+     * @param source - ApplicantResponse(applicantId,name,description,user,isComleted,typeTeam,teamMemberType), ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
+     */
     private boolean applyFilter(ApplicantResponse source, ApplicantFiltrationRequest filter) {
 
         if (filter.getStart() == null && filter.getFinish() == null && filter.getName() == null

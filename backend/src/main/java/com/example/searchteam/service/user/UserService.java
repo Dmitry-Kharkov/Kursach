@@ -14,18 +14,38 @@ import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
+
+/**
+ * Сервис пользователя
+ * @deprecated реализует методы обработки информации о пользователе
+ */
 public class UserService {
 
+    /**
+     * Domain Service пользователя
+     * @deprecated реализует методы обработки информации о пользователе
+     */
     private final UserDomainService service;
 
+    /**
+     * получение пользователя по id
+     * @param request - id
+     */
     public UserResponse getUserById(UserRequest request ){
         return service.getUserById(request.getUserId());
     }
 
+    /**
+     * получение всех пользователей
+     */
     public List<UserResponse> getAllUsers(){
         return service.getAllUsers();
     }
 
+    /**
+     * Создание нового пользователя
+     * @param request - UserAddRequest(id,name,login,password)
+     */
     public UserResponse addUser(UserAddRequest request) {
         if(!verificationPassword(request.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
@@ -35,12 +55,19 @@ public class UserService {
         return service.getUserById(userId);
     }
 
-
+    /**
+     * Изменение пользователя
+     * @param request - UserAddRequest(id,name,login,password)
+     */
     public UserResponse editUser(UserAddRequest request) {
         Long userId = service.editUser(request);
         return service.getUserById(userId);
     }
 
+    /**
+     * Изменение пароля пользователя
+     * @param request - UserEditPasswordRequest(id,password)
+     */
     public UserResponse editPasswordUser(UserEditPasswordRequest request) {
         if(!verificationPassword(request.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
@@ -49,15 +76,28 @@ public class UserService {
         return service.getUserById(userId);
     }
 
+    /**
+     * Изменение роли пользователя
+     * @param request - UserEditRolesRequest(id,roles)
+     */
     public UserResponse editRolesUser(UserEditRolesRequest request) {
         Long userId = service.editRolesUser(request);
         return service.getUserById(userId);
     }
 
+    /**
+     * Существование пользователя
+     * @deprecated Проверка, существует ли пользователь
+     * @param request - LoginUserRequest(login,password)
+     */
     public Boolean isExists(LoginUserRequest request) {
         return service.isExists(request);
 }
 
+    /**
+     * Поиск пользователей
+     * @param request - FiltrationUser(searchValue,from,count)
+     */
     public List<UserResponse> searchUsers(FiltrationUser request) {
         return service.getAllUsers()
                 .stream()
@@ -67,6 +107,10 @@ public class UserService {
                 .toList();
     }
 
+    /**
+     * Проверка корректности пароля
+     * @param password - пароль
+     */
     private boolean verificationPassword(String password) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
         Matcher m =  Pattern.compile(regex).matcher(password);

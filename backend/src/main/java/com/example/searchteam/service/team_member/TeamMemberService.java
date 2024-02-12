@@ -8,10 +8,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+
+/**
+ * Сервис участника команды
+ * @deprecated реализует методы обработки информации об участнике команды
+ */
 public class TeamMemberService {
 
+    /**
+     * Domain Service участника команды
+     * @deprecated реализует методы обработки информации об участнике команды
+     */
     private final TeamMemberDomainService service;
 
+    /**
+     * получение участника команды по id
+     * @param request - id
+     */
     public TeamMemberResponse getTeamMemberById(TeamMemberRequest request ){
         return service.getTeamMemberById(request.getTeamMemberId());
     }
