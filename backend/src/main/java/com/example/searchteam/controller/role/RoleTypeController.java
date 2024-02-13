@@ -27,6 +27,7 @@ public class RoleTypeController {
 
     /**
      * Запрос получения всех типов ролей
+     * @return типов ролей
      */
     @PostMapping(
             value = ROLE_TYPE_GET_ALL,
@@ -39,6 +40,7 @@ public class RoleTypeController {
     /**
      * Запрос изменения типа роли
      * @param request - RoleTypeAddRequest(id,name,description)
+     * @return тип роли
      */
     @PostMapping(
             value = ROLE_TYPE_EDIT,

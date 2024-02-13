@@ -32,6 +32,7 @@ public class RoleController {
     /**
      * Запрос получения роли по id
      * @param request - roleId
+     * @return роль
      */
     @PostMapping(
             value = ROLE_GET_BY_ID,
@@ -43,6 +44,7 @@ public class RoleController {
 
     /**
      * Запрос получения всех ролей
+     * @return список ролей
      */
     @PostMapping(
             value = ROLE_GET_ALL,
@@ -55,6 +57,7 @@ public class RoleController {
     /**
      * Запрос добавления роли
      * @param request - RoleAddRequest(id,name,roleType,description)
+     * @return роль
      */
     @PostMapping(
             value = ROLE_ADD,
@@ -67,6 +70,7 @@ public class RoleController {
     /**
      * Запрос изменения роли
      * @param request - RoleAddRequest(id,name,roleType,description)
+     * @return роль
      */
     @PostMapping(
             value = ROLE_EDIT,

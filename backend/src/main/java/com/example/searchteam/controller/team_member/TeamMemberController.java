@@ -26,6 +26,7 @@ public class TeamMemberController {
     /**
      * Запрос получения участника команды по id
      * @param request - TeamMemberId
+     * @return участник команды
      */
     @PostMapping(
             value = TEAM_MEMBER_GET_BY_ID,

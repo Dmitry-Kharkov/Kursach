@@ -34,6 +34,7 @@ public class UserController {
     /**
      * Запрос получения пользователя по id
      * @param request - userId
+     * @return пользователь
      */
     @PostMapping(
             value = USER_GET_BY_ID,
@@ -46,6 +47,7 @@ public class UserController {
     /**
      * Запрос добавления пользователя
      * @param request - UserAddRequest(id,name,login,password)
+     * @return пользователь
      */
     @PostMapping(
             value = USER_ADD,
@@ -58,6 +60,7 @@ public class UserController {
     /**
      * Запрос изменения пользователя
      * @param request - UserAddRequest(id,name,login,password)
+     * @return пользователь
      */
     @PostMapping(
             value = USER_EDIT,
@@ -70,6 +73,7 @@ public class UserController {
     /**
      * Запрос изменения пароля пользователя
      * @param request - UserEditPasswordRequest(id,password)
+     * @return пользователь
      */
     @PostMapping(
             value = USER_EDIT_PASSWORD,
@@ -82,6 +86,7 @@ public class UserController {
     /**
      * Запрос изменения роли пользователя
      * @param request - UserEditRolesRequest(id,roles)
+     * @return пользователь
      */
     @PostMapping(
             value = USER_EDIT_ROLES,
@@ -93,6 +98,7 @@ public class UserController {
 
     /**
      * Запрос получения всех пользователей
+     * @return список пользователей
      */
     @PostMapping(
             value = USER_GET_ALL,
@@ -103,6 +109,7 @@ public class UserController {
     /**
      * Запрос проверки существования пользователя
      * @param request - LoginUserRequest(login,password)
+     * @return булевое значение
      */
     @PostMapping(
             value = USER_LOGIN,
@@ -113,6 +120,7 @@ public class UserController {
     /**
      * Запрос поиска пользователя
      * @param request - FiltrationUser(searchValue,from,count)
+     * @return список пользователей
      */
     @PostMapping(
             value = USER_SEARCH,

@@ -35,6 +35,7 @@ public class TeamController {
     /**
      * Запрос получения команды по id
      * @param request - teamId
+     * @return команда
      */
     @PostMapping(
             value = TEAM_GET_BY_ID,
@@ -46,6 +47,7 @@ public class TeamController {
 
     /**
      * Запрос получения всех команд
+     * @return список команд
      */
     @PostMapping(
             value = TEAM_GET_ALL,
@@ -58,6 +60,7 @@ public class TeamController {
     /**
      * Запрос добавления команды
      * @param request - TeamAddRequest(id,name,description,userId,typeTeamId,members)
+     * @return команда
      */
     @PostMapping(
             value = TEAM_ADD,
@@ -70,6 +73,7 @@ public class TeamController {
     /**
      * Запрос изменения команды
      * @param request - TeamAddRequest(id,name,description,userId,typeTeamId,members)
+     * @return команда
      */
     @PostMapping(
             value = TEAM_EDIT,
@@ -94,6 +98,7 @@ public class TeamController {
     /**
      * Запрос поиска команды
      * @param request - TeamFiltrationRequest(teamTypes,isCompleted,name,start,finish,users,members)
+     * @return укороченный список команд
      */
     @PostMapping(
             value = TEAM_SEARCH,

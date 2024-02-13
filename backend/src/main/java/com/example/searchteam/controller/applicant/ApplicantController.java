@@ -37,6 +37,7 @@ public class ApplicantController {
     /**
      * Запрос получения заявителя по id
      * @param request - applicantId
+     * @return заявитель
      */
     @PostMapping(
             value = APPLICANT_GET_BY_ID,
@@ -49,6 +50,7 @@ public class ApplicantController {
     /**
      * Запрос добавления заявителя
      * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     * @return заявитель
      */
     @PostMapping(
             value = APPLICANT_ADD,
@@ -61,6 +63,7 @@ public class ApplicantController {
     /**
      * Запрос изменения заявителя
      * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     * @return заявитель
      */
     @PostMapping(
             value = APPLICANT_EDIT,
@@ -72,6 +75,7 @@ public class ApplicantController {
 
     /**
      * Запрос получения всех заявителей
+     * @return список заявителей
      */
     @PostMapping(
             value = APPLICANT_GET_ALL,
@@ -94,6 +98,7 @@ public class ApplicantController {
     /**
      * Запрос поиска заявителя
      * @param request - ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
+     * @return укороченный список заявителей
      */
     @PostMapping(
             value = APPLICANT_SEARCH,

@@ -25,6 +25,7 @@ public class MessageController {
     /**
      * Запрос получения сообщения по id
      * @param request - messageId
+     * @return сообщение
      */
     @PostMapping(
             value = MESSAGE_GET_BY_ID,
