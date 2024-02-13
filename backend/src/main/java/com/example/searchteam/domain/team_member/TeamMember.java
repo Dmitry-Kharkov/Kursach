@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 
 /**
  * Сущность участника команды
- * @deprecated Описание участника команды
+ * Описание участника команды
  */
 public class TeamMember extends EntityWithName {
 
@@ -64,6 +64,7 @@ public class TeamMember extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return участник команды
      */
     @Override
     public TeamMember setId(Long id) {
@@ -74,6 +75,7 @@ public class TeamMember extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return участник команды
      */
     @Override
     public TeamMember setName(String name) {
@@ -84,6 +86,7 @@ public class TeamMember extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return участник команды
      */
     @Override
     public TeamMember setDescription(String description) {
@@ -94,6 +97,7 @@ public class TeamMember extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return участник команды
      */
     @Override
     public TeamMember setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -104,6 +108,7 @@ public class TeamMember extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return участник команды
      */
     @Override
     public TeamMember setModifiedDateTime(LocalDateTime modifiedDateTime) {

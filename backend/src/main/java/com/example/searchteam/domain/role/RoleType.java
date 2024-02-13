@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Сущность типа роли
- * @deprecated Роли делятся на командные и системные
+ * Роли делятся на командные и системные
  */
 public class RoleType extends EntityWithName {
 
@@ -54,6 +54,7 @@ public class RoleType extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return тип роли
      */
     @Override
     public RoleType setId(Long id) {
@@ -64,6 +65,7 @@ public class RoleType extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return тип роли
      */
     @Override
     public RoleType setName(String name) {
@@ -74,6 +76,7 @@ public class RoleType extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return тип роли
      */
     @Override
     public RoleType setDescription(String description) {
@@ -84,6 +87,7 @@ public class RoleType extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return тип роли
      */
     @Override
     public RoleType setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -94,6 +98,7 @@ public class RoleType extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return тип роли
      */
     @Override
     public RoleType setModifiedDateTime(LocalDateTime modifiedDateTime) {

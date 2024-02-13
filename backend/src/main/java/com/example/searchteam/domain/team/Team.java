@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * Сущность команды
- * @deprecated Создание заявок для поиска команды
+ * Создание заявок для поиска команды
  */
 public class Team extends EntityWithName {
 
@@ -36,7 +36,7 @@ public class Team extends EntityWithName {
 
     /**
      * Переменная статуса команды
-     * @deprecated Показывает статус заполнения команды
+     * Показывает статус заполнения команды
      */
     @Column(name="IS_COMPLETED")
     boolean isCompleted;
@@ -65,7 +65,7 @@ public class Team extends EntityWithName {
 
     /**
      * Переменная участников команды
-     * @deprecated список участников команды
+     * Список участников команды
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private List<TeamMember> teamMembers = Collections.emptyList();
@@ -74,6 +74,7 @@ public class Team extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return команда
      */
     @Override
     public Team setId(Long id) {
@@ -84,6 +85,7 @@ public class Team extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return команда
      */
     @Override
     public Team setName(String name) {
@@ -94,6 +96,7 @@ public class Team extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return команда
      */
     @Override
     public Team setDescription(String description) {
@@ -104,6 +107,7 @@ public class Team extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return команда
      */
     @Override
     public Team setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -114,6 +118,7 @@ public class Team extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return команда
      */
     @Override
     public Team setModifiedDateTime(LocalDateTime modifiedDateTime) {

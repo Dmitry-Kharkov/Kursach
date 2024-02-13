@@ -56,6 +56,7 @@ public class UserRole extends BaseEntity {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return пользовательская роль
      */
     @Override
     public UserRole setId(Long id) {
@@ -66,6 +67,7 @@ public class UserRole extends BaseEntity {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return пользовательская роль
      */
     @Override
     public UserRole setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -76,6 +78,7 @@ public class UserRole extends BaseEntity {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return пользовательская роль
      */
     @Override
     public UserRole setModifiedDateTime(LocalDateTime modifiedDateTime) {

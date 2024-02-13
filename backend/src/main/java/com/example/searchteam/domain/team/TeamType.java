@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * Сущность типа команды
- * @deprecated Тип команды
+ * Тип команды
  */
 public class TeamType extends EntityWithName {
 
@@ -47,14 +47,14 @@ public class TeamType extends EntityWithName {
 
     /**
      * Переменная заявителей
-     * @deprecated список заявителей с данным типом команд
+     * Список заявителей с данным типом команд
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamType")
     private List<Applicant> applicants = Collections.emptyList();
 
     /**
      * Переменная команд
-     * @deprecated список команд данного типа команд
+     * Список команд данного типа команд
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamType")
     private List<Team> teams = Collections.emptyList();
@@ -62,6 +62,7 @@ public class TeamType extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return тип команды
      */
     @Override
     public TeamType setId(Long id) {
@@ -72,6 +73,7 @@ public class TeamType extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return тип команды
      */
     @Override
     public TeamType setName(String name) {
@@ -82,6 +84,7 @@ public class TeamType extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return тип команды
      */
     @Override
     public TeamType setDescription(String description) {
@@ -92,6 +95,7 @@ public class TeamType extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return тип команды
      */
     @Override
     public TeamType setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -102,6 +106,7 @@ public class TeamType extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return тип команды
      */
     @Override
     public TeamType setModifiedDateTime(LocalDateTime modifiedDateTime) {

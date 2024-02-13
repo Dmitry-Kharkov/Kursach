@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 
 /**
  * Сущность сообщения
- * @deprecated Создание сообщения для общения внутри сайта
+ * Создание сообщения для общения внутри сайта
  */
 public class Message extends BaseEntity {
 
@@ -33,7 +33,7 @@ public class Message extends BaseEntity {
 
     /**
      * Переменная текста сообщения
-     * @deprecated текст
+     * Текст
      */
     @Column(name="TEXT")
     private String text;
@@ -48,7 +48,7 @@ public class Message extends BaseEntity {
 
     /**
      * Переменная id отправителя
-     * @deprecated id пользователя, написавшего сообщение
+     * id пользователя, написавшего сообщение
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FROM_USER_ID")
@@ -56,7 +56,7 @@ public class Message extends BaseEntity {
 
     /**
      * Переменная id получателя
-     * @deprecated id пользователя, получившего сообщение
+     * id пользователя, получившего сообщение
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TO_USER_ID")
@@ -65,6 +65,7 @@ public class Message extends BaseEntity {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return сообщение
      */
     @Override
     public Message setId(Long id) {
@@ -75,6 +76,7 @@ public class Message extends BaseEntity {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return сообщение
      */
     @Override
     public Message setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -85,6 +87,7 @@ public class Message extends BaseEntity {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return сообщение
      */
     @Override
     public Message setModifiedDateTime(LocalDateTime modifiedDateTime) {

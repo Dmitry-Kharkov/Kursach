@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * Сущность роли
- * @deprecated Командные и системные роли пользователя
+ * Командные и системные роли пользователя
  */
 public class Role extends EntityWithName {
 
@@ -58,7 +58,7 @@ public class Role extends EntityWithName {
 
     /**
      * Переменная пользовательских ролей
-     * @deprecated список ролей пользователя
+     * Cписок ролей пользователя
      */
    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "role")
     private List<UserRole> userRoles = Collections.emptyList();
@@ -66,6 +66,7 @@ public class Role extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return роль
      */
     @Override
     public Role setId(Long id) {
@@ -76,6 +77,7 @@ public class Role extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return роль
      */
     @Override
     public Role setName(String name) {
@@ -86,6 +88,7 @@ public class Role extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return роль
      */
     @Override
     public Role setDescription(String description) {
@@ -96,6 +99,7 @@ public class Role extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return роль
      */
     @Override
     public Role setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -106,6 +110,7 @@ public class Role extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return роль
      */
     @Override
     public Role setModifiedDateTime(LocalDateTime modifiedDateTime) {

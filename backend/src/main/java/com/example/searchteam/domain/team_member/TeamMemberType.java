@@ -38,14 +38,14 @@ public class TeamMemberType extends EntityWithName {
 
     /**
      * Переменная заявителей
-     * @deprecated список заявителей с данным типом участника команды
+     * Список заявителей с данным типом участника команды
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamMemberType")
     private List<Applicant> applicants = Collections.emptyList();
 
     /**
      * Переменная участников команды
-     * @deprecated список участников команды с данным типом
+     * Список участников команды с данным типом
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamMemberType")
     private List<TeamMember> teamMembers = Collections.emptyList();
@@ -53,6 +53,7 @@ public class TeamMemberType extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return тип участника команды
      */
     @Override
     public TeamMemberType setId(Long id) {
@@ -63,6 +64,7 @@ public class TeamMemberType extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return тип участника команды
      */
     @Override
     public TeamMemberType setName(String name) {
@@ -73,6 +75,7 @@ public class TeamMemberType extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return тип участника команды
      */
     @Override
     public TeamMemberType setDescription(String description) {
@@ -83,6 +86,7 @@ public class TeamMemberType extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return тип участника команды
      */
     @Override
     public TeamMemberType setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -93,6 +97,7 @@ public class TeamMemberType extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return тип участника команды
      */
     @Override
     public TeamMemberType setModifiedDateTime(LocalDateTime modifiedDateTime) {

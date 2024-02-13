@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * Сущность заявителя
- * @deprecated Создание заявок для поиска команды
+ * Создание заявок для поиска команды
  */
 
 public class Applicant extends EntityWithName {
@@ -40,7 +40,7 @@ public class Applicant extends EntityWithName {
 
     /**
      * Переменная статуса заявки
-     * @deprecated Показывает статус выполнения заявки
+     * Показывает статус выполнения заявки
      */
     @Column(name="IS_COMPLETED")
     boolean isCompleted;
@@ -56,7 +56,7 @@ public class Applicant extends EntityWithName {
 
     /**
      * Переменная id пользователя
-     * @deprecated id пользователя, подавшего заявку
+     * id пользователя, подавшего заявку
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
@@ -64,7 +64,7 @@ public class Applicant extends EntityWithName {
 
     /**
      * Переменная id типа команды
-     * @deprecated указывает тип команды, указанной в заявке
+     * Указывает тип команды, указанной в заявке
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_TEAM_ID")
@@ -72,7 +72,7 @@ public class Applicant extends EntityWithName {
 
     /**
      * Переменная id типа участника команды
-     * @deprecated указывает тип участника в заданной команде
+     * Указывает тип участника в заданной команде
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_MEMBER_TYPE_ID")
@@ -88,6 +88,7 @@ public class Applicant extends EntityWithName {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return заявитель
      */
     @Override
     public Applicant setId(Long id) {
@@ -98,6 +99,7 @@ public class Applicant extends EntityWithName {
     /**
      * Метод изменения имени
      * @param name - имя
+     * @return заявитель
      */
     @Override
     public Applicant setName(String name) {
@@ -108,6 +110,7 @@ public class Applicant extends EntityWithName {
     /**
      * Метод изменения описания
      * @param description - описание
+     * @return заявитель
      */
     @Override
     public Applicant setDescription(String description) {
@@ -118,6 +121,7 @@ public class Applicant extends EntityWithName {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return заявитель
      */
     @Override
     public Applicant setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -128,6 +132,7 @@ public class Applicant extends EntityWithName {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return заявитель
      */
     @Override
     public Applicant setModifiedDateTime(LocalDateTime modifiedDateTime) {

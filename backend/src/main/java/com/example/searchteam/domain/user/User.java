@@ -32,7 +32,7 @@ import java.util.List;
 
 /**
  * Сущность пользователя
- * @deprecated Описание пользователя
+ * Описание пользователя
  */
 public class User extends BaseEntity {
 
@@ -57,35 +57,35 @@ public class User extends BaseEntity {
 
     /**
      * Переменная ролей пользователя
-     * @deprecated список ролей пользователя
+     * Список ролей пользователя
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserRole> userRoles = Collections.emptyList();
 
     /**
      * Переменная команд пользователя
-     * @deprecated список команд пользователя
+     * Список команд пользователя
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Team> teams = Collections.emptyList();
 
     /**
      * Переменная отправленных сообщений пользователя
-     * @deprecated список сообщений, отправленных пользователем
+     * Список сообщений, отправленных пользователем
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fromUser")
     private List<Message> fromMessages = Collections.emptyList();
 
     /**
      * Переменная полученных сообщений пользователя
-     * @deprecated список сообщений, полученных пользователем
+     * Список сообщений, полученных пользователем
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "toUser")
     private List<Message> toMessages = Collections.emptyList();
 
     /**
      * Переменная заявок пользователя
-     * @deprecated список заявок, созданных пользователем
+     * Список заявок, созданных пользователем
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Applicant> applicants = Collections.emptyList();
@@ -101,6 +101,7 @@ public class User extends BaseEntity {
     /**
      * Метод изменения id
      * @param id - идентификатор
+     * @return пользователь
      */
     @Override
     public User setId(Long id) {
@@ -111,6 +112,7 @@ public class User extends BaseEntity {
     /**
      * Метод изменения времени создания
      * @param createdDateTime - время создания
+     * @return пользователь
      */
     @Override
     public User setCreatedDateTime(LocalDateTime createdDateTime) {
@@ -121,6 +123,7 @@ public class User extends BaseEntity {
     /**
      * Метод изменения времени изменения
      * @param modifiedDateTime - время изменения
+     * @return пользователь
      */
     @Override
     public User setModifiedDateTime(LocalDateTime modifiedDateTime) {
