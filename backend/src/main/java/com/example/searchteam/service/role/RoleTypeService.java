@@ -14,24 +14,26 @@ import java.util.List;
 
 /**
  * Сервис типа роли
- * @deprecated реализует методы обработки информации о типе роли
+ * *Реализует методы обработки информации о типе роли
  */
 public class RoleTypeService {
 
     /**
      * Domain Service типа роли
-     * @deprecated реализует методы обработки информации о типе роли
+     * Реализует методы обработки информации о типе роли
      */
     private final RoleTypeDomainService service;
 
     /**
      * получение всех типов ролей
+     * @return список типов ролей
      */
     public List<RoleTypeResponse> getAllRoleTypes(){ return service.getAllRoleTypes(); }
 
     /**
      * Изменение типа роли
      * @param request - RoleTypeAddRequest(id,name,description)
+     * @return тип роли
      */
     public RoleTypeResponse editRoleType(RoleTypeAddRequest request){
         Long roleTypeId = service.editRoleType(request);

@@ -13,19 +13,20 @@ import java.util.List;
 
 /**
  * Сервис роли пользователя
- * @deprecated реализует методы обработки информации о роли пользователя
+ * Реализует методы обработки информации о роли пользователя
  */
 public class UserRoleService {
 
     /**
      * Domain Service роли пользователя
-     * @deprecated реализует методы обработки информации о роли пользователя
+     * Реализует методы обработки информации о роли пользователя
      */
     private final UserRoleDomainService service;
 
     /**
      * получение роли пользователя по id
      * @param request - id
+     * @return список ролей пользователя
      */
     public List<UserRole> getUserRolesByUserId(UserRoleRequest request) {
         return service.getUserRoleByUserId(request.getUserId());

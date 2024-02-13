@@ -15,19 +15,20 @@ import java.util.List;
 @RequiredArgsConstructor
 /**
  * Сервис заявителя
- * @deprecated реализует методы обработки информации о заявителе
+ * Реализует методы обработки информации о заявителе
  */
 public class ApplicantService {
 
     /**
      * Domain Service заявителя
-     * @deprecated реализует методы обработки информации о заявителе
+     * Реализует методы обработки информации о заявителе
      */
     private final ApplicantDomainService service;
 
     /**
      * получение заявителя по id
      * @param request - id
+     * @return заявитель по id
      */
     public ApplicantResponse getApplicantById(ApplicantRequest request) {
         return service.getApplicantById(request.getApplicantId());
@@ -35,6 +36,7 @@ public class ApplicantService {
 
     /**
      * получение всех заявок
+     * @return список заявителей
      */
     public List<ApplicantResponse> getAllApplicants() {
         return service.getAllApplicants();
@@ -43,6 +45,7 @@ public class ApplicantService {
     /**
      * Создание новой заявки
      * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     * @return заявитель
      */
     public ApplicantResponse addApplicant(ApplicantAddRequest request) {
         Long applicantId = service.addApplicant(request);
@@ -52,6 +55,7 @@ public class ApplicantService {
     /**
      * Изменение заявки
      * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
+     * @return заявитель
      */
     public ApplicantResponse editApplicant(ApplicantAddRequest request) {
         Long applicantId = service.editApplicant(request);
@@ -69,6 +73,7 @@ public class ApplicantService {
     /**
      * Поиск заявки
      * @param request - ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
+     * @return укороченный список заявителей
      */
     public List<ShortApplicantResponse> getSearchApplicants(ApplicantFiltrationRequest request) {
         return service.getAllApplicants().stream()
@@ -82,6 +87,7 @@ public class ApplicantService {
     /**
      * Фильтр для поиска заявки
      * @param source - ApplicantResponse(applicantId,name,description,user,isComleted,typeTeam,teamMemberType), ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
+     * @return булевое значение
      */
     private boolean applyFilter(ApplicantResponse source, ApplicantFiltrationRequest filter) {
 

@@ -17,19 +17,20 @@ import java.util.List;
 
 /**
  * Сервис команд
- * @deprecated реализует методы обработки информации о команде
+ * Реализует методы обработки информации о команде
  */
 public class TeamService {
 
     /**
      * Domain Service команд
-     * @deprecated реализует методы обработки информации о команде
+     * Реализует методы обработки информации о команде
      */
     private final TeamDomainService service;
 
     /**
      * получение команды по id
      * @param request - id
+     * @return команда
      */
     public TeamResponse getTeamById(TeamRequest request) {
         return service.getTeamById(request.getTeamId());
@@ -37,6 +38,7 @@ public class TeamService {
 
     /**
      * получение всех команд
+     * @return список команд
      */
     public List<TeamResponse> getAllTeams() {
         return service.getAllTeams();
@@ -45,6 +47,7 @@ public class TeamService {
     /**
      * Создание новой команды
      * @param request - TeamAddRequest(id,name,description,userId,typeTeamId,members)
+     * @return команда
      */
     public TeamResponse addTeam(TeamAddRequest request) {
         Long teamId = service.addTeam(request);
@@ -54,6 +57,7 @@ public class TeamService {
     /**
      * Изменение команды
      * @param request - TeamAddRequest(id,name,description,userId,typeTeamId,members)
+     * @return команда
      */
     public TeamResponse editTeam(TeamAddRequest request) {
         Long teamId = service.editTeam(request);
@@ -71,6 +75,7 @@ public class TeamService {
     /**
      * Поиск команд
      * @param request - TeamFiltrationRequest(teamTypes,isCompleted,name,start,finish,users,members)
+     * @return укороченный список команд
      */
     public List<ShortTeamResponse> getSearchTeams(TeamFiltrationRequest request) {
         return service.getAllTeams().stream()
@@ -83,6 +88,7 @@ public class TeamService {
     /**
      * Фильтр для поиска команд
      * @param source - TeamResponse(teamId,name,description,user,isComleted,typeTeam,teamMemberType,members), TeamFiltrationRequest(teamTypes,isCompleted,name,start,finish,users,members)
+     * @return булевое значение
      */
     private boolean applyFilter(TeamResponse source, TeamFiltrationRequest filter) {
 
