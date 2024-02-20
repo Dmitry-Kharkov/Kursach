@@ -30,7 +30,8 @@ public class UserController {
     public static final String USER_EDIT_ROLES="/api/v1/user/edit-roles";
     public static final String USER_SEARCH="/api/v1/user/search";
     public static final String USER_LOGIN="/api/v1/user/login";
-    public static final String SEND_MAIL="/api/v1/user/send";
+    public static final String SEND_UUID="/api/v1/user/send";
+    public static final String USER_RESET_PASSWORD="/api/v1/user/reset-password";
 
     private final UserService service;
 
@@ -43,6 +44,7 @@ public class UserController {
     public UserResponse getUserById(@RequestBody UserRequest request){
         return service.getUserById(request);
     }
+
 
     @PostMapping(
             value = USER_ADD,
@@ -93,22 +95,28 @@ public class UserController {
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> searchUsers(@RequestBody FiltrationUser request){ return service.searchUsers(request); }
 
+    @PostMapping(
+            value = USER_RESET_PASSWORD,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public void resetPassword(@RequestBody ResetPasswordRequest request){ service.resetPassword(request); }
 
 
     @PostMapping(
-            value = SEND_MAIL,
+            value = SEND_UUID,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public void test() throws MessagingException {
-
+    public void sendUUID(@RequestBody  ResetPasswordRequest request) throws MessagingException {
         var sender = mailFactory.getJavaMailSender();
         var msg = sender.createMimeMessage();
         var mimeMessage = new MimeMessageHelper(msg, true, "UTF-8");
-
-        mimeMessage.addTo("ledford1403@gmail.com");
-        mimeMessage.setText("123");
-        mimeMessage.setFrom("vyushin1403@yandex.ru");
-        mimeMessage.setSubject("Тест");
+        var code=java.util.UUID.randomUUID();
+        request.setCode(code);
+        service.setUUID(request);
+        mimeMessage.addTo(request.getEmail());
+        mimeMessage.setText("Ваш UUID для сброса пароля:"+code+"\nСсылка для смены пароля: http://localhost:8070/api/v1/user/reset-password");
+        mimeMessage.setFrom("dmitry.harckoff@yandex.ru");
+        mimeMessage.setSubject("Смена пароля");
         sender.send(msg);
 
     }

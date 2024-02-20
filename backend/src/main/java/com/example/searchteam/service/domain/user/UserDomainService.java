@@ -3,10 +3,7 @@ package com.example.searchteam.service.domain.user;
 import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
-import com.example.searchteam.dto.request.user.LoginUserRequest;
-import com.example.searchteam.dto.request.user.UserAddRequest;
-import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
-import com.example.searchteam.dto.request.user.UserEditRolesRequest;
+import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.mapper.user.UserLoginMapper;
 import com.example.searchteam.mapper.user.UserMapper;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -102,10 +100,24 @@ public class UserDomainService {
     }
 
     @Transactional
+    public void setUUIDByLogin(ResetPasswordRequest request){
+        var user=repository.getUserByLogin(request.getLogin());
+        System.out.println(user.getFullName());
+        request.setEmail(user.getEmail());
+        user.setCode(request.getCode());
+    }
+
+    @Transactional
     public Boolean isExists(LoginUserRequest request){
         var loginUser=userLoginMapper.from(request);
         var users=repository.findAll();
         return !users.stream().filter(e->e.getLogin().equals(loginUser.getLogin()) && e.getPassword().equals(loginUser.getPassword())).toList().isEmpty();
 
+    }
+
+    @Transactional
+    public void resetPassword(ResetPasswordRequest request){
+        var user=repository.getUserByCode(request.getCode());
+        user.setPassword(request.getPassword());
     }
 }

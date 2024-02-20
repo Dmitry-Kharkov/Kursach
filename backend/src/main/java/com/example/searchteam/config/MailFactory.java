@@ -22,8 +22,8 @@ public class MailFactory {
         mailSender.setHost("smtp.yandex.ru");
         mailSender.setPort(465);
         mailSender.setProtocol("smtp");
-        mailSender.setUsername("vyushin1403");
-        mailSender.setPassword("cyvyiwyzozjfrtcg");
+        mailSender.setUsername("dmitry.harckoff");
+        mailSender.setPassword("dplxeoxaxhzqcgsk");
 
         Properties properties = mailSender.getJavaMailProperties();
 

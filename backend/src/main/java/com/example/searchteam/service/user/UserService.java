@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,9 +22,16 @@ public class UserService {
     public UserResponse getUserById(UserRequest request ){
         return service.getUserById(request.getUserId());
     }
+    public UserResponse getUUIDById(UserRequest request ){
+        return service.getUserById(request.getUserId());
+    }
 
     public List<UserResponse> getAllUsers(){
         return service.getAllUsers();
+    }
+
+    public void setUUID(ResetPasswordRequest request){
+        service.setUUIDByLogin(request);
     }
 
     public UserResponse addUser(UserAddRequest request) {
@@ -49,6 +57,13 @@ public class UserService {
         return service.getUserById(userId);
     }
 
+    public void resetPassword(ResetPasswordRequest request){
+        if(!verificationPassword(request.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+        }
+        service.resetPassword(request);
+    }
+
     public UserResponse editRolesUser(UserEditRolesRequest request) {
         Long userId = service.editRolesUser(request);
         return service.getUserById(userId);
@@ -72,4 +87,6 @@ public class UserService {
         Matcher m =  Pattern.compile(regex).matcher(password);
         return (m.matches());
     }
+
+
 }
