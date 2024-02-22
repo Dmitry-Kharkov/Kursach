@@ -20,6 +20,7 @@ public class UserResponseMapper implements Mapper<UserResponse, User> {
                 .setUserId(source.getId())
                 .setFullName(source.getFullName())
                 .setLogin(source.getLogin())
+                .setEmail(source.getEmail())
                 .setRoles(roleResponseMapper.from(source.getUserRoles().stream().map(UserRole::getRole).toList()))
                 .setCreated(source.getCreatedDateTime())
                 .setModified(source.getModifiedDateTime());

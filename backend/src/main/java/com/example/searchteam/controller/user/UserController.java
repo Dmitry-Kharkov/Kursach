@@ -106,18 +106,9 @@ public class UserController {
             value = SEND_UUID,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public void sendUUID(@RequestBody  ResetPasswordRequest request) throws MessagingException {
-        var sender = mailFactory.getJavaMailSender();
-        var msg = sender.createMimeMessage();
-        var mimeMessage = new MimeMessageHelper(msg, true, "UTF-8");
-        var code=java.util.UUID.randomUUID();
-        request.setCode(code);
+    public void sendUUID(@RequestBody  ResetPasswordRequest request){
+
         service.setUUID(request);
-        mimeMessage.addTo(request.getEmail());
-        mimeMessage.setText("Ваш UUID для сброса пароля:"+code+"\nСсылка для смены пароля: http://localhost:8070/api/v1/user/reset-password");
-        mimeMessage.setFrom("dmitry.harckoff@yandex.ru");
-        mimeMessage.setSubject("Смена пароля");
-        sender.send(msg);
 
     }
 

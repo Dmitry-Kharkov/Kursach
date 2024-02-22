@@ -1,6 +1,7 @@
 package com.example.searchteam.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
@@ -11,19 +12,28 @@ import java.util.Properties;
 @RequiredArgsConstructor
 public class MailFactory {
 
-    //cyvyiwyzozjfrtcg
+    @Value("${spring.mail.host}")
+    private String host;
 
+    @Value("${spring.mail.port}")
+    private int port;
+
+    @Value("${spring.mail.username}")
+    private String user;
+
+    @Value("${spring.mail.password}")
+    private String pwd;
 
     public JavaMailSender getJavaMailSender() {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
 
-        mailSender.setHost("smtp.yandex.ru");
-        mailSender.setPort(465);
+        mailSender.setHost(host);
+        mailSender.setPort(port);
         mailSender.setProtocol("smtp");
-        mailSender.setUsername("dmitry.harckoff");
-        mailSender.setPassword("dplxeoxaxhzqcgsk");
+        mailSender.setUsername(user);
+        mailSender.setPassword(pwd);
 
         Properties properties = mailSender.getJavaMailProperties();
 

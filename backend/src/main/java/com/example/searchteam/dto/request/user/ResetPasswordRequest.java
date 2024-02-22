@@ -12,9 +12,9 @@ import java.util.UUID;
 @ToString
 @Accessors(chain = true)
 public class ResetPasswordRequest {
-    String login;
-    UUID code;
-    String password;
-    String email;
+    private String login;
+    private UUID code;
+    private String password;
+    private String email;
 
 }
