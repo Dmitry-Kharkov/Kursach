@@ -74,6 +74,7 @@ export default {
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
+                  @click="console.log(this.user.fullName,this.user.email)"
                   rounded
                   variant="text"
               >

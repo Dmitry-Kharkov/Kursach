@@ -13,6 +13,7 @@ import TeamMemberType from "@/pages/admin/TeamMemberType.vue";
 import TypeTeam from "@/pages/admin/TypeTeam.vue";
 import Users from "@/pages/admin/Users.vue";
 import Dialog from "@/pages/Dialog.vue";
+import Registration from "@/pages/Registration.vue";
 
 const routes = [
 
@@ -35,6 +36,11 @@ const routes = [
     {
         path: '/login',
         component : Login
+    },
+
+    {
+        path: '/registration',
+        component : Registration
     },
 
     {
