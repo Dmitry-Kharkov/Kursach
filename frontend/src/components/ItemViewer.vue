@@ -1,6 +1,13 @@
 <script>
 
+import {blue} from "vuetify/util/colors";
+
 export default {
+  computed: {
+    blue() {
+      return blue
+    }
+  },
 
   props : {
 
@@ -22,19 +29,19 @@ export default {
 
 <template>
 
-  <v-card :variant="'outlined'" >
-    <v-card-title>{{ item.name }}</v-card-title>
+  <v-card :variant="'outlined'" height="40%" >
     <v-card-text>
-      <div><strong>ID:</strong> {{ id }}</div>
+      <div>{{ item.name }}</div>
       <div>{{ item.description }}</div>
-      <div><strong>Создан:</strong> {{ item.created }}</div>
-      <div><strong>Изменен:</strong> {{ item.modified }}</div>
-
+      <v-col class="text-right">
+        <v-btn @click="$emit('item_edit', item )" :variant="'outlined'">Редактировать</v-btn>
+        <v-btn @click="$emit('item_delete', id)" :variant="'outlined'">Удалить</v-btn>
+      </v-col>
+<!--      <div><strong>ID:</strong> {{ id }}</div>-->
+<!--      <div>{{ item.description }}</div>-->
+<!--      <div><strong>Создан:</strong> {{ item.created }}</div>-->
+<!--      <div><strong>Изменен:</strong> {{ item.modified }}</div>-->
     </v-card-text>
-    <v-card-actions>
-      <v-btn @click="$emit('item_edit', item )" :variant="'outlined'">Редактировать</v-btn>
-      <v-btn @click="$emit('item_delete', id)" :variant="'outlined'">Удалить</v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 

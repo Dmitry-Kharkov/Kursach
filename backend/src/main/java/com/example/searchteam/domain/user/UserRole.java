@@ -31,31 +31,55 @@ public class UserRole extends BaseEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Конструктор роли пользователя
+     * @param userRoleId - id роли пользователя
+     */
     public UserRole(Long userRoleId) {
         this.id = userRoleId;
     }
 
-
+    /**
+     * Переменная id роли пользователя
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLE_ID")
     private Role role;
 
+    /**
+     * Переменная id пользователя
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    /**
+     * Метод изменения id
+     * @param id - идентификатор
+     * @return пользовательская роль
+     */
     @Override
     public UserRole setId(Long id) {
         this.id = id;
         return this;
     }
 
+    /**
+     * Метод изменения времени создания
+     * @param createdDateTime - время создания
+     * @return пользовательская роль
+     */
     @Override
     public UserRole setCreatedDateTime(LocalDateTime createdDateTime) {
         this.createdDateTime = createdDateTime;
         return this;
     }
 
+    /**
+     * Метод изменения времени изменения
+     * @param modifiedDateTime - время изменения
+     * @return пользовательская роль
+     */
     @Override
     public UserRole setModifiedDateTime(LocalDateTime modifiedDateTime) {
         this.modifiedDateTime = modifiedDateTime;
