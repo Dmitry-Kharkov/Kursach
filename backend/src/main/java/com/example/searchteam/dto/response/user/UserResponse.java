@@ -18,6 +18,7 @@ public class UserResponse {
     private Long userId;
     private String fullName;
     private String login;
+    private String email;
     private List<RoleResponse> roles;
     private LocalDateTime created;
     private LocalDateTime modified;
