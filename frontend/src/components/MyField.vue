@@ -13,6 +13,15 @@ export default {
       type : String,
       required: true
     }
+  },
+
+  computed : {
+
+    modelValue(){
+      return this.value
+    }
+
+
   }
 
 }
@@ -22,7 +31,7 @@ export default {
 <template>
   <v-text-field
       :label=label
-      :value=value
+      v-model=modelValue
       variant="outlined"
       class="field"
       @input="$emit('update:modelValue', $event.target.value)"

@@ -20,6 +20,7 @@ import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Entity(name = "USERS")
 @Getter
@@ -50,6 +51,13 @@ public class User extends BaseEntity {
     @Column(name = "LOGIN")
     private String login;
     /**
+     * Переменная почтового адреса пользователя
+     */
+    @Column(name = "EMAIL")
+    private String email;
+    @Column(name = "CODE")
+    private UUID code;
+   /**
      * Переменная пароля пользователя
      */
     @Column(name = "PASSWORD")

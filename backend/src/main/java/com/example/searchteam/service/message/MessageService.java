@@ -11,10 +11,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+
+/**
+ * Сервис сообшения
+ * Реализует методы обработки информации о сообщении
+ */
 public class MessageService {
 
+    /**
+     * Domain Service сообщения
+     * Реализует методы обработки информации о сообщении
+     */
     private final MessageDomainService service;
 
+    /**
+     * получение сообщения по id
+     * @param request - id
+     * @return сообщение по id
+     */
     public MessageResponse getMessageById(MessageRequest request ){
         return service.getMessageById(request.getMessageId());
     }

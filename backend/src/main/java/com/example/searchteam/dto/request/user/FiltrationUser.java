@@ -9,13 +9,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-
-public class UserAddRequest {
-
-    private Long id;
-    private String name;
-    private String email;
-    private String login;
-    private String password;
-
+public class FiltrationUser {
+    private String searchValue;
+    private Long from;
+    private Long count;
 }

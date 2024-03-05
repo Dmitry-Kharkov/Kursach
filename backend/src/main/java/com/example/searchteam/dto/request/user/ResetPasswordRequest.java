@@ -5,17 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-
-public class UserAddRequest {
-
-    private Long id;
-    private String name;
-    private String email;
+public class ResetPasswordRequest {
     private String login;
+    private UUID code;
     private String password;
+    private String email;
 
 }

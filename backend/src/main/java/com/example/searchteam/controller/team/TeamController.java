@@ -17,6 +17,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+/**
+ * Контроллер для команды
+ */
 public class TeamController {
 
     public static final String TEAM_GET_BY_ID = "/api/v1/team/get-by-id";
@@ -29,6 +32,11 @@ public class TeamController {
 
     private final TeamService service;
 
+    /**
+     * Запрос получения команды по id
+     * @param request - teamId
+     * @return команда
+     */
     @PostMapping(
             value = TEAM_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -37,6 +45,10 @@ public class TeamController {
         return service.getTeamById(request);
     }
 
+    /**
+     * Запрос получения всех команд
+     * @return список команд
+     */
     @PostMapping(
             value = TEAM_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
@@ -45,6 +57,11 @@ public class TeamController {
         return service.getAllTeams();
     }
 
+    /**
+     * Запрос добавления команды
+     * @param request - TeamAddRequest(id,name,description,userId,typeTeamId,members)
+     * @return команда
+     */
     @PostMapping(
             value = TEAM_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -53,6 +70,11 @@ public class TeamController {
         return service.addTeam(request);
     }
 
+    /**
+     * Запрос изменения команды
+     * @param request - TeamAddRequest(id,name,description,userId,typeTeamId,members)
+     * @return команда
+     */
     @PostMapping(
             value = TEAM_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -61,6 +83,10 @@ public class TeamController {
         return service.editTeam(request);
     }
 
+    /**
+     * Запрос удаления команды
+     * @param request - TeamRequest(teamId)
+     */
     @PostMapping(
             value = TEAM_DELETE,
             consumes = APPLICATION_JSON_VALUE,
@@ -69,6 +95,11 @@ public class TeamController {
         service.deleteTeam(request);
     }
 
+    /**
+     * Запрос поиска команды
+     * @param request - TeamFiltrationRequest(teamTypes,isCompleted,name,start,finish,users,members)
+     * @return укороченный список команд
+     */
     @PostMapping(
             value = TEAM_SEARCH,
             consumes = APPLICATION_JSON_VALUE,

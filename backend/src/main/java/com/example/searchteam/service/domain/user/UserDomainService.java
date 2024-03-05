@@ -3,10 +3,13 @@ package com.example.searchteam.service.domain.user;
 import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
+import com.example.searchteam.dto.request.user.ResetPasswordRequest;
 import com.example.searchteam.dto.request.user.UserAddRequest;
 import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
 import com.example.searchteam.dto.request.user.UserEditRolesRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
+import com.example.searchteam.mapper.user.UserLoginMapper;
 import com.example.searchteam.mapper.user.UserMapper;
 import com.example.searchteam.mapper.user.UserMerger;
 import com.example.searchteam.mapper.user.UserResponseMapper;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +32,7 @@ public class UserDomainService {
     private final UserResponseMapper responseUserMapper;
     private final UserMapper userMapper;
     private final UserMerger userMerger;
+    private final UserLoginMapper userLoginMapper;
 
     @Transactional
     public UserResponse getUserById(Long id) {
@@ -83,7 +88,7 @@ public class UserDomainService {
     @Transactional
     public Long editRolesUser(UserEditRolesRequest request) {
         var userRoles = request.getRoles().stream()
-                .map( r -> new UserRole().setUser(new User(request.getId())).setRole(new Role(r)))
+                .map(r -> new UserRole().setUser(new User(request.getId())).setRole(new Role(r)))
                 .toList();
         userRoleRepository.saveAll(userRoles);
         return repository.getReferenceById(request.getId()).getId();
@@ -91,11 +96,33 @@ public class UserDomainService {
 
 
     @Transactional
-    public void setUserRole(Long userId, List<Long> roles){
+    public void setUserRole(Long userId, List<Long> roles) {
         var userRoles = roles.stream()
-                .map( r -> new UserRole().setUser(new User(userId)).setRole(new Role(r)))
+                .map(r -> new UserRole().setUser(new User(userId)).setRole(new Role(r)))
                 .toList();
         userRoleRepository.saveAll(userRoles);
     }
 
+    @Transactional
+    public void setUUIDByLogin(String login, UUID code) {
+        var user = repository.getUserByLogin(login);
+        user.setCode(code);
+        repository.save(user);
+    }
+
+    @Transactional
+    public Boolean isExists(LoginUserRequest request) {
+        var loginUser = userLoginMapper.from(request);
+        var users = repository.findAll();
+        return !users.stream().filter(e -> e.getLogin().equals(loginUser.getLogin()) && e.getPassword().equals(loginUser.getPassword())).toList().isEmpty();
+
+    }
+
+    @Transactional
+    public void resetPassword(ResetPasswordRequest request) {
+        var user = repository.getUserByCode(request.getCode());
+        user.setPassword(request.getPassword());
+        user.setCode(null);
+        repository.save(user);
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.searchteam.dto.request.user;
+package com.example.searchteam.dto.request.role;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,15 +7,10 @@ import lombok.experimental.Accessors;
 
 @Data
 @NoArgsConstructor
-@ToString
 @Accessors(chain = true)
-
-public class UserAddRequest {
-
+@ToString
+public class RoleTypeAddRequest {
     private Long id;
     private String name;
-    private String email;
-    private String login;
-    private String password;
-
+    private String description;
 }
