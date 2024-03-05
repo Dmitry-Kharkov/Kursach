@@ -7,7 +7,11 @@
     <changeSet id="ADD-COLUMN-USER-001" author="harkov_dv">
 
         <addColumn schemaName="REPOSITORY" tableName="USERS">
-            <column name="CODE" type="UUID" afterColumn="EMAIL"/>
+            <column name="CODE" type="UUID" beforeColumn="CREATED"/>
+        </addColumn>
+
+        <addColumn schemaName="REPOSITORY" tableName="USERS">
+            <column name="EMAIL" type="VARCHAR(50)" beforeColumn="LOGIN"/>
         </addColumn>
 
 

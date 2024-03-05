@@ -1,10 +1,16 @@
 package com.example.searchteam.service.user;
 
-import com.example.searchteam.dto.request.user.*;
+import com.example.searchteam.dto.request.user.FiltrationUser;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
+import com.example.searchteam.dto.request.user.ResetPasswordRequest;
+import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
+import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.request.util.EmailSendRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.domain.user.UserDomainService;
-import com.example.searchteam.service.domain.util.MailSender;
+import com.example.searchteam.service.domain.util.MailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,7 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +28,10 @@ import static com.example.searchteam.controller.user.UserController.USER_RESET_P
 public class UserService {
 
     private final UserDomainService service;
-    private final MailSender mailSender;
+    private final MailSenderService mailSender;
+
+
+    private final static String BAD_PASSWORD = "Некорректный пароль";
 
     public UserResponse getUserById(UserRequest request ){
         return service.getUserById(request.getUserId());
@@ -53,7 +61,7 @@ public class UserService {
 
     public UserResponse addUser(UserAddRequest request) {
         if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
         }
         Long userId = service.addUser(request);
         service.setUserRole(userId, List.of(2L));
@@ -68,7 +76,7 @@ public class UserService {
 
     public UserResponse editPasswordUser(UserEditPasswordRequest request) {
         if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
         }
         Long userId = service.editPasswordUser(request);
         return service.getUserById(userId);
@@ -76,7 +84,7 @@ public class UserService {
 
     public void resetPassword(ResetPasswordRequest request){
         if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
         }
         service.resetPassword(request);
     }
