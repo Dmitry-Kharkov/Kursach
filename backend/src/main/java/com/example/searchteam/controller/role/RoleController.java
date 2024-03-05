@@ -15,6 +15,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+
+/**
+ * Контроллер для роли
+ */
 public class RoleController {
 
     public static final String ROLE_GET_BY_ID = "/api/v1/role/get-by-id";
@@ -25,6 +29,11 @@ public class RoleController {
 
     private final RoleService service;
 
+    /**
+     * Запрос получения роли по id
+     * @param request - roleId
+     * @return роль
+     */
     @PostMapping(
             value = ROLE_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -33,6 +42,10 @@ public class RoleController {
         return service.getRoleById(request);
     }
 
+    /**
+     * Запрос получения всех ролей
+     * @return список ролей
+     */
     @PostMapping(
             value = ROLE_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
@@ -41,7 +54,11 @@ public class RoleController {
         return service.getAllRoles();
     }
 
-
+    /**
+     * Запрос добавления роли
+     * @param request - RoleAddRequest(id,name,roleType,description)
+     * @return роль
+     */
     @PostMapping(
             value = ROLE_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -49,6 +66,12 @@ public class RoleController {
     public RoleResponse addRole(@RequestBody RoleAddRequest request) {
         return service.addRole(request);
     }
+
+    /**
+     * Запрос изменения роли
+     * @param request - RoleAddRequest(id,name,roleType,description)
+     * @return роль
+     */
     @PostMapping(
             value = ROLE_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -57,6 +80,10 @@ public class RoleController {
         return service.editRole(request);
     }
 
+    /**
+     * Запрос удаления роли
+     * @param request - RoleRequest(roleId)
+     */
     @PostMapping(
             value = ROLE_DELETE,
             consumes = APPLICATION_JSON_VALUE,

@@ -20,6 +20,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+/**
+ * Контроллер для пользователя
+ */
 public class UserController {
 
     public static final String USER_GET_BY_ID = "/api/v1/user/get-by-id";
@@ -34,9 +37,14 @@ public class UserController {
     public static final String USER_RESET_PASSWORD="/api/v1/user/reset-password";
 
     private final UserService service;
-
     private final MailFactory mailFactory;
 
+
+    /**
+     * Запрос получения пользователя по id
+     * @param request - userId
+     * @return пользователь
+     */
     @PostMapping(
             value = USER_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -45,7 +53,11 @@ public class UserController {
         return service.getUserById(request);
     }
 
-
+    /**
+     * Запрос добавления пользователя
+     * @param request - UserAddRequest(id,name,login,password)
+     * @return пользователь
+     */
     @PostMapping(
             value = USER_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -53,6 +65,12 @@ public class UserController {
     public UserResponse addUser(@RequestBody UserAddRequest request) {
         return service.addUser(request);
     }
+
+    /**
+     * Запрос изменения пользователя
+     * @param request - UserAddRequest(id,name,login,password)
+     * @return пользователь
+     */
     @PostMapping(
             value = USER_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -61,6 +79,11 @@ public class UserController {
         return service.editUser(request);
     }
 
+    /**
+     * Запрос изменения пароля пользователя
+     * @param request - UserEditPasswordRequest(id,password)
+     * @return пользователь
+     */
     @PostMapping(
             value = USER_EDIT_PASSWORD,
             consumes = APPLICATION_JSON_VALUE,
@@ -69,6 +92,11 @@ public class UserController {
         return service.editPasswordUser(request);
     }
 
+    /**
+     * Запрос изменения роли пользователя
+     * @param request - UserEditRolesRequest(id,roles)
+     * @return пользователь
+     */
     @PostMapping(
             value = USER_EDIT_ROLES,
             consumes = APPLICATION_JSON_VALUE,
@@ -77,18 +105,32 @@ public class UserController {
         return service.editRolesUser(request);
     }
 
+    /**
+     * Запрос получения всех пользователей
+     * @return список пользователей
+     */
     @PostMapping(
             value = USER_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> getAllUsers(){ return service.getAllUsers(); }
 
+    /**
+     * Запрос проверки существования пользователя
+     * @param request - LoginUserRequest(login,password)
+     * @return булевое значение
+     */
     @PostMapping(
             value = USER_LOGIN,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public Boolean isExists(@RequestBody LoginUserRequest request){ return service.isExists(request); }
-  
+
+    /**
+     * Запрос поиска пользователя
+     * @param request - FiltrationUser(searchValue,from,count)
+     * @return список пользователей
+     */
     @PostMapping(
             value = USER_SEARCH,
             consumes = APPLICATION_JSON_VALUE,
