@@ -1,14 +1,39 @@
 <script>
 
+import MyField from "@/components/MyField.vue";
+import userController from "@/controllers/UserController";
+
 export default {
+  components: {MyField},
   data(){
     return{
+      isEditRole:false,
       user: {
         initials: 'DH',
         fullName: 'Dima Harkov',
+        login:'test',
         email: 'harkov.dima2005@gmail.com',
+        password: 'test'
       },
+      oldPassword:'',
+      testPassword:''
     }
+  },
+  methods:{
+    editPassword(){
+      if(this.oldPassword===this.testPassword) {
+        userController.editPassword(this.user.password)
+            .then(response => this.user = response.data)
+            .catch(() => alert("Произошла ошибка при загрузке ролей"))
+      }
+      else{
+        alert("Пароли не совпадают!")
+      }
+    },
+    showEditPasswordDialog(){
+      this.oldPassword=this.user.password;
+      this.isEditRole = true;
+    },
   }
 }
 
@@ -25,6 +50,7 @@ export default {
           <v-btn
               icon
               v-bind="props"
+              @click="showEditPasswordDialog()"
           >
             <v-avatar
                 color="brown"
@@ -67,6 +93,27 @@ export default {
       </v-menu>
     </v-row>
   </v-container>
+
+
+  <v-dialog
+      width="500"
+      v-model="isEditRole"
+  >
+    <v-card title="Изменение пароля">
+
+      <my-field label="Старый пароль" :value="''" v-on:update:modelValue="this.user.testPassword = $event"/>
+      <my-field label="Новый пароль" :value="''" v-on:update:modelValue="this.user.password = $event" />
+
+      <v-card-actions>
+        <v-btn
+            text="Сохранить"
+            @click="editPassword()"
+        ></v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+
 </template>
 
 <style>
