@@ -1,9 +1,14 @@
 package com.example.searchteam.controller.user;
 
+import com.example.searchteam.config.MailFactory;
 import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.user.UserService;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +33,12 @@ public class UserController {
     public static final String USER_EDIT_ROLES="/api/v1/user/edit-roles";
     public static final String USER_SEARCH="/api/v1/user/search";
     public static final String USER_LOGIN="/api/v1/user/login";
+    public static final String SEND_UUID="/api/v1/user/send";
+    public static final String USER_RESET_PASSWORD="/api/v1/user/reset-password";
 
     private final UserService service;
+    private final MailFactory mailFactory;
+
 
     /**
      * Запрос получения пользователя по id
@@ -127,6 +136,23 @@ public class UserController {
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> searchUsers(@RequestBody FiltrationUser request){ return service.searchUsers(request); }
+
+    @PostMapping(
+            value = USER_RESET_PASSWORD,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public void resetPassword(@RequestBody ResetPasswordRequest request){ service.resetPassword(request); }
+
+
+    @PostMapping(
+            value = SEND_UUID,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public void sendUUID(@RequestBody  ResetPasswordRequest request){
+
+        service.setUUID(request);
+
+    }
 
 
 }
