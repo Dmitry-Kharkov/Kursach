@@ -41,8 +41,10 @@ public class User extends BaseEntity {
     private String login;
     @Column(name = "EMAIL")
     private String email;
-    @Column(name = "CODE")
-    private UUID code;
+    @Column(name = "PASSWORD_CODE")
+    private UUID passwordCode;
+    @Column(name = "EMAIL_CODE")
+    private UUID emailCode;
     @Column(name = "PASSWORD")
     private String password;
 

@@ -15,6 +15,7 @@ public class UserAddRequest {
     private Long id;
     private String name;
     private String login;
+    private String email;
     private String password;
 
 }

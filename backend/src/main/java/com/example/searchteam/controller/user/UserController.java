@@ -1,12 +1,6 @@
 package com.example.searchteam.controller.user;
 
-import com.example.searchteam.dto.request.user.FiltrationUser;
-import com.example.searchteam.dto.request.user.LoginUserRequest;
-import com.example.searchteam.dto.request.user.ResetPasswordRequest;
-import com.example.searchteam.dto.request.user.UserAddRequest;
-import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
-import com.example.searchteam.dto.request.user.UserEditRolesRequest;
-import com.example.searchteam.dto.request.user.UserRequest;
+import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +24,10 @@ public class UserController {
     public static final String USER_EDIT_ROLES = "/api/v1/user/edit-roles";
     public static final String USER_SEARCH = "/api/v1/user/search";
     public static final String USER_LOGIN = "/api/v1/user/login";
-    public static final String SEND_UUID = "/api/v1/user/send";
+    public static final String SEND_PASSWORD_CODE = "/api/v1/user/send-pwd";
+    public static final String SEND_EMAIL_CODE = "/api/v1/user/send-email";
     public static final String USER_RESET_PASSWORD = "/api/v1/user/reset-password";
+    public static final String USER_CONFIRMATION_EMAIL = "/api/v1/user/confirmation-email";
 
     private final UserService service;
 
@@ -108,14 +104,32 @@ public class UserController {
         service.resetPassword(request);
     }
 
-
     @PostMapping(
-            value = SEND_UUID,
+            value = USER_CONFIRMATION_EMAIL,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public void sendUUID(@RequestBody ResetPasswordRequest request) {
+    public void confirmEmail(@RequestBody ConfirmEmailRequest request) {
+        service.confirmEmail(request);
+    }
 
-        service.setUUID(request);
+
+    @PostMapping(
+            value = SEND_PASSWORD_CODE,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public void sendPasswordCode(@RequestBody String request) {
+
+        service.setPasswordCode(request);
+
+    }
+
+    @PostMapping(
+            value = SEND_EMAIL_CODE,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
+    public void sendEmailCode(@RequestBody String request) {
+
+        service.setEmailCode(request);
 
     }
 

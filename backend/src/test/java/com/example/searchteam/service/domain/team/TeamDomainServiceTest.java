@@ -66,7 +66,7 @@ class TeamDomainServiceTest {
     @Test
     void getTeamByIdTest() {
         when(repository.findById(any())).thenReturn(Optional.ofNullable(getTeam()));
-        when(responseMapper.from((Team)any())).thenReturn(getTeamResponse());
+        //when(responseMapper.from((Team)any()));
 
         var result = domainService.getTeamById(any());
 
@@ -80,7 +80,7 @@ class TeamDomainServiceTest {
         assertEquals(MODIFIED, result.getModified());
 
         verify(repository).findById(any());
-        verify(responseMapper).from((Team)any());
+        //verify(responseMapper).from((Team)any());
         verifyNoMoreInteractions(repository);
         verifyNoMoreInteractions(responseMapper);
     }

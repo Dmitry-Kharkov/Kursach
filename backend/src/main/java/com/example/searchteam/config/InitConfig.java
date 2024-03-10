@@ -16,11 +16,11 @@ public class InitConfig {
 
     private final UserDomainService userDomainService;
 
-    //@Value("${search_team.admin.login}")
-    private String login="admin";
+    @Value("${search_team.admin.login}")
+    private String login;
 
-    //@Value("${search_team.admin.pwd}")
-    private String password="admin";
+    @Value("${search_team.admin.pwd}")
+    private String password;
 
 
     @PostConstruct

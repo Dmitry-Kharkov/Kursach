@@ -28,7 +28,8 @@ import static org.mockito.Mockito.*;
 
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
-    private static final String LOGIN = "LOGIN";
+    private static final String LOGIN = "admin";
+    private static final String EMAIL = "email.test@gmail.com";
 
     private static final List<Long> ROLES=null;
 
@@ -189,6 +190,7 @@ import static org.mockito.Mockito.*;
                 .setId(ID)
                 .setName(NAME)
                 .setLogin(LOGIN)
+                .setEmail(EMAIL)
                 .setPassword(pwd);
     }
 
