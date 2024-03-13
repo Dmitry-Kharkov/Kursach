@@ -13,6 +13,8 @@ public interface UserRepository extends JpaRepository<User, Long > {
     void deleteUserByFullName(String fullName);
     void deleteUserByLogin(String login);
 
-    User getUserByCode(UUID code);
+    User getUserByPasswordCode(UUID code);
     User getUserByLogin(String login);
+
+    User getUserByEmailCode(UUID code);
 }

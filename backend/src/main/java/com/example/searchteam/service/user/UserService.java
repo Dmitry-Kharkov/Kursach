@@ -4,41 +4,32 @@ import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.request.util.EmailSendRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.domain.user.UserDomainService;
-import com.example.searchteam.service.domain.util.MailSender;
+import com.example.searchteam.service.domain.util.MailSenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.example.searchteam.controller.user.UserController.USER_CONFIRMATION_EMAIL;
 import static com.example.searchteam.controller.user.UserController.USER_RESET_PASSWORD;
 
 @Service
 @RequiredArgsConstructor
-
-/**
- * Сервис пользователя
- * Реализует методы обработки информации о пользователе
- */
 public class UserService {
 
-    /**
-     * Domain Service пользователя
-     * Реализует методы обработки информации о пользователе
-     */
     private final UserDomainService service;
-    private final MailSender mailSender;
+    private final MailSenderService mailSender;
 
-    /**
-     * получение пользователя по id
-     * @param request - id
-     * @return пользователь
-     */
+
+    private final static String BAD_PASSWORD = "Некорректный пароль";
+    private final static String BAD_EMAIL = "Некорректный почтовый адрес";
+
     public UserResponse getUserById(UserRequest request ){
         return service.getUserById(request.getUserId());
     }
@@ -46,21 +37,14 @@ public class UserService {
         return service.getUserById(request.getUserId());
     }
 
-    /**
-     * получение всех пользователей
-     * @return список пользователей
-     */
     public List<UserResponse> getAllUsers(){
         return service.getAllUsers();
     }
 
-
-    public void setUUID(ResetPasswordRequest request){
+    public void setPasswordCode(String login){
         var code = java.util.UUID.randomUUID();
-        service.setUUIDByLogin(request.getLogin(), code);
-
-        var user = service.getUserByLogin(request.getLogin());
-
+        service.setPasswordCodeByLogin(login, code);
+        var user = service.getUserByLogin(login);
         mailSender.sendEmail(
                 new EmailSendRequest()
                         .setTo(Collections.singletonList(user.getEmail()))
@@ -70,41 +54,41 @@ public class UserService {
 
     }
 
-      /**
-     * Создание нового пользователя
-     * @param request - UserAddRequest(id,name,login,password)
-     * @return пользователь
-     */
+    public void setEmailCode(String login){
+        var code = java.util.UUID.randomUUID();
+        service.setEmailCodeByLogin(login, code);
+        var user = service.getUserByLogin(login);
+        mailSender.sendEmail(
+                new EmailSendRequest()
+                        .setTo(Collections.singletonList(user.getEmail()))
+                        .setText("Ваш UUID для подтверждения почты:"+code+"\nСсылка для подтверждения почты: http://localhost:8070" + USER_CONFIRMATION_EMAIL)
+                        .setSubject("Подтверждение почты")
+        );
+
+    }
+
     public UserResponse addUser(UserAddRequest request) {
         if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
         }
         if(!verificationEmail(request.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный адрес электронной почты");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_EMAIL);
         }
         Long userId = service.addUser(request);
         service.setUserRole(userId, List.of(2L));
+        setEmailCode(request.getLogin());
         return service.getUserById(userId);
     }
 
-    /**
-     * Изменение пользователя
-     * @param request - UserAddRequest(id,name,login,password)
-     * @return пользователь
-     */
+
     public UserResponse editUser(UserAddRequest request) {
         Long userId = service.editUser(request);
         return service.getUserById(userId);
     }
 
-    /**
-     * Изменение пароля пользователя
-     * @param request - UserEditPasswordRequest(id,password)
-     * @return пользователь
-     */
     public UserResponse editPasswordUser(UserEditPasswordRequest request) {
         if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
         }
         Long userId = service.editPasswordUser(request);
         return service.getUserById(userId);
@@ -112,36 +96,24 @@ public class UserService {
 
     public void resetPassword(ResetPasswordRequest request){
         if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Некорректный пароль");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
         }
         service.resetPassword(request);
     }
 
-     /**
-     * Изменение роли пользователя
-     * @param request - UserEditRolesRequest(id,roles)
-     * @return пользователь
-     */
+    public void confirmEmail(ConfirmEmailRequest request){
+        service.confirmEmail(request);
+    }
+
     public UserResponse editRolesUser(UserEditRolesRequest request) {
         Long userId = service.editRolesUser(request);
         return service.getUserById(userId);
     }
 
-    /**
-     * Существование пользователя
-     * @deprecated Проверка, существует ли пользователь
-     * @param request - LoginUserRequest(login,password)
-     * @return булевые значения
-     */
     public Boolean isExists(LoginUserRequest request) {
         return service.isExists(request);
 }
 
-    /**
-     * Поиск пользователей
-     * @param request - FiltrationUser(searchValue,from,count)
-     * @return список пользователей
-     */
     public List<UserResponse> searchUsers(FiltrationUser request) {
         return service.getAllUsers()
                 .stream()
@@ -151,11 +123,6 @@ public class UserService {
                 .toList();
     }
 
-    /**
-     * Проверка корректности пароля
-     * @param password - пароль
-     * @return булевое значение
-     */
     private boolean verificationPassword(String password) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
         Matcher m =  Pattern.compile(regex).matcher(password);
@@ -163,8 +130,10 @@ public class UserService {
     }
 
     private boolean verificationEmail(String email) {
-        String regex = "/^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i";
+        String regex = "^[a-z0-9._%+-]+@[a-z0-9-]+.+.[a-z]{2,4}";
         Matcher m =  Pattern.compile(regex).matcher(email);
         return (m.matches());
     }
+
+
 }

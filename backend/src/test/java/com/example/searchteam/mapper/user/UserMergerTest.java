@@ -21,7 +21,7 @@ class UserMergerTest {
 
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
-    private static final String LOGIN = "LOGIN";
+    private static final String LOGIN = "login";
     private static final String PASSWORD = "PASSWORD";
     private static final List<UserRole> ROLES=null;
     private static final List<Applicant> APPLICANTS=null;

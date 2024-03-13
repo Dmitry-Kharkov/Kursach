@@ -138,7 +138,7 @@ class RoleServiceTest {
 
     private RoleAddRequest getRoleAddRequest() {
         return new RoleAddRequest()
-                .setRoleTypeId((long) ROLE_TYPE.ordinal())
+                .setRoleType(ROLE_TYPE)
                 .setName(NAME)
                 .setDescription(DESCRIPTION)
                 .setId(ID);

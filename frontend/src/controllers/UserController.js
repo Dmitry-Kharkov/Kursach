@@ -50,10 +50,6 @@ export default {
 
         return axios.post('http://localhost:8070/api/v1/user/login',
             {"login":login,"password":password},
-                          
-            "from":searchUsers.from,
-            "count":searchUsers.count},
-
             {
                 headers : {
                     'Content-Type' : "application/json;charset=utf-8"
@@ -78,9 +74,4 @@ export default {
 
 
     },
-
-    }
-
-
-
 }

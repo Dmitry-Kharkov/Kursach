@@ -42,7 +42,7 @@ class RoleMapperTest {
 
         verify(source).getName();
         verify(source).getDescription();
-        verify(source).getRoleTypeId();
+        verify(source).getRoleType();
         verifyNoMoreInteractions(source);
 
     }
@@ -68,7 +68,7 @@ class RoleMapperTest {
 
         verify(source, times(3)).getName();
         verify(source,times(3)).getDescription();
-        verify(source, times(3)).getRoleTypeId();
+        verify(source, times(3)).getRoleType();
         verifyNoMoreInteractions(source);
 
     }
@@ -77,7 +77,7 @@ class RoleMapperTest {
 
     private RoleAddRequest getRoleAddRequest() {
         return new RoleAddRequest()
-                .setRoleTypeId((long) ROLE_TYPE.ordinal())
+                .setRoleType(ROLE_TYPE)
                 .setName(NAME)
                 .setDescription(DESCRIPTION)
                 .setId(ID);

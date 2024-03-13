@@ -159,7 +159,7 @@ class RoleDomainServiceTest {
 
     private RoleAddRequest getRoleAddRequest() {
         return new RoleAddRequest()
-                .setRoleTypeId(ROLE_TYPE_ID)
+                .setRoleType(ROLE_TYPE_ENUM)
                 .setName(NAME)
                 .setDescription(DESCRIPTION)
                 .setId(ID);

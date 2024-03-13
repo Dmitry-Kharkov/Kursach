@@ -143,7 +143,7 @@ export default {
 
     routeRegistration() {
       this.$router.push('/registration')
-    }
+    },
     
     routeLogin() {
       this.$router.push('/login')

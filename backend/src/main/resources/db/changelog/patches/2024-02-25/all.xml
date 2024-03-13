@@ -4,8 +4,13 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="classpath:/db/changelog/patches/2023-10-31/all.xml"/>
-<!--    <include file="classpath:/db/changelog/patches/2024-02-16/all.xml"/>-->
-    <include file="classpath:/db/changelog/patches/2024-02-25/all.xml"/>
+    <changeSet id="ADD-COLUMN-USER-002" author="harkov_dv">
 
+        <renameColumn tableName="USERS" oldColumnName="CODE" newColumnName="PASSWORD_CODE"></renameColumn>
+        <addColumn schemaName="REPOSITORY" tableName="USERS">
+            <column name="EMAIL_CODE" type="UUID" afterColumn="PASSWORD_CODE"/>
+        </addColumn>
+
+
+    </changeSet>
 </databaseChangeLog>

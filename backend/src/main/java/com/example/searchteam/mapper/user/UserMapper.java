@@ -16,7 +16,7 @@ public class UserMapper implements Mapper<User, UserAddRequest> {
     public User from(UserAddRequest source) {
         return new User()
                 .setFullName(source.getName())
-                .setLogin(source.getLogin())
+                .setLogin(source.getLogin().toLowerCase())
                 .setEmail(source.getEmail())
                 .setPassword(source.getPassword());
     }

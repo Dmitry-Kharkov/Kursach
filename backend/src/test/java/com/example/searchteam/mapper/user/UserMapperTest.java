@@ -17,7 +17,8 @@ class UserMapperTest {
 
     private static final Long ID = 0L;
     private static final String NAME = "NAME";
-    private static final String LOGIN = "LOGIN";
+    private static final String LOGIN = "login";
+    private static final String EMAIL = "email@email.com";
     private static final String PASSWORD = "PASSWORD";
 
     @InjectMocks
@@ -34,12 +35,14 @@ class UserMapperTest {
         assertNull(result.getModifiedDateTime());
         assertEquals(NAME, result.getFullName());
         assertEquals(LOGIN, result.getLogin());
+        assertEquals(EMAIL, result.getEmail());
         assertEquals(PASSWORD, result.getPassword());
 
 
         verify(source).getName();
         verify(source).getLogin();
         verify(source).getPassword();
+        verify(source).getEmail();
         verifyNoMoreInteractions(source);
 
     }
@@ -61,12 +64,14 @@ class UserMapperTest {
         assertNull(result.getModifiedDateTime());
         assertEquals(NAME, result.getFullName());
         assertEquals(LOGIN, result.getLogin());
+        assertEquals(EMAIL, result.getEmail());
         assertEquals(PASSWORD, result.getPassword());
 
 
         verify(source,times(3)).getName();
         verify(source,times(3)).getLogin();
         verify(source,times(3)).getPassword();
+        verify(source,times(3)).getEmail();
         verifyNoMoreInteractions(source);
 
     }
@@ -75,6 +80,7 @@ class UserMapperTest {
         return new UserAddRequest()
                 .setName(NAME)
                 .setLogin(LOGIN)
+                .setEmail(EMAIL)
                 .setPassword(PASSWORD)
                 .setId(ID);
     }

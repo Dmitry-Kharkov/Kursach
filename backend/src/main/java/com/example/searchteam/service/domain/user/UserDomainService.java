@@ -3,11 +3,7 @@ package com.example.searchteam.service.domain.user;
 import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
-import com.example.searchteam.dto.request.user.LoginUserRequest;
-import com.example.searchteam.dto.request.user.ResetPasswordRequest;
-import com.example.searchteam.dto.request.user.UserAddRequest;
-import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
-import com.example.searchteam.dto.request.user.UserEditRolesRequest;
+import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.mapper.user.UserLoginMapper;
 import com.example.searchteam.mapper.user.UserMapper;
@@ -104,11 +100,19 @@ public class UserDomainService {
     }
 
     @Transactional
-    public void setUUIDByLogin(String login, UUID code) {
+    public void setPasswordCodeByLogin(String login, UUID code) {
         var user = repository.getUserByLogin(login);
-        user.setCode(code);
+        user.setPasswordCode(code);
         repository.save(user);
     }
+
+    @Transactional
+    public void setEmailCodeByLogin(String login, UUID code) {
+        var user = repository.getUserByLogin(login);
+        user.setEmailCode(code);
+        repository.save(user);
+    }
+
 
     @Transactional
     public Boolean isExists(LoginUserRequest request) {
@@ -120,9 +124,16 @@ public class UserDomainService {
 
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
-        var user = repository.getUserByCode(request.getCode());
+        var user = repository.getUserByPasswordCode(request.getCode());
         user.setPassword(request.getPassword());
-        user.setCode(null);
+        user.setPasswordCode(null);
+        repository.save(user);
+    }
+
+    @Transactional
+    public void confirmEmail(ConfirmEmailRequest request) {
+        var user = repository.getUserByEmailCode(request.getCode());
+        user.setEmailCode(null);
         repository.save(user);
     }
 }
