@@ -28,41 +28,77 @@ public class TeamMemberType extends EntityWithName {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Конструктор типа участника команды
+     * @param teamMemberTypeId - id типа участника команды
+     */
     public TeamMemberType(Long teamMemberTypeId) {
         this.id = teamMemberTypeId;
     }
 
+    /**
+     * Переменная заявителей
+     * Список заявителей с данным типом участника команды
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamMemberType")
     private List<Applicant> applicants = Collections.emptyList();
 
+    /**
+     * Переменная участников команды
+     * Список участников команды с данным типом
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamMemberType")
     private List<TeamMember> teamMembers = Collections.emptyList();
 
-
+    /**
+     * Метод изменения id
+     * @param id - идентификатор
+     * @return тип участника команды
+     */
     @Override
     public TeamMemberType setId(Long id) {
         this.id = id;
         return this;
     }
 
+    /**
+     * Метод изменения имени
+     * @param name - имя
+     * @return тип участника команды
+     */
     @Override
     public TeamMemberType setName(String name) {
         this.name = name;
         return this;
     }
 
+    /**
+     * Метод изменения описания
+     * @param description - описание
+     * @return тип участника команды
+     */
     @Override
     public TeamMemberType setDescription(String description) {
         this.description = description;
         return this;
     }
 
+    /**
+     * Метод изменения времени создания
+     * @param createdDateTime - время создания
+     * @return тип участника команды
+     */
     @Override
     public TeamMemberType setCreatedDateTime(LocalDateTime createdDateTime) {
         this.createdDateTime = createdDateTime;
         return this;
     }
 
+    /**
+     * Метод изменения времени изменения
+     * @param modifiedDateTime - время изменения
+     * @return тип участника команды
+     */
     @Override
     public TeamMemberType setModifiedDateTime(LocalDateTime modifiedDateTime) {
         this.modifiedDateTime = modifiedDateTime;

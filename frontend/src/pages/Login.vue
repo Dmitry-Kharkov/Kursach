@@ -63,7 +63,7 @@ export default {
   methods: {
     onSubmit () {
       UserController.userLogin(this.login,this.password)
-          .then(response=>response.data?window.location.href="http://localhost:8080/":this.text="Пользователь не найден")
+          .then(response=>response.data?this.$router.push('/'):this.text="Пользователь не найден")
           .catch(error => alert('Произошла ошибка при авторизации' + error))
 
       // if (!this.form) return
