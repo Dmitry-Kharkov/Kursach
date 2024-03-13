@@ -1,19 +1,22 @@
 package com.example.searchteam.controller.user;
 
 import com.example.searchteam.config.MailFactory;
-import com.example.searchteam.dto.request.user.*;
+import com.example.searchteam.dto.request.user.FiltrationUser;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
+import com.example.searchteam.dto.request.user.ResetPasswordRequest;
+import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
+import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.user.UserService;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.javamail.MimeMailMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Console;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -23,6 +26,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 /**
  * Контроллер для пользователя
  */
+@Tag(name = "Управление пользователями")
 public class UserController {
 
     public static final String USER_GET_BY_ID = "/api/v1/user/get-by-id";
@@ -40,6 +44,7 @@ public class UserController {
     private final MailFactory mailFactory;
 
 
+    @Operation(summary = "Получение пользователя по ID")
     /**
      * Запрос получения пользователя по id
      * @param request - userId
@@ -111,7 +116,6 @@ public class UserController {
      */
     @PostMapping(
             value = USER_GET_ALL,
-            consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
     public List<UserResponse> getAllUsers(){ return service.getAllUsers(); }
 
