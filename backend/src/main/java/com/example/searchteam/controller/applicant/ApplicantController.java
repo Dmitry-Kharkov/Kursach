@@ -9,6 +9,9 @@ import com.example.searchteam.dto.response.applicant.ApplicantResponse;
 import com.example.searchteam.dto.response.applicant.ShortApplicantResponse;
 import com.example.searchteam.dto.response.team.ShortTeamResponse;
 import com.example.searchteam.service.applicant.ApplicantService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 /**
  * Контроллер для заявителя
  */
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Управление заявителями",
+                description = "Контроллер управления заявителями", version = "1.0.0"
+        )
+)
 public class ApplicantController {
 
     public static final String APPLICANT_GET_BY_ID = "/api/v1/applicant/get-by-id";
@@ -39,6 +48,7 @@ public class ApplicantController {
      * @param request - applicantId
      * @return заявитель
      */
+    @Operation(summary="Получение заявителя по ID")
     @PostMapping(
             value = APPLICANT_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -52,6 +62,7 @@ public class ApplicantController {
      * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
      * @return заявитель
      */
+    @Operation(summary="Добавление заявителя")
     @PostMapping(
             value = APPLICANT_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -65,6 +76,7 @@ public class ApplicantController {
      * @param request - ApplicantAddRequest(id,name,description,userId,teamTypeId,teamMemberTypeId)
      * @return заявитель
      */
+    @Operation(summary="Изменение заявителя")
     @PostMapping(
             value = APPLICANT_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -77,6 +89,7 @@ public class ApplicantController {
      * Запрос получения всех заявителей
      * @return список заявителей
      */
+    @Operation(summary="Получение всех заявителей")
     @PostMapping(
             value = APPLICANT_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
@@ -87,6 +100,7 @@ public class ApplicantController {
      * Запрос удаления заявителя
      * @param request - ApplicantRequest(applicantId)
      */
+    @Operation(summary="Удаление заявителя")
     @PostMapping(
             value = APPLICANT_DELETE,
             consumes = APPLICATION_JSON_VALUE,
@@ -100,6 +114,7 @@ public class ApplicantController {
      * @param request - ApplicantFiltrationRequest(teamTypes,isCompleted,name,start,finish,users)
      * @return укороченный список заявителей
      */
+    @Operation(summary="Поиск заявителя")
     @PostMapping(
             value = APPLICANT_SEARCH,
             consumes = APPLICATION_JSON_VALUE,

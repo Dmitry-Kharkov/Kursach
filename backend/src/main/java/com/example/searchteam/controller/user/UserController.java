@@ -3,6 +3,9 @@ package com.example.searchteam.controller.user;
 import com.example.searchteam.dto.request.user.*;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.user.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +17,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
+
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Управление пользователями",
+                description = "Контроллер управления пользователями", version = "1.0.0"
+        )
+)
 public class UserController {
 
     public static final String USER_GET_BY_ID = "/api/v1/user/get-by-id";
@@ -31,6 +41,7 @@ public class UserController {
 
     private final UserService service;
 
+    @Operation(summary="Получение пользователя по ID")
     @PostMapping(
             value = USER_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -39,7 +50,7 @@ public class UserController {
         return service.getUserById(request);
     }
 
-
+    @Operation(summary="Добавление пользователя")
     @PostMapping(
             value = USER_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -48,6 +59,7 @@ public class UserController {
         return service.addUser(request);
     }
 
+    @Operation(summary="Изменение пользователя")
     @PostMapping(
             value = USER_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -56,6 +68,7 @@ public class UserController {
         return service.editUser(request);
     }
 
+    @Operation(summary="Изменение пароля пользователя")
     @PostMapping(
             value = USER_EDIT_PASSWORD,
             consumes = APPLICATION_JSON_VALUE,
@@ -64,6 +77,7 @@ public class UserController {
         return service.editPasswordUser(request);
     }
 
+    @Operation(summary="Изменение ролей пользователя")
     @PostMapping(
             value = USER_EDIT_ROLES,
             consumes = APPLICATION_JSON_VALUE,
@@ -72,6 +86,7 @@ public class UserController {
         return service.editRolesUser(request);
     }
 
+    @Operation(summary="Получение всех пользователей")
     @PostMapping(
             value = USER_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
@@ -80,6 +95,7 @@ public class UserController {
         return service.getAllUsers();
     }
 
+    @Operation(summary="Проверка существования пользователя")
     @PostMapping(
             value = USER_LOGIN,
             consumes = APPLICATION_JSON_VALUE,
@@ -88,6 +104,7 @@ public class UserController {
         return service.isExists(request);
     }
 
+    @Operation(summary="Поиск пользователя")
     @PostMapping(
             value = USER_SEARCH,
             consumes = APPLICATION_JSON_VALUE,
@@ -96,6 +113,7 @@ public class UserController {
         return service.searchUsers(request);
     }
 
+    @Operation(summary="Сброс пароля")
     @PostMapping(
             value = USER_RESET_PASSWORD,
             consumes = APPLICATION_JSON_VALUE,
@@ -104,6 +122,7 @@ public class UserController {
         service.resetPassword(request);
     }
 
+    @Operation(summary="Проверка почты пользователя")
     @PostMapping(
             value = USER_CONFIRMATION_EMAIL,
             consumes = APPLICATION_JSON_VALUE,
@@ -112,7 +131,7 @@ public class UserController {
         service.confirmEmail(request);
     }
 
-
+    @Operation(summary="Отправка UUID для сброса пароля")
     @PostMapping(
             value = SEND_PASSWORD_CODE,
             consumes = APPLICATION_JSON_VALUE,
@@ -123,6 +142,7 @@ public class UserController {
 
     }
 
+    @Operation(summary="Отправка UUID для подтверждения почты")
     @PostMapping(
             value = SEND_EMAIL_CODE,
             consumes = APPLICATION_JSON_VALUE,

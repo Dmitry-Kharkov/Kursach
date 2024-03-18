@@ -66,15 +66,15 @@ class TeamDomainServiceTest {
     @Test
     void getTeamByIdTest() {
         when(repository.findById(any())).thenReturn(Optional.ofNullable(getTeam()));
-      //  when(responseMapper.from((Team)any())).thenReturn(getTeamResponse());
+        //when(responseMapper.from((Team)any()));
 
         var result = domainService.getTeamById(any());
 
         assertEquals(ID, result.getTeamId());
         assertEquals(NAME, result.getName());
-       // assertEquals(TEAM_TYPE, result.getTypeTeam());
+        assertEquals(TEAM_TYPE, result.getTypeTeam());
         assertNull(result.getMembers());
-      //  assertEquals(USER, result.getUser());
+        assertEquals(USER, result.getUser());
         assertEquals(DESCRIPTION, result.getDescription());
         assertEquals(CREATED, result.getCreated());
         assertEquals(MODIFIED, result.getModified());
