@@ -4,6 +4,9 @@ import com.example.searchteam.dto.request.role.RoleAddRequest;
 import com.example.searchteam.dto.request.role.RoleRequest;
 import com.example.searchteam.dto.response.role.RoleResponse;
 import com.example.searchteam.service.role.RoleService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 /**
  * Контроллер для роли
  */
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Управление ролями",
+                description = "Контроллер управления ролями", version = "1.0.0"
+        )
+)
 public class RoleController {
 
     public static final String ROLE_GET_BY_ID = "/api/v1/role/get-by-id";
@@ -34,6 +43,7 @@ public class RoleController {
      * @param request - roleId
      * @return роль
      */
+    @Operation(summary="Получение роли по ID")
     @PostMapping(
             value = ROLE_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
@@ -46,6 +56,7 @@ public class RoleController {
      * Запрос получения всех ролей
      * @return список ролей
      */
+    @Operation(summary="Получение ролей")
     @PostMapping(
             value = ROLE_GET_ALL,
             consumes = APPLICATION_JSON_VALUE,
@@ -59,6 +70,7 @@ public class RoleController {
      * @param request - RoleAddRequest(id,name,roleType,description)
      * @return роль
      */
+    @Operation(summary="Добавление роли")
     @PostMapping(
             value = ROLE_ADD,
             consumes = APPLICATION_JSON_VALUE,
@@ -72,6 +84,7 @@ public class RoleController {
      * @param request - RoleAddRequest(id,name,roleType,description)
      * @return роль
      */
+    @Operation(summary="Изменение роли")
     @PostMapping(
             value = ROLE_EDIT,
             consumes = APPLICATION_JSON_VALUE,
@@ -84,6 +97,7 @@ public class RoleController {
      * Запрос удаления роли
      * @param request - RoleRequest(roleId)
      */
+    @Operation(summary="Удаление роли")
     @PostMapping(
             value = ROLE_DELETE,
             consumes = APPLICATION_JSON_VALUE,

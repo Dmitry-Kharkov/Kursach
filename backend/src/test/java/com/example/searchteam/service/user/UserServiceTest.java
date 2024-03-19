@@ -69,6 +69,7 @@ import static org.mockito.Mockito.*;
 
         when(domainService.addUser(any())).thenReturn(ID);
         when(domainService.getUserById(any())).thenReturn(getUserResponse());
+        when(domainService.getUserByLogin(any())).thenReturn(getUserResponse());
 
         var result = service.addUser(getUserAddRequest("QwEr123145#"));
 

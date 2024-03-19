@@ -3,6 +3,9 @@ package com.example.searchteam.controller.message;
 import com.example.searchteam.dto.request.message.MessageRequest;
 import com.example.searchteam.dto.response.message.MessageResponse;
 import com.example.searchteam.service.message.MessageService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 /**
  * Контроллер для сообщения
  */
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Управление сообщениями",
+                description = "Контроллер управления сообщениями", version = "1.0.0"
+        )
+)
 public class MessageController {
 
     public static final String MESSAGE_GET_BY_ID = "/api/v1/message/get-by-id";
@@ -27,6 +36,7 @@ public class MessageController {
      * @param request - messageId
      * @return сообщение
      */
+    @Operation(summary="Получение сообщения по ID")
     @PostMapping(
             value = MESSAGE_GET_BY_ID,
             consumes = APPLICATION_JSON_VALUE,
