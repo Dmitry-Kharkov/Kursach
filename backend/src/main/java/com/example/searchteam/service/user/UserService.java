@@ -1,13 +1,23 @@
 package com.example.searchteam.service.user;
 
-import com.example.searchteam.dto.request.user.*;
+import com.example.searchteam.dto.request.user.ConfirmEmailRequest;
+import com.example.searchteam.dto.request.user.FiltrationUser;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
+import com.example.searchteam.dto.request.user.ResetPasswordRequest;
+import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
+import com.example.searchteam.dto.request.user.UserRequest;
 import com.example.searchteam.dto.request.util.EmailSendRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.service.domain.user.UserDomainService;
 import com.example.searchteam.service.domain.util.MailSenderService;
+import com.example.searchteam.service.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.mail.MailSender;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,55 +35,71 @@ public class UserService {
 
     private final UserDomainService service;
     private final MailSenderService mailSender;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
 
     private final static String BAD_PASSWORD = "Некорректный пароль";
     private final static String BAD_EMAIL = "Некорректный почтовый адрес";
 
-    public UserResponse getUserById(UserRequest request ){
-        return service.getUserById(request.getUserId());
+
+    public String login(LoginUserRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                request.getLogin(),
+                request.getPassword()
+        ));
+        var user = service.getUserByLogin(request.getLogin());
+        return jwtService.generateToken(user);
     }
-    public UserResponse getUUIDById(UserRequest request ){
+
+
+    public UserResponse getUserById(UserRequest request) {
         return service.getUserById(request.getUserId());
     }
 
-    public List<UserResponse> getAllUsers(){
+    public UserResponse getUUIDById(UserRequest request) {
+        return service.getUserById(request.getUserId());
+    }
+
+    public List<UserResponse> getAllUsers() {
         return service.getAllUsers();
     }
 
-    public void setPasswordCode(String login){
+    public void setPasswordCode(String login) {
         var code = java.util.UUID.randomUUID();
         service.setPasswordCodeByLogin(login, code);
         var user = service.getUserByLogin(login);
         mailSender.sendEmail(
                 new EmailSendRequest()
                         .setTo(Collections.singletonList(user.getEmail()))
-                        .setText("Ваш UUID для сброса пароля:"+code+"\nСсылка для смены пароля: http://localhost:8070" + USER_RESET_PASSWORD)
+                        .setText("Ваш UUID для сброса пароля:" + code + "\nСсылка для смены пароля: http://localhost:8070" + USER_RESET_PASSWORD)
                         .setSubject("Смена пароля")
         );
 
     }
 
-    public void setEmailCode(String login){
+    public void setEmailCode(String login) {
         var code = java.util.UUID.randomUUID();
         service.setEmailCodeByLogin(login, code);
         var user = service.getUserByLogin(login);
         mailSender.sendEmail(
                 new EmailSendRequest()
                         .setTo(Collections.singletonList(user.getEmail()))
-                        .setText("Ваш UUID для подтверждения почты:"+code+"\nСсылка для подтверждения почты: http://localhost:8070" + USER_CONFIRMATION_EMAIL)
+                        .setText("Ваш UUID для подтверждения почты:" + code + "\nСсылка для подтверждения почты: http://localhost:8070" + USER_CONFIRMATION_EMAIL)
                         .setSubject("Подтверждение почты")
         );
 
     }
 
     public UserResponse addUser(UserAddRequest request) {
-        if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
+        if (!verificationPassword(request.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BAD_PASSWORD);
         }
-        if(!verificationEmail(request.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_EMAIL);
+        if (!verificationEmail(request.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BAD_EMAIL);
         }
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
         Long userId = service.addUser(request);
         service.setUserRole(userId, List.of(2L));
         setEmailCode(request.getLogin());
@@ -87,21 +113,21 @@ public class UserService {
     }
 
     public UserResponse editPasswordUser(UserEditPasswordRequest request) {
-        if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
+        if (!verificationPassword(request.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BAD_PASSWORD);
         }
         Long userId = service.editPasswordUser(request);
         return service.getUserById(userId);
     }
 
-    public void resetPassword(ResetPasswordRequest request){
-        if(!verificationPassword(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,BAD_PASSWORD);
+    public void resetPassword(ResetPasswordRequest request) {
+        if (!verificationPassword(request.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, BAD_PASSWORD);
         }
         service.resetPassword(request);
     }
 
-    public void confirmEmail(ConfirmEmailRequest request){
+    public void confirmEmail(ConfirmEmailRequest request) {
         service.confirmEmail(request);
     }
 
@@ -112,12 +138,12 @@ public class UserService {
 
     public Boolean isExists(LoginUserRequest request) {
         return service.isExists(request);
-}
+    }
 
     public List<UserResponse> searchUsers(FiltrationUser request) {
         return service.getAllUsers()
                 .stream()
-                .filter(e->e.getLogin().contains(request.getSearchValue().toLowerCase()))
+                .filter(e -> e.getLogin().contains(request.getSearchValue().toLowerCase()))
                 .skip(request.getFrom())
                 .limit(request.getCount())
                 .toList();
@@ -125,13 +151,13 @@ public class UserService {
 
     private boolean verificationPassword(String password) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
-        Matcher m =  Pattern.compile(regex).matcher(password);
+        Matcher m = Pattern.compile(regex).matcher(password);
         return (m.matches());
     }
 
     private boolean verificationEmail(String email) {
         String regex = "^[a-z0-9._%+-]+@[a-z0-9-]+.+.[a-z]{2,4}";
-        Matcher m =  Pattern.compile(regex).matcher(email);
+        Matcher m = Pattern.compile(regex).matcher(email);
         return (m.matches());
     }
 

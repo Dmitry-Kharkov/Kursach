@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class InitConfig {
 
     private final UserDomainService userDomainService;
+    private final PasswordEncoder passwordEncoder;
 
     @Value("${search_team.admin.login}")
     private String login;
@@ -25,8 +27,12 @@ public class InitConfig {
 
     @PostConstruct
     public void initAdmin(){
-        if (userDomainService.getUserByLogin(login).getUserId() == null){
-           var user =  userDomainService.addUser(new UserAddRequest().setName("admin").setLogin(login).setPassword(password));
+        if (userDomainService.getUserByLogin(login).getId() == null){
+           var user =  userDomainService.addUser(
+                   new UserAddRequest()
+                           .setName("admin")
+                           .setLogin(login)
+                           .setPassword(passwordEncoder.encode(password)));
            userDomainService.setUserRole(user, List.of(0L));
         }
     }

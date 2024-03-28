@@ -100,8 +100,8 @@ public class UserController {
             value = USER_LOGIN,
             consumes = APPLICATION_JSON_VALUE,
             produces = APPLICATION_JSON_VALUE)
-    public Boolean isExists(@RequestBody LoginUserRequest request) {
-        return service.isExists(request);
+    public String login(@RequestBody LoginUserRequest request) {
+        return service.login(request);
     }
 
     @Operation(summary="Поиск пользователя")
