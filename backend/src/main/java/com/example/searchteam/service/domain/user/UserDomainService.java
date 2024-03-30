@@ -3,7 +3,12 @@ package com.example.searchteam.service.domain.user;
 import com.example.searchteam.domain.role.Role;
 import com.example.searchteam.domain.user.User;
 import com.example.searchteam.domain.user.UserRole;
-import com.example.searchteam.dto.request.user.*;
+import com.example.searchteam.dto.request.user.ConfirmEmailRequest;
+import com.example.searchteam.dto.request.user.LoginUserRequest;
+import com.example.searchteam.dto.request.user.ResetPasswordRequest;
+import com.example.searchteam.dto.request.user.UserAddRequest;
+import com.example.searchteam.dto.request.user.UserEditPasswordRequest;
+import com.example.searchteam.dto.request.user.UserEditRolesRequest;
 import com.example.searchteam.dto.response.user.UserResponse;
 import com.example.searchteam.mapper.user.UserLoginMapper;
 import com.example.searchteam.mapper.user.UserMapper;
@@ -13,6 +18,7 @@ import com.example.searchteam.repository.user.UserRepository;
 import com.example.searchteam.repository.user.UserRoleRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -43,11 +49,6 @@ public class UserDomainService {
     @Transactional
     public List<User> getUserByFullName(String fullName) {
         return repository.getUserByFullName(fullName);
-    }
-
-    @Transactional
-    public UserResponse getUserByLogin(String login) {
-        return responseUserMapper.from(repository.findUserByLogin(login).orElse(new User()));
     }
 
     @Transactional
@@ -135,5 +136,23 @@ public class UserDomainService {
         var user = repository.getUserByEmailCode(request.getCode());
         user.setEmailCode(null);
         repository.save(user);
+    }
+
+    @Transactional
+    public User getUserByLogin(String login) {
+        return repository.findUserByLogin(login).orElse(new User());
+    }
+
+
+    @Transactional
+    public List<String> getUserRoleByLogin(String login) {
+        var user = repository.findUserByLogin(login).orElseThrow();
+        return user.getUserRoles().stream().map(UserRole::getRole).map(Role::getName).toList();
+
+
+    }
+
+    public UserDetailsService userDetailsService() {
+        return this::getUserByLogin;
     }
 }

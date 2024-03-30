@@ -5,7 +5,7 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="classpath:/db/changelog/patches/2023-10-31/all.xml"/>
-<!--    <include file="classpath:/db/changelog/patches/2024-02-16/all.xml"/>-->
+   <include file="classpath:/db/changelog/patches/2024-02-16/all.xml"/>
     <include file="classpath:/db/changelog/patches/2024-02-25/all.xml"/>
 
 </databaseChangeLog>
