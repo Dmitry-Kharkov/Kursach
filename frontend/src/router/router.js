@@ -1,96 +1,73 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Main from "@/pages/Main.vue";
 import MyTeams from "@/pages/MyTeams.vue";
-import Roles from "@/pages/admin/Roles.vue";
 import Login from "@/pages/Login.vue";
 import MyApplication from "@/pages/MyApplication.vue";
 import SearchTeam from "@/pages/SearchTeam.vue";
 import SearchTeamMember from "@/pages/SearchTeamMember.vue";
-import AllApplication from "@/pages/admin/AllApplication.vue";
-import AllTeam from "@/pages/admin/AllTeam.vue";
-import RoleType from "@/pages/admin/RoleType.vue";
-import TeamMemberType from "@/pages/admin/TeamMemberType.vue";
-import TypeTeam from "@/pages/admin/TypeTeam.vue";
-import Users from "@/pages/admin/Users.vue";
 import Dialog from "@/pages/Dialog.vue";
 import Registration from "@/pages/Registration.vue";
+import { useAuth } from "@/store/auth";
 
 const routes = [
 
     {
         path: '/',
-        component : Main
+        component : Main,
+        meta: { auth: true, },
     },
 
 
     {
         path: '/my-teams',
-        component : MyTeams
-    },
-
-    {
-        path: '/roles',
-        component : Roles
+        component : MyTeams,
+        meta: { auth: true, },
     },
 
     {
         path: '/login',
-        component : Login
+        component : Login,
+        meta: { auth: false, },
     },
 
     {
         path: '/registration',
-        component : Registration
+        component : Registration,
+        meta: { auth: false, },
     },
 
     {
         path: '/my-application',
-        component : MyApplication
+        component : MyApplication,
+        meta: { auth: true, },
     },
+    {
+        path: '/all-application',
+        component: () => import('@/pages/AllApplication.vue'),
+        meta: { auth: true, },
+    },    
+    {
+        path: '/applications/requests',
+        component: () => import('@/pages/ApplicationRequests.vue'),
+        meta: { auth: true, },
+    },        
 
     {
         path: '/search-team',
-        component : SearchTeam
+        component : SearchTeam,
+        meta: { auth: true, },
     },
 
     {
         path: '/search-team-member',
-        component : SearchTeamMember
-    },
-
-    {
-        path: '/all-application',
-        component : AllApplication
-    },
-
-    {
-        path: '/all-team',
-        component : AllTeam
-    },
-
-    {
-        path: '/role-type',
-        component : RoleType
-    },
-
-    {
-        path: '/team-member-type',
-        component : TeamMemberType
-    },
-
-    {
-        path: '/type-team',
-        component : TypeTeam
-    },
-
-    {
-        path: '/users',
-        component : Users
+        component : SearchTeamMember,
+        meta: { auth: true, },
     },
 
     {
         path: '/dialog',
-        component : Dialog
+        component : Dialog,
+        meta: { auth: true, },
     },
 
 
@@ -103,5 +80,17 @@ const router = createRouter({
     history : createWebHistory(process.env.BASE_URL)
 })
 
+
+router.beforeEach(async (to, from, next) => {
+    const uStorage = useAuth()
+    const isValid = await uStorage.currentToken() != null
+    const requireAuth = to.matched.some(record => record.meta.auth)
+    if (requireAuth && !isValid) {
+      localStorage.clear()
+      next('/login')
+    } else {
+      next()
+    }
+  })
 
 export default router

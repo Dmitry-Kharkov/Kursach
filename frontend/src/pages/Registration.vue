@@ -5,15 +5,6 @@
           v-model="form"
           @submit.prevent="onSubmit"
       >
-
-        <v-text-field
-            v-model="user.name"
-            :readonly="loading"
-            :rules="[required]"
-            class="mb-2"
-            clearable
-            label="Имя"
-        ></v-text-field>
         <v-text-field
             v-model="user.login"
             :readonly="loading"
@@ -36,7 +27,7 @@
         ></v-text-field>
 
         <v-btn
-            :disabled="!form"
+            :disabled="!enableButtonSave"
             :loading="loading"
             block
             color="success"
@@ -51,12 +42,11 @@
   </v-sheet>
 </template>
 <script>
-import Account from "@/components/Account.vue";
-import UserController from "@/controllers/UserController";
+import { useAuth } from "@/store/auth";
 
 export default {
   data: () => ({
-    isExists:true,
+    uAuth: useAuth(),
     min: v => v.length >= 8 || 'Минимум 8 символов',
     show: false,
     form: false,
@@ -67,13 +57,17 @@ export default {
       loading: false,
     }
   }),
-
+  computed: {
+    enableButtonSave () {
+      return this.user.login && this.user.password
+    }
+  },
   methods: {
-    onSubmit () {
-      UserController.addUser(this.user)
-          .then(response=>window.location.href="http://localhost:8080/")
-          .catch(error => alert('Произошла ошибка при регистрации' + error))
-      setTimeout(() => (this.loading = false), 2000)
+    async onSubmit () {
+      const token = await this.uAuth.register(this.user.login, this.user.password)
+      if(token != null) {
+        this.$router.push("/my-application")
+      }
     },
     required (v) {
       return !!v || 'Поле обязательно для заполнения'

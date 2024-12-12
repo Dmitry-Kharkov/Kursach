@@ -2,12 +2,22 @@
 
 import MyField from "@/components/MyField.vue";
 import userController from "@/controllers/UserController";
+import { useAuth } from "@/store/auth";
+import { useRole } from "@/store/roles";
+import { userUser } from "@/store/user";
 
 export default {
   components: {MyField},
   data(){
     return{
-      isEditRole:false,
+      uUser: userUser(),
+      uRoles: useRole(),
+      roles: [],
+      selectedRoles: [],
+      myRoles: [],
+      uUser: userUser(),
+      editRole: false,
+      editPassword: false,
       user: {
         initials: 'DH',
         fullName: 'Dima Harkov',
@@ -20,20 +30,32 @@ export default {
     }
   },
   methods:{
-    editPassword(){
-      if(this.oldPassword===this.testPassword) {
-        userController.editPassword(this.user.password)
-            .then(response => this.user = response.data)
-            .catch(() => alert("Произошла ошибка при загрузке ролей"))
-      }
-      else{
-        alert("Пароли не совпадают!")
+    async updateRoles(){
+      this.myRoles = await this.uUser.updateRoles(this.selectedRolesId)
+      this.selectedRoles = this.myRoles.map(role => role.name);
+    },
+    async updatePassword(){
+      if(await this.uUser.updatePassword(this.oldPassword,this.user.password)) {
+        alert('Пароль успешно изменен');
       }
     },
-    showEditPasswordDialog(){
-      this.oldPassword=this.user.password;
-      this.isEditRole = true;
+    // showEditPasswordDialog(){
+    //   this.oldPassword=this.user.password;
+    //   this.isEditRole = true;
+    // },
+  },
+  computed: {
+    rolesName(){
+      return this.roles.map(role => role.name);
     },
+    selectedRolesId(){
+      return this.roles.filter(role => this.selectedRoles.includes(role.name)).map(role => role.id);
+    }
+  },
+  async mounted(){
+    this.roles = await this.uRoles.getAllRoles();
+    this.myRoles = await this.uUser.myRoles();
+    this.selectedRoles = this.myRoles.map(role => role.name);
   }
 }
 
@@ -50,7 +72,6 @@ export default {
           <v-btn
               icon
               v-bind="props"
-              @click="showEditPasswordDialog()"
           >
             <v-avatar
                 color="brown"
@@ -74,12 +95,19 @@ export default {
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                  @click="console.log(this.user.fullName,this.user.email)"
+                  @click="editRole = true"
                   rounded
                   variant="text"
               >
                 Edit Account
               </v-btn>
+              <v-btn
+                  @click="editPassword = true"
+                  rounded
+                  variant="text"
+              >
+                Edit password
+              </v-btn>              
               <v-divider class="my-3"></v-divider>
               <v-btn
                   rounded
@@ -94,20 +122,39 @@ export default {
     </v-row>
   </v-container>
 
+  <v-dialog
+      width="500"
+      v-model="editRole"
+  >
+    <v-card
+        title="Изменение роли"
+    >
+      <v-select
+          v-model="selectedRoles"
+          :items="rolesName"
+          label="Роли"
+          multiple
+      ></v-select>
+      <v-btn
+            text="Сохранить"
+            @click="updateRoles()"
+        ></v-btn>      
+    </v-card>
+  </v-dialog>
 
   <v-dialog
       width="500"
-      v-model="isEditRole"
+      v-model="editPassword"
   >
     <v-card title="Изменение пароля">
 
-      <my-field label="Старый пароль" :value="''" v-on:update:modelValue="this.user.testPassword = $event"/>
+      <my-field label="Старый пароль" :value="''" v-on:update:modelValue="this.oldPassword = $event"/>
       <my-field label="Новый пароль" :value="''" v-on:update:modelValue="this.user.password = $event" />
 
       <v-card-actions>
         <v-btn
             text="Сохранить"
-            @click="editPassword()"
+            @click="updatePassword()"
         ></v-btn>
       </v-card-actions>
     </v-card>

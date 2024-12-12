@@ -45,12 +45,15 @@
   </v-sheet>
 </template>
 <script>
-import Account from "@/components/Account.vue";
+
 import UserController from "@/controllers/UserController";
+import { useAuth } from "@/store/auth";
 
 export default {
   data: () => ({
     isExists:true,
+    uAuth: useAuth(),
+
     text:"Пользователь не найден",
     min: v => v.length >= 0 || 'Минимум 8 символов',
     show: false,
@@ -61,18 +64,11 @@ export default {
   }),
 
   methods: {
-    onSubmit () {
-      UserController.userLogin(this.login,this.password)
-          .then(response=>response.data?this.$router.push('/'):this.text="Пользователь не найден")
-          .catch(error => alert('Произошла ошибка при авторизации' + error))
-
-      // if (!this.form) return
-      //
-      // this.loading = true
-      // console.log(this.login,this.password)
-      // Account.data().user.fullName=this.login
-      // Account.data().user.email=this.password
-      setTimeout(() => (this.loading = false), 2000)
+    async onSubmit () {
+      const res = await this.uAuth.auth(this.login, this.password)
+      if (res != null) {
+        this.$router.push('/my-application');
+      }
     },
     required (v) {
       return !!v || 'Поле обязательно для заполнения'
@@ -80,65 +76,6 @@ export default {
   },
 }
 </script>
-
-
-
-<!--<script>-->
-<!--export default {-->
-<!--  data () {-->
-<!--    return {-->
-<!--      show: false,-->
-<!--      password: '',-->
-<!--      rules: {-->
-<!--        required: value => !!value || '',-->
-<!--        min: v => v.length >= 8 || 'Минимум 8 символов',-->
-<!--        loginMatch: () => (`Введенные вами логин и пароль не совпадают`),-->
-<!--      },-->
-<!--    }-->
-<!--  },-->
-<!--}-->
-<!--</script>-->
-
-
-<!--<template>-->
-
-
-<!--    <v-responsive-->
-<!--        class="mx-auto"-->
-<!--        max-width="344"-->
-<!--    >-->
-<!--      <v-text-field-->
-<!--          label="Логин"-->
-<!--          hide-details="auto"-->
-<!--      ></v-text-field>-->
-<!--    </v-responsive>-->
-
-<!--  <v-form>-->
-<!--    <v-container fluid>-->
-<!--      <v-row>-->
-<!--        <v-col-->
-<!--            cols="12"-->
-<!--            sm="6"-->
-<!--        >-->
-<!--          <v-text-field-->
-<!--              v-model="password"-->
-<!--              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"-->
-<!--              :rules="[rules.required, rules.min]"-->
-<!--              :type="show ? 'text' : 'password'"-->
-<!--              name="input-10-1"-->
-<!--              label="Пароль"-->
-<!--              hint="Не менее 8 символов"-->
-<!--              counter-->
-<!--              @click:append="show = !show"-->
-<!--          ></v-text-field>-->
-<!--        </v-col>-->
-
-<!--      </v-row>-->
-<!--    </v-container>-->
-<!--  </v-form>-->
-<!--</template>-->
-
-
 
 <style scoped>
 

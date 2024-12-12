@@ -34,30 +34,40 @@ export default {
     addUser(user) {
 
         return axios.post('http://localhost:8070/api/v1/user/add',
-            {"name":user.name,
-            "login":user.login,
-            "password":user.password},
+            {
+                "id": Math.floor(Math.random() * 100000),
+                "name":user.name,
+                "login":user.name,
+                "email":user.login,
+                "password":user.password
+            },
             {
                 headers : {
-                    'Content-Type' : "application/json;charset=utf-8"
+                    'Content-Type' : "application/json",
+                    "accept": "application/json"
                 }
-        })
+            }
+        )
 
     },
 
 
-    userLogin(login,password) {
+    async userLogin(login,password) {
 
-        return axios.post('http://localhost:8070/api/v1/user/login',
+        const response = await axios.post('http://localhost:8070/api/v1/user/login',
             {"login":login,"password":password},
             {
                 headers : {
                     'Content-Type' : "application/json;charset=utf-8"
                 }
             }
-        )               
-       },
-                          
+        )   
+        const data = response.data
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('userId', data.userId)
+        localStorage.setItem('token', data.token)
+    },
+
     searchUsers(searchUsers) {
 
         return axios.post(HOST + API + 'search',
