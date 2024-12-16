@@ -33,16 +33,13 @@ export default {
     async updateRoles(){
       this.myRoles = await this.uUser.updateRoles(this.selectedRolesId)
       this.selectedRoles = this.myRoles.map(role => role.name);
+      this.editRole = false;
     },
     async updatePassword(){
       if(await this.uUser.updatePassword(this.oldPassword,this.user.password)) {
         alert('Пароль успешно изменен');
       }
     },
-    // showEditPasswordDialog(){
-    //   this.oldPassword=this.user.password;
-    //   this.isEditRole = true;
-    // },
   },
   computed: {
     rolesName(){

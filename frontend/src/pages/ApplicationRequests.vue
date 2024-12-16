@@ -28,7 +28,7 @@ import { useTeam } from '@/store/team';
         </template>
         <template #item.actions="{ item }">
             <v-btn @click="rejectApplication(item.id)">Отклонить</v-btn>
-            <v-btn @click="enterToTeam(item.id, item.teamId, item.roleId)" >Принять</v-btn>
+            <v-btn @click="enterToTeam(item.id, item.teamId, item.userId, item.roleId)" >Принять</v-btn>
         </template>
     </v-data-table>
 </template>
@@ -86,6 +86,7 @@ export default defineComponent({
                 id: item.id,
                 applicationName: item.application.name,
                 name: item.user.username,
+                userId: item.user.id,
                 description: item.description,
                 createdAt: DateTime.fromISO(item.createdAt).toLocaleString(DateTime.DATETIME_MED),
                 role: item.role.name,
@@ -93,12 +94,11 @@ export default defineComponent({
                 roleId: item.role.id
             }
         },
-        async enterToTeam(applicationId, teamId, roleId) {
-            const res = this.uTeam.enter(teamId, localStorage.getItem('userId'), roleId)
+        async enterToTeam(applicationId, teamId, userId, roleId) {
+            const res = this.uTeam.enter(teamId, userId, roleId)
             if (res) {
                 this.items = this.items.filter((item) => item.id !== applicationId)
             }
-            await this.load()
         },
         async rejectApplication(applicationId) {
             const res = this.uApplicationRequest.rejectApllicationEnterToTeam(applicationId)

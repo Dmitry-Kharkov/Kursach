@@ -1,12 +1,3 @@
-<script setup>
-import PopupComponent from '@/components/PopupComponent.vue'
-import { defineComponent } from 'vue';
-import {useApplication} from '@/store/applications';
-import { useTeam } from '@/store/team';
-import { DateTime } from 'luxon';
-import { userUser } from '@/store/user';
-</script>
-
 <template>
     <div class="header">
         <h1>Мои команды</h1>
@@ -57,7 +48,20 @@ import { userUser } from '@/store/user';
             <v-text-field v-model="name" label="Название"></v-text-field>
             <v-text-field v-model="description" label="Описание"></v-text-field>
             <v-select
+                :items="roleCategoriesNames"
+                v-model="selectedRoleCategory"
+                label="Какая сфера?" />
+            <hr />
+            <v-select
+                :items="teamRoleNames"
+                v-model="selectedTeamRoles"
+                multiple
+                label="Кто требуется?" />
+            <hr />            
+            <v-select
+                clearable
                 :items="roleNames"
+                v-if="roleNames.length > 0"
                 v-model="selectedRole"
                 label="Кем Вы являетесь" />
             <hr />
@@ -75,6 +79,13 @@ import { userUser } from '@/store/user';
 </style>
 
 <script>
+import PopupComponent from '@/components/PopupComponent.vue'
+import { defineComponent } from 'vue';
+import {useApplication} from '@/store/applications';
+import { useTeam } from '@/store/team';
+import { DateTime } from 'luxon';
+import { userUser } from '@/store/user';
+import { useRole } from '@/store/roles';
 
 export default defineComponent({
     name: "MyTeams",
@@ -87,10 +98,16 @@ export default defineComponent({
             items: [],
             uTeam: useTeam(),
             uUser: userUser(),
+            uRole: useRole(),
+            roleCategories: [],
+            teamRoles: [],
+            selectedTeamRoles: [],
             myRoles: [],
             selectedRole: "",
+            selectedRoleCategory: "",
             name: "",
             description: "",
+            a: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
             headers: [
                 {
                     title: 'ID',
@@ -146,10 +163,13 @@ export default defineComponent({
             this.showAdd = false
         },
         async createTeam() {
-            const res = await this.uTeam.createTeam(this.name, this.description)
+            const res = await this.uTeam.createTeam(this.name, this.description, this.selectedRoleCategoryId, this.selectedRolesToIds)
             if (res) {
                 this.items.push(this.fromResponseToitem(res))
-                await this.uTeam.enter(res.id, localStorage.getItem("userId"), this.selectedRoleToId)
+                if (this.selectedRole != '') {
+                    await this.uTeam.enter(res.id, localStorage.getItem("userId"), this.selectedRoleToId)
+                    this.items = (await this.uTeam.getAllMyTeams()).map(item => this.fromResponseToitem(item))
+                }
                 this.clearAll()
             }
         },
@@ -158,22 +178,43 @@ export default defineComponent({
             if (res) {
                 this.items = this.items.filter(item => item.id !== teamId)
             }
+        },
+        getRoleCategoryIdByName(name) {
+            return this.roleCategories.find(item => item.name === name).id
+        }
+    },
+    watch: {
+        async selectedRoleCategory(newVal) {
+            this.teamRoles = await this.uRole.getAllRoles(this.getRoleCategoryIdByName(newVal))
         }
     },
     computed: {
         roleNames() {
-            return this.myRoles.map(item => item.name)
+            return this.myRoles.filter(item => this.selectedRolesToIds.includes(item.id)).map(item => item.name)
         },
         showButtonSave() {
-            return this.name.length > 0 && this.description.length > 0 && this.selectedRole.length > 0
+            return this.name.length > 0 && this.description.length > 0 && this.selectedRoleCategory != "" && this.selectedTeamRoles.length > 0
         },
         selectedRoleToId() {
             return this.myRoles.find(item => item.name === this.selectedRole).id
         },
+        roleCategoriesNames() {
+            return this.roleCategories.map(item => item.name)
+        },
+        teamRoleNames() {
+            return this.teamRoles.map(item => item.name)
+        },
+        selectedRoleCategoryId() {
+            return this.roleCategories.find(item => item.name === this.selectedRoleCategory).id
+        },
+        selectedRolesToIds() {
+            return this.selectedTeamRoles.map(item => this.teamRoles.find(role => role.name === item).id)
+        }
     },
     async mounted() {
         this.items = (await this.uTeam.getAllMyTeams()).map(item => this.fromResponseToitem(item))
         this.myRoles = await this.uUser.myRoles()
+        this.roleCategories = await this.uRole.getRoleCategories()
     }
 })
 </script>

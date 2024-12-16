@@ -69,15 +69,24 @@ export const getApplications = (token, userId) => ({
   }
 });
 
-export const qRoles = (token) => ({
+export const qRoles = (token, categoryId) => ({
     query: gql`
-        query roles {
-            roles {
+        query roles ($filter: RoleModelFilter) {
+            roles (filters: $filter) {
                 id
                 name
             }
         }
       `,
+    variables: {
+      "filter": {
+        "category": {
+          "id": {
+            "exact": categoryId
+          }
+        }
+      }
+    },
     fetchPolicy: 'no-cache',
     context: {
       headers: {
@@ -306,6 +315,23 @@ export const qRoles = (token) => ({
         }
       }
     },
+    fetchPolicy: 'no-cache',
+    context: {
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    }
+  });
+
+  export const qGetRoleCategories = (token) => ({
+    query: gql`
+      query getRoleCategories {
+        roleCategories {
+          id
+          name
+        }
+      }
+    `,
     fetchPolicy: 'no-cache',
     context: {
       headers: {

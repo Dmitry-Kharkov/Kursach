@@ -142,7 +142,7 @@ export const mDeleteApplication = (token, applicationId) => ({
       }    
 });
 
-export const mCreateTeam = (token, name, description, userId, ) => ({
+export const mCreateTeam = (token, name, description, userId, roleCategoryId, roles) => ({
     mutation: gql`
         mutation createTeam($input: TeamModelInput!) {
             createTeam(input: $input) {
@@ -157,6 +157,19 @@ export const mCreateTeam = (token, name, description, userId, ) => ({
                     description
                     createdAt
                     completed
+                    members {
+                    user {
+                        id
+                        username
+                    }
+                    role {
+                        name
+                    }
+                    }
+                    needRoles {
+                        id
+                        name
+                    }   
                 }
             }
         }
@@ -167,7 +180,11 @@ export const mCreateTeam = (token, name, description, userId, ) => ({
             "owner": {
               "id": userId
             },
-            "description": description
+            "description": description,
+            "rolesCategory": {
+                "id": roleCategoryId
+              },
+              "allRoles": roles        
         }
     },
     context: {

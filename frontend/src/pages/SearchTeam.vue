@@ -25,7 +25,7 @@ import { useRole } from '@/store/roles';
         <v-select
             :items="['Не выбрано', 'Завершен', 'Не завершен']"
             v-model="selectedDone"
-            label="Выберите роль нужного участника"
+            label="Статус набор команды"
         />     
         <label>
             Дата от:

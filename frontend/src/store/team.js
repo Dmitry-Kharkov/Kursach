@@ -30,9 +30,9 @@ export const useTeam = defineStore("team", () => {
     }    
     
 
-    const createTeam = async (name, description) => {
+    const createTeam = async (name, description, roleCategoryId, allRoles) => {
         const currentTokent = await uAuth.currentToken()
-        const res = (await apolloClient.mutate(mCreateTeam(currentTokent.token, name, description, localStorage.getItem("userId")))).data.createTeam
+        const res = (await apolloClient.mutate(mCreateTeam(currentTokent.token, name, description, localStorage.getItem("userId"), roleCategoryId, allRoles))).data.createTeam
         if (Object.keys(res).includes('messages')) {
             alert(`Произошла ошибка при вступлении в команду: ${res.messages[0].message}`)
             return null;
