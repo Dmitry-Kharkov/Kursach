@@ -252,6 +252,7 @@ export const qRoles = (token, categoryId) => ({
             }            
           }
           user {
+            id
             username
           }
           role {
